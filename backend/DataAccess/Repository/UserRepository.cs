@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using DataAccess.Constant;
 using DataAccess.Interface;
 using DataObject;
 using System;
@@ -17,19 +18,34 @@ namespace DataAccess.Repository
         {
 
         }
-        public Task<int> AddUser(UserDO user)
+        public async Task<int> AddUser(UserDO user)
         {
-            throw new NotImplementedException();
+            var param = new DynamicParameters();
+
+            param.Add("@UserName", user.UserName);
+            param.Add("@FirstName", user.FirstName);
+            param.Add("@LastName", user.LastName);
+            param.Add("@Password", user.Password);
+            param.Add("@EmailAddress", user.EmailAddress);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.USER_INSERT, param);
+            return result;
         }
 
-        public Task<List<UserDO>> GetAllUser()
+        public async Task<List<UserDO>> GetAllUser()
         {
-            throw new NotImplementedException();
+            var result = await QueryCommandAsync<UserDO>(StoredProcedure.USER_GETALL);
+            return result.ToList();
         }
 
-        public Task<UserDO> GetUserByUserNamePassword(string userName, string password)
+        public async Task<UserDO> GetUserByUserNamePassword(string userName, string password)
         {
-            throw new NotImplementedException();
+            var param = new DynamicParameters();
+            param.Add("@UserName", userName);
+            param.Add("@Password", password);
+
+            var result = await QueryCommandSingleAsync<UserDO>(StoredProcedure.USER_GETBY_USERNAME_PASSWORD, param);
+            return result;
         }
     }
 }

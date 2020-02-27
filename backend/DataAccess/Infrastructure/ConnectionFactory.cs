@@ -9,7 +9,7 @@ namespace DataAccess.Infrastructure
 {
     public class ConnectionFactory : IConnectionFactory
     {
-        private readonly string connectionString = "Server=.\\SQLExpress;Database=EmployeeDB;Trusted_Connection=True;";
+        private readonly string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=BanHangDB;Integrated Security=True";
 
         public IDbConnection GetConnection
         {
