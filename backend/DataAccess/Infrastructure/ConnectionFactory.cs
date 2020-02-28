@@ -15,7 +15,6 @@ namespace DataAccess.Infrastructure
         {
             get
             {
-                //DbProviderFactories.RegisterFactory("System.Data.SqlClient", SqlClientFactory.Instance);
                 var factory = DbProviderFactories.GetFactory("System.Data.SqlClient");
                 var connect = factory.CreateConnection();
                 connect.ConnectionString = connectionString;

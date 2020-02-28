@@ -27,7 +27,9 @@ namespace BusinessLogic.Service
             {
                 try
                 {
-
+                    dal.UnitOfWork.Begin();
+                    result = await dal.UnitOfWork.UserRepository.AddUser(addParam);
+                    dal.UnitOfWork.Commit();
                 } catch(Exception ex)
                 {
                     dal.UnitOfWork.Rollback();

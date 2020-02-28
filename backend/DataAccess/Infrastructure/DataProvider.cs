@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using DataAccess.Infrastructure.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public abstract class DataProvider
+    public abstract class DataProvider : IDataProvider
     {
         protected IDbTransaction Transaction { get; private set; }
 

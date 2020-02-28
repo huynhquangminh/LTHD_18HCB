@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BusinessLogic.Service.Interface;
 using BusinessObject;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -31,6 +32,7 @@ namespace API.Controllers
         /// Get all users
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         [HttpGet]
         [Produces("application/json")]
         [Route("GetAllUsers")]
@@ -41,38 +43,27 @@ namespace API.Controllers
         }
 
         /// <summary>
-        /// Get User by user name and password
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <param name="password"></param>
-        /// <returns></returns>
-        [HttpGet]
-        [Produces("application/json")]
-        [Route("GetUserByUserNamePassword")]
-        public async Task<ActionResult<UserBO>> GetUserByUserNamePassword(string userName, string password)
-        {
-            if (_userService.GetUserByUserNamePassword(userName, password).Result == null)
-            {
-                return NotFound();
-            }
-
-            return await _userService.GetUserByUserNamePassword(userName,password);
-        }
-
-        /// <summary>
-        /// Add new user
+        /// Register new user
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost]
         [Produces("application/json")]
-        [Route("AddUser")]
-        public async Task<ActionResult<int>> AddUser(UserBO user)
+        [Route("Register")]
+        public async Task<ActionResult<int>> Register(UserBO user)
         {
             return await _userService.AddUser(user);
         }
 
-        [HttpGet]
+        /// <summary>
+        /// Login account
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost]
         [Produces("application/json")]
         [Route("Login")]
         public async Task<IActionResult> Login(string username, string password)
@@ -92,6 +83,19 @@ namespace API.Controllers
             }
 
             return response;
+        }
+
+        /// <summary>
+        /// Testing authorize
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("GetValue")]
+        public ActionResult<IEnumerable<string>> TestAuthentication()
+        {
+            return new string[] { "Value1", "Value2", "Value3" };
         }
 
         private UserBO AuthenticateUser(UserBO login)
