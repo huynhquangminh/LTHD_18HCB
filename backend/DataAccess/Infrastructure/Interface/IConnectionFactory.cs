@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DataAccess.Interface
 {
-    interface IConnectionFactory : IDisposable
+    public interface IConnectionFactory : IDisposable
     {
         IDbConnection GetConnection { get; }
     }

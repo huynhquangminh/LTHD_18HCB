@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using DataAccess.Infrastructure.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public abstract class DataProvider
+    public abstract class DataProvider : IDataProvider
     {
         protected IDbTransaction Transaction { get; private set; }
 
@@ -23,6 +24,11 @@ namespace DataAccess
         public async Task<IEnumerable<T>> QueryCommandAsync<T>(string storedProcedure)
         {
             return await Connection.QueryAsync<T>(storedProcedure);
+        }
+
+        public async Task<IEnumerable<T>> QueryCommandAsyncWithParam<T>(string storedProcedure, DynamicParameters param = null)
+        {
+            return await Connection.QueryAsync<T>(storedProcedure, param);
         }
 
         public async Task<T> QueryCommandSingleAsync<T>(string storedProcedure, DynamicParameters param = null)

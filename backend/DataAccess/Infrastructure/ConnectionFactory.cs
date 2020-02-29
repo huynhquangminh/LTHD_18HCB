@@ -9,13 +9,12 @@ namespace DataAccess.Infrastructure
 {
     public class ConnectionFactory : IConnectionFactory
     {
-        private readonly string connectionString = "Server=.\\SQLExpress;Database=EmployeeDB;Trusted_Connection=True;";
+        private readonly string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=BanHangDB;Integrated Security=True";
 
         public IDbConnection GetConnection
         {
             get
             {
-                //DbProviderFactories.RegisterFactory("System.Data.SqlClient", SqlClientFactory.Instance);
                 var factory = DbProviderFactories.GetFactory("System.Data.SqlClient");
                 var connect = factory.CreateConnection();
                 connect.ConnectionString = connectionString;
