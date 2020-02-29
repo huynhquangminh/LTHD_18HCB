@@ -54,6 +54,20 @@ namespace BusinessLogic.Service
             }
         }
 
+        public async Task<UserBO> GetUserByUserName(string userName)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<UserDO, UserBO>();
+            });
+            var mapper = config.CreateMapper();
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.UserRepository.GetUserByUserName(userName);
+                return mapper.Map<UserBO>(result);
+            }
+        }
+
         public async Task<UserBO> GetUserByUserNamePassword(string userName, string password)
         {
             var config = new MapperConfiguration(cfg =>

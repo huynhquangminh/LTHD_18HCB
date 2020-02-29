@@ -9,6 +9,7 @@ namespace BusinessLogic.Service.Interface
     public interface IUserService
     {
         Task<List<UserBO>> GetAllUsers();
+        Task<UserBO> GetUserByUserName(string userName);
         Task<UserBO> GetUserByUserNamePassword(string userName, string password);
         Task<int> AddUser(UserBO user);
     }

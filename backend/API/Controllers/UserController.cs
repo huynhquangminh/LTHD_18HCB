@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using BusinessLogic.Service.Interface;
@@ -15,6 +16,9 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace API.Controllers
 {
+    /// <summary>
+    /// User Api
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -22,6 +26,11 @@ namespace API.Controllers
         private IConfiguration _config;
         private readonly IUserService _userService;
 
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="config"></param>
+        /// <param name="userService"></param>
         public UserController(IConfiguration config, IUserService userService)
         {
             _config = config;
@@ -53,6 +62,8 @@ namespace API.Controllers
         [Route("Register")]
         public async Task<ActionResult<int>> Register(UserBO user)
         {
+            var salt = BCrypt.Net.BCrypt.GenerateSalt(12);
+            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, salt);
             return await _userService.AddUser(user);
         }
 
@@ -101,9 +112,15 @@ namespace API.Controllers
         private UserBO AuthenticateUser(UserBO login)
         {
             UserBO user = null;
-            user = _userService.GetUserByUserNamePassword(login.UserName, login.Password).Result;
+            user = _userService.GetUserByUserName(login.UserName).Result;
+            bool validPassword = BCrypt.Net.BCrypt.Verify(login.Password, user.Password);
 
-            return user;
+            if (validPassword)
+            {
+                return user;
+            }
+
+            return null;
         }
 
         private string GenerateJSONWebToken(UserBO userInfo)
@@ -122,11 +139,22 @@ namespace API.Controllers
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Issuer"],
                 claims,
-                expires: DateTime.Now.AddMinutes(120),
+                expires: DateTime.Now.AddMinutes(5),
                 signingCredentials: credentials);
 
             var encodeToken = new JwtSecurityTokenHandler().WriteToken(token);
             return encodeToken;
+        }
+
+        public string GenerateRefreshToken()
+        {
+            var randomNumber = new byte[32];
+
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                return Convert.ToBase64String(randomNumber);
+            }
         }
     }
 }

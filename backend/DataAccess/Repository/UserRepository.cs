@@ -18,6 +18,12 @@ namespace DataAccess.Repository
         {
 
         }
+
+        /// <summary>
+        /// Add new user
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public async Task<int> AddUser(UserDO user)
         {
             var param = new DynamicParameters();
@@ -32,12 +38,37 @@ namespace DataAccess.Repository
             return result;
         }
 
+        /// <summary>
+        /// Get all user
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<UserDO>> GetAllUser()
         {
             var result = await QueryCommandAsync<UserDO>(StoredProcedure.USER_GETALL);
             return result.ToList();
         }
 
+
+        /// <summary>
+        /// Get user by userName
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public async Task<UserDO> GetUserByUserName(string userName)
+        {
+            var param = new DynamicParameters();
+            param.Add("@UserName", userName);
+
+            var result = await QueryCommandSingleAsync<UserDO>(StoredProcedure.USER_GETBY_USERNAME, param);
+            return result;
+        }
+
+        /// <summary>
+        /// Get user by userName and pasword
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public async Task<UserDO> GetUserByUserNamePassword(string userName, string password)
         {
             var param = new DynamicParameters();
