@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DialogServiceService } from 'src/app/shared/services/dialog-service.service';
 
 @Component({
   selector: 'app-taikhoanthanhtoan',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TaikhoanthanhtoanComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialogServiceService: DialogServiceService) { }
 
   ngOnInit() {
+  }
+
+  open() {
+    this.dialogServiceService.showDialogError('xxxxxxxxxxxxx');
   }
 
 }
