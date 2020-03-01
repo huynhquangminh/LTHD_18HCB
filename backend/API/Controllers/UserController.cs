@@ -90,7 +90,13 @@ namespace API.Controllers
             if (user != null)
             {
                 var stringToken = GenerateJSONWebToken(user);
-                response = Ok(new { token = stringToken });
+                var stringRefreshToken = GenerateRefreshToken();
+
+                user.RefreshToken = stringRefreshToken;
+                var result = _userService.EditUserRefreshToken(user.UserName, user.RefreshToken);
+                response = Ok(new { token = stringToken, 
+                    refreshToken = stringRefreshToken 
+                });
             }
 
             return response;
@@ -107,6 +113,58 @@ namespace API.Controllers
         public ActionResult<IEnumerable<string>> TestAuthentication()
         {
             return new string[] { "Value1", "Value2", "Value3" };
+        }
+
+        /// Refresh token
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="refreshToken"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Produces("application/json")]
+        [Route("RefreshToken")]
+        public async Task<IActionResult> Refresh(string token, string refreshToken)
+        {
+            var princial = GetPrincipalFromExpiredToken(token);
+            //var userName = princial.Identity.Name;
+            var userName = princial.Claims.ToList()[0].Value;
+            var user = _userService.GetUserByUserName(userName).Result;
+
+            if (user == null || user.RefreshToken != refreshToken)
+            {
+                return BadRequest();
+            }
+
+            var newJwtToken = GenerateJSONWebToken(user);
+            var newRefreshToken = GenerateRefreshToken();
+
+            var result = _userService.EditUserRefreshToken(userName, refreshToken);
+
+            return new ObjectResult(new
+            {
+                token = newJwtToken,
+                refreshToken = newRefreshToken
+            });
+        }
+
+        /// <summary>
+        /// Revoke api
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPost]
+        [Produces("application/json")]
+        [Route("RevokeToken")]
+        public async Task<IActionResult> Revoke()
+        {
+            var userName = User.Identity.Name;
+
+            var user = _userService.GetUserByUserName(userName).Result;
+            if (user == null) return BadRequest();
+
+            user.RefreshToken = null;
+            var result = _userService.EditUserRefreshToken(userName, null);
+            return NoContent();
         }
 
         private UserBO AuthenticateUser(UserBO login)
@@ -139,22 +197,42 @@ namespace API.Controllers
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Issuer"],
                 claims,
-                expires: DateTime.Now.AddMinutes(5),
+                expires: DateTime.Now.AddMinutes(10),
                 signingCredentials: credentials);
 
             var encodeToken = new JwtSecurityTokenHandler().WriteToken(token);
             return encodeToken;
         }
 
-        public string GenerateRefreshToken()
+        private string GenerateRefreshToken()
         {
             var randomNumber = new byte[32];
-
             using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(randomNumber);
                 return Convert.ToBase64String(randomNumber);
             }
+        }
+
+        private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
+        {
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateAudience = false, //you might want to validate the audience and issuer depending on your use case
+                ValidateIssuer = false,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"])),
+                ValidateLifetime = false //here we are saying that we don't care about the token's expiration date
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            SecurityToken securityToken;
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out securityToken);
+            var jwtSecurityToken = securityToken as JwtSecurityToken;
+            if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+                throw new SecurityTokenException("Invalid token");
+
+            return principal;
         }
     }
 }
