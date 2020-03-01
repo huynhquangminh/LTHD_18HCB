@@ -39,6 +39,26 @@ namespace BusinessLogic.Service
             }
         }
 
+        public async Task<int> EditUserRefreshToken(string userName, string refreshToken)
+        {
+            var result = 0;
+
+            using (DalSession dal = new DalSession())
+            {
+                try
+                {
+                    dal.UnitOfWork.Begin();
+                    result = await dal.UnitOfWork.UserRepository.EditUserRefreshToken(userName, refreshToken);
+                    dal.UnitOfWork.Commit();
+                } catch (Exception ex)
+                {
+                    dal.UnitOfWork.Rollback();
+                    throw new AggregateException();
+                }
+                return result;
+            }
+        }
+
         public async Task<List<UserBO>> GetAllUsers()
         {
             var config = new MapperConfiguration(cfg =>

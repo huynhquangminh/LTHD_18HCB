@@ -38,6 +38,17 @@ namespace DataAccess.Repository
             return result;
         }
 
+        public async Task<int> EditUserRefreshToken(string userName, string refreshToken)
+        {
+            var param = new DynamicParameters();
+
+            param.Add("@UserName", userName);
+            param.Add("@RefreshToken", refreshToken);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.USER_EDIT_REFRESHTOKEN, param);
+            return result;
+        }
+
         /// <summary>
         /// Get all user
         /// </summary>
