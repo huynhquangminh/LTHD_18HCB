@@ -1,0 +1,96 @@
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
+    <div class="list-group">
+        <a routerLink="/home" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>Trang chủ </span>
+        </a>
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('home', 0)">
+                <i class="fa fa-plus"></i>&nbsp;
+                <span>Thông tin tài khoản</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu[0] === 'home'">
+                <ul class="submenu">
+                    <li>
+                        <a routerLink="./payment-account" [routerLinkActive]="['router-link-active']" class="hiden-decoration" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Tài khoản thanh toán</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="./saving-account" [routerLinkActive]="['router-link-active']" class="hiden-decoration" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Tài khoản tiết kiệm</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="./recipient-contacts" [routerLinkActive]="['router-link-active']" class="hiden-decoration" class="hiden-decoration" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Danh bạ người nhận</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="./internal-transfer" [routerLinkActive]="['router-link-active']" class="hiden-decoration" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Chuyển khoản nội bộ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="./interbank-transfer" [routerLinkActive]="['router-link-active']" class="hiden-decoration"  >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Chuyển khoản liên ngân hàng</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('home1', 1)">
+                <i class="fa fa-plus"></i>&nbsp;
+                <span>Quản lý nhắc nợ </span>
+            </a>
+            <li class="nested" [class.expand]="showMenu[1] === 'home1'">
+                <ul class="submenu">
+                    <li>
+                        <a class="hiden-decoration" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Tạo nhắc nợ </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="hiden-decoration" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Xem nhắc nợ</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('home2', 2)">
+                <i class="fa fa-plus"></i>&nbsp;
+                <span>Cài đặt </span>
+            </a>
+            <li class="nested" [class.expand]="showMenu[2] === 'home2'">
+                <ul class="submenu">
+                    <li>
+                        <a class="hiden-decoration" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Đổi mật khẩu </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="hiden-decoration" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Xem lịch sử giao dịch</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+    </div>
+    <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
+        <i class="fa fa-fw fa-angle-double-{{collapsed?'right':'left'}}"></i>&nbsp;
+        <span>Thu gọn</span>
+    </div>
+</nav>
