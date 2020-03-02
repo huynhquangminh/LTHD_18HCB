@@ -28,6 +28,7 @@ namespace DataAccess.Repository
         {
             var param = new DynamicParameters();
 
+            param.Add("@UserId", user.UserId);
             param.Add("@UserName", user.UserName);
             param.Add("@FirstName", user.FirstName);
             param.Add("@LastName", user.LastName);

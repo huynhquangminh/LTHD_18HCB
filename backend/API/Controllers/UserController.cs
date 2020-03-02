@@ -63,6 +63,7 @@ namespace API.Controllers
         public async Task<ActionResult<int>> Register(UserBO user)
         {
             var salt = BCrypt.Net.BCrypt.GenerateSalt(12);
+            user.UserId = Guid.NewGuid().ToString();
             user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, salt);
             return await _userService.AddUser(user);
         }
@@ -126,10 +127,10 @@ namespace API.Controllers
         public async Task<IActionResult> Refresh(string token, string refreshToken)
         {
             var princial = GetPrincipalFromExpiredToken(token);
-            //var userName = princial.Identity.Name;
             var userName = princial.Claims.ToList()[0].Value;
             var user = _userService.GetUserByUserName(userName).Result;
 
+            // Check current request token of user
             if (user == null || user.RefreshToken != refreshToken)
             {
                 return BadRequest();
@@ -157,7 +158,7 @@ namespace API.Controllers
         [Route("RevokeToken")]
         public async Task<IActionResult> Revoke()
         {
-            var userName = User.Identity.Name;
+            var userName = User.Claims.ToList()[0].Value;
 
             var user = _userService.GetUserByUserName(userName).Result;
             if (user == null) return BadRequest();
@@ -190,7 +191,7 @@ namespace API.Controllers
             {
                 new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Sub, userInfo.UserName),
                 new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Email, userInfo.EmailAddress),
-                new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Jti, userInfo.UserId)
             };
 
             var token = new JwtSecurityToken(
