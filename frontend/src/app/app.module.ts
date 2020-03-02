@@ -1,3 +1,5 @@
+import { LoginComponent } from './login/login.component';
+import { FormModule } from './layout/form/form.module';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -13,6 +15,7 @@ import { TemplateDialogComfirmComponent } from './shared/component/template-dial
 import { DialogServiceService } from './shared/services/dialog-service.service';
 import { NgbModalModule, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { DialogErrorComponent } from './shared/component/dialog-error/dialog-error.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
@@ -22,7 +25,7 @@ import { DialogErrorComponent } from './shared/component/dialog-error/dialog-err
         HttpClientModule,
         LanguageTranslationModule,
         AppRoutingModule,
-        NgbModalModule
+        NgbModalModule,
     ],
     declarations: [
         AppComponent,

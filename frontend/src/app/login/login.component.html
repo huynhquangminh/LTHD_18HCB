@@ -3,17 +3,32 @@
         <div class="col-md-4">
             <img src="https://tienganhtflat.com/uploads/blog/666_57fdf7bdc2f25.jpg" width="150px" class="user-avatar" />
             <h1>18HCB Bank</h1>
-            <form role="form">
+            <form novalidate #formLogin="ngForm" (ngSubmit)="onSubmit()">
                 <div class="form-content">
                     <div class="form-group">
-                        <input type="text" ng-model="name" class="form-control input-underline input-lg" id="" placeholder="Tên đăng nhập">
+                        <input type="text" name="tendangnhap" class="form-control input-underline input-lg"
+                            [(ngModel)]="modelLogin.tendangnhap" placeholder="Tên đăng nhập" required>
+                        <div class="validate-form" style="float: left;"
+                            *ngIf="formLogin.controls.tendangnhap?.errors?.required && formLogin.controls.tendangnhap?.touched">
+                            <span>(*) Tên đăng nhập không được trống !</span>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control input-underline input-lg" id="" placeholder="Mật khẩu">
+                        <input type="password" name="matkhau" class="form-control input-underline input-lg"
+                            [(ngModel)]="modelLogin.matkhau" placeholder="Mật khẩu" required>
+                        <div class="validate-form" style="float: left;"
+                            *ngIf="formLogin.controls.matkhau?.errors?.required && formLogin.controls.matkhau?.touched">
+                            <span>(*) Mật khẩu không được trống !</span>
+                        </div>
                     </div>
                 </div>
-                <a class="btn rounded-btn" [routerLink]="['/home']" (click)="onLoggedin()">Đăng nhập</a>
+                <re-captcha (resolved)="resolved($event)" siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU">
+                </re-captcha>
+                <button class="btn rounded-btn" [disabled]="(!formLogin.valid || !isLoger)">
+                    Đăng nhập
+                </button>
             </form>
+
         </div>
     </div>
 </div>

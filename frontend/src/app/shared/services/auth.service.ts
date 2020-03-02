@@ -13,6 +13,7 @@ export class AuthService extends HandleErrorService {
   protected headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   protected options: any = { headers: this.headers, observe: 'response' };
   protected env = '';
+  public isLogin = false;
   authHttp: HttpClient;
   public httpPost(methodName, args, isFormData?: boolean): Observable<any> {
     let newOptions: any;
@@ -49,7 +50,7 @@ export class AuthService extends HandleErrorService {
       password: model.password
     };
     // Call POST API to login user
-    return this.httpPost('login', request).pipe(
+    return this.httpPost('/login', request).pipe(
       map((result: any) => {
         try {
 
