@@ -41,48 +41,48 @@ namespace API.Controllers
         /// Get all users
         /// </summary>
         /// <returns></returns>
-        [Authorize]
-        [HttpGet]
-        [Produces("application/json")]
-        [Route("GetAllUsers")]
-        public async Task<ActionResult<List<UserBO>>> GetAll()
-        {
-            var result = await _userService.GetAllUsers();
-            return Ok(result);
-        }
+        //[Authorize]
+        //[HttpGet]
+        //[Produces("application/json")]
+        //[Route("GetAllUsers")]
+        //public async Task<ActionResult<List<UserBO>>> GetAll()
+        //{
+        //    var result = await _userService.GetAllUsers();
+        //    return Ok(result);
+        //}
 
         /// <summary>
         /// Register new user
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        [AllowAnonymous]
-        [HttpPost]
-        [Produces("application/json")]
-        [Route("Register")]
-        public async Task<ActionResult<int>> Register(UserBO user)
-        {
-            var salt = BCrypt.Net.BCrypt.GenerateSalt(12);
-            user.UserId = Guid.NewGuid().ToString();
-            user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, salt);
-            return await _userService.AddUser(user);
-        }
+        //[AllowAnonymous]
+        //[HttpPost]
+        //[Produces("application/json")]
+        //[Route("Register")]
+        //public async Task<ActionResult<int>> Register(UserBO user)
+        //{
+        //    var salt = BCrypt.Net.BCrypt.GenerateSalt(12);
+        //    user.UserId = Guid.NewGuid().ToString();
+        //    user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, salt);
+        //    return await _userService.AddUser(user);
+        //}
 
         /// <summary>
         /// Login account
         /// </summary>
-        /// <param name="username"></param>
-        /// <param name="password"></param>
+        /// <param name="tenDangNhap"></param>
+        /// <param name="matKhau"></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         [Produces("application/json")]
         [Route("Login")]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login(string tenDangNhap, string matKhau)
         {
             UserBO login = new UserBO();
-            login.UserName = username;
-            login.Password = password;
+            login.TenTaiKhoan = tenDangNhap;
+            login.MatKhau = matKhau;
 
             IActionResult response = Unauthorized();
 
@@ -91,12 +91,12 @@ namespace API.Controllers
             if (user != null)
             {
                 var stringToken = GenerateJSONWebToken(user);
-                var stringRefreshToken = GenerateRefreshToken();
-
-                user.RefreshToken = stringRefreshToken;
-                var result = _userService.EditUserRefreshToken(user.UserName, user.RefreshToken);
-                response = Ok(new { token = stringToken, 
-                    refreshToken = stringRefreshToken 
+                
+                //var stringRefreshToken = GenerateRefreshToken();
+                //user.RefreshToken = stringRefreshToken;
+                //var result = _userService.EditUserRefreshToken(user.UserName, user.RefreshToken);
+                response = Ok(new { user = user, token = stringToken
+                    //refreshToken = stringRefreshToken 
                 });
             }
 
@@ -121,58 +121,58 @@ namespace API.Controllers
         /// <param name="token"></param>
         /// <param name="refreshToken"></param>
         /// <returns></returns>
-        [HttpPost]
-        [Produces("application/json")]
-        [Route("RefreshToken")]
-        public async Task<IActionResult> Refresh(string token, string refreshToken)
-        {
-            var princial = GetPrincipalFromExpiredToken(token);
-            var userName = princial.Claims.ToList()[0].Value;
-            var user = _userService.GetUserByUserName(userName).Result;
+        //[HttpPost]
+        //[Produces("application/json")]
+        //[Route("RefreshToken")]
+        //public async Task<IActionResult> Refresh(string token, string refreshToken)
+        //{
+        //    var princial = GetPrincipalFromExpiredToken(token);
+        //    var userName = princial.Claims.ToList()[0].Value;
+        //    var user = _userService.GetUserByUserName(userName).Result;
 
-            // Check current request token of user
-            if (user == null || user.RefreshToken != refreshToken)
-            {
-                return BadRequest();
-            }
+        //    // Check current request token of user
+        //    if (user == null || user.RefreshToken != refreshToken)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            var newJwtToken = GenerateJSONWebToken(user);
-            var newRefreshToken = GenerateRefreshToken();
+        //    var newJwtToken = GenerateJSONWebToken(user);
+        //    var newRefreshToken = GenerateRefreshToken();
 
-            var result = _userService.EditUserRefreshToken(userName, refreshToken);
+        //    var result = _userService.EditUserRefreshToken(userName, refreshToken);
 
-            return new ObjectResult(new
-            {
-                token = newJwtToken,
-                refreshToken = newRefreshToken
-            });
-        }
+        //    return new ObjectResult(new
+        //    {
+        //        token = newJwtToken,
+        //        refreshToken = newRefreshToken
+        //    });
+        //}
 
         /// <summary>
         /// Revoke api
         /// </summary>
         /// <returns></returns>
-        [Authorize]
-        [HttpPost]
-        [Produces("application/json")]
-        [Route("RevokeToken")]
-        public async Task<IActionResult> Revoke()
-        {
-            var userName = User.Claims.ToList()[0].Value;
+        //[Authorize]
+        //[HttpPost]
+        //[Produces("application/json")]
+        //[Route("RevokeToken")]
+        //public async Task<IActionResult> Revoke()
+        //{
+        //    var userName = User.Claims.ToList()[0].Value;
 
-            var user = _userService.GetUserByUserName(userName).Result;
-            if (user == null) return BadRequest();
+        //    var user = _userService.GetUserByUserName(userName).Result;
+        //    if (user == null) return BadRequest();
 
-            user.RefreshToken = null;
-            var result = _userService.EditUserRefreshToken(userName, null);
-            return NoContent();
-        }
+        //    user.RefreshToken = null;
+        //    var result = _userService.EditUserRefreshToken(userName, null);
+        //    return NoContent();
+        //}
 
         private UserBO AuthenticateUser(UserBO login)
         {
             UserBO user = null;
-            user = _userService.GetUserByUserName(login.UserName).Result;
-            bool validPassword = BCrypt.Net.BCrypt.Verify(login.Password, user.Password);
+            user = _userService.GetUserByTenDangNhap(login.TenTaiKhoan).Result;
+            bool validPassword = BCrypt.Net.BCrypt.Verify(login.MatKhau, user.MatKhau);
 
             if (validPassword)
             {
@@ -189,9 +189,9 @@ namespace API.Controllers
 
             var claims = new[]
             {
-                new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Sub, userInfo.UserName),
-                new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Email, userInfo.EmailAddress),
-                new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Jti, userInfo.UserId)
+                new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Sub, userInfo.TenTaiKhoan),
+                new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Email, userInfo.Email),
+                new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Jti, userInfo.Id)
             };
 
             var token = new JwtSecurityToken(
