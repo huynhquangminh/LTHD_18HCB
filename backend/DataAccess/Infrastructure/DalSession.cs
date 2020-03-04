@@ -8,7 +8,7 @@ namespace DataAccess.Infrastructure
 {
     public sealed class DalSession : IDisposable
     {
-        private readonly string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=BanHangDB;Integrated Security=True";
+        private readonly string connectionString = "Data Source=.\\SQLEXPRESS;Initial Catalog=Bank_LTHD;Integrated Security=True";
         private readonly IDbConnection _connection = null;
         private readonly UnitOfWork.UnitOfWork _unitOfWork = null;
 
