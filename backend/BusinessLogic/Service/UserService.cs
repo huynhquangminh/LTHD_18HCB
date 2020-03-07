@@ -101,5 +101,19 @@ namespace BusinessLogic.Service
                 return mapper.Map<UserBO>(result);
             }
         }
+
+        public async Task<UserBO> GetUserByTenDangNhap(string tenDangNhap)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<UserDO, UserBO>();
+            });
+            var mapper = config.CreateMapper();
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.UserRepository.GetUserByTenDangNhap(tenDangNhap);
+                return mapper.Map<UserBO>(result);
+            }
+        }
     }
 }
