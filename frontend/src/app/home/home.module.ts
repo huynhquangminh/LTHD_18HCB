@@ -4,7 +4,7 @@ import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
-import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { TaikhoanthanhtoanComponent } from './taikhoanthanhtoan/taikhoanthanhtoan.component';
 import { TaikhoantietkiemComponent } from './taikhoantietkiem/taikhoantietkiem.component';
@@ -21,13 +21,14 @@ import { ChuyenkhoanliennganhangComponent } from './chuyenkhoanliennganhang/chuy
     TaikhoantietkiemComponent,
     DanhbanguoinhanComponent,
     ChuyenkhoannoiboComponent,
-    ChuyenkhoanliennganhangComponent
+    ChuyenkhoanliennganhangComponent,
   ],
   imports: [
     CommonModule,
     HomeRoutingModule,
     NgbDropdownModule,
     TranslateModule,
-  ]
+    NgbModule
+  ],
 })
 export class HomeModule { }
