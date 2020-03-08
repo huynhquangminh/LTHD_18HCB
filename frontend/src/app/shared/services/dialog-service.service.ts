@@ -13,4 +13,8 @@ export class DialogServiceService {
     const dialogRef = this.modalService.open(TemplateDialogComfirmComponent);
     dialogRef.componentInstance.textContent = message;
   }
+
+  showDialog(nameComponent: any) {
+    this.modalService.open(nameComponent);
+  }
 }

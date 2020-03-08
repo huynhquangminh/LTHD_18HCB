@@ -1,6 +1,8 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { DialogServiceService } from 'src/app/shared/services/dialog-service.service';
+import { DialogDoimatkhauComponent } from '../dialog-doimatkhau/dialog-doimatkhau.component';
 
 @Component({
     selector: 'app-sidebar',
@@ -15,7 +17,11 @@ export class SidebarComponent implements OnInit {
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
-    constructor(private translate: TranslateService, public router: Router) {
+    constructor(
+        private translate: TranslateService,
+        public router: Router,
+        private dialogServiceService: DialogServiceService
+        ) {
         this.router.events.subscribe(val => {
             if (
                 val instanceof NavigationEnd &&
@@ -73,5 +79,9 @@ export class SidebarComponent implements OnInit {
 
     onLoggedout() {
         localStorage.removeItem('isLoggedin');
+    }
+
+    showDialogChangePassword() {
+        this.dialogServiceService.showDialog(DialogDoimatkhauComponent);
     }
 }

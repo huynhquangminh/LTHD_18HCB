@@ -1,6 +1,3 @@
-import { LoginComponent } from './login/login.component';
-import { FormModule } from './layout/form/form.module';
-import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,31 +9,35 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { NotfoundpageComponent } from './notfoundpage/notfoundpage.component';
 import { TemplateDialogComfirmComponent } from './shared/component/template-dialog-comfirm/template-dialog-comfirm.component';
-import { DialogServiceService } from './shared/services/dialog-service.service';
-import { NgbModalModule, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DialogErrorComponent } from './shared/component/dialog-error/dialog-error.component';
 import { FormsModule } from '@angular/forms';
+import { DialogDoimatkhauComponent } from './home/components/dialog-doimatkhau/dialog-doimatkhau.component';
 
 @NgModule({
     imports: [
-        CommonModule,
+        // CommonModule,
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
         LanguageTranslationModule,
         AppRoutingModule,
         NgbModalModule,
+        FormsModule,
     ],
     declarations: [
         AppComponent,
         NotfoundpageComponent,
         TemplateDialogComfirmComponent,
-        DialogErrorComponent
+        DialogErrorComponent,
+        DialogDoimatkhauComponent
     ],
-    providers: [AuthGuard],
+    providers: [AuthGuard, NgbModalConfig],
     bootstrap: [AppComponent],
     entryComponents: [
         TemplateDialogComfirmComponent,
-        DialogErrorComponent]
+        DialogErrorComponent,
+        DialogDoimatkhauComponent
+    ]
 })
 export class AppModule { }

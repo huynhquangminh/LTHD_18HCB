@@ -21,14 +21,17 @@
                             <span>(*) Mật khẩu không được trống !</span>
                         </div>
                     </div>
+                    <div style="float: left;">
+                        <a routerLink="forgot-password" >Quên mật khẩu </a>
+                    </div>
+                    <re-captcha (resolved)="resolved($event)" siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU">
+                    </re-captcha>
                 </div>
-                <re-captcha (resolved)="resolved($event)" siteKey="6LcOuyYTAAAAAHTjFuqhA52fmfJ_j5iFk5PsfXaU">
-                </re-captcha>
+               
                 <button class="btn rounded-btn" [disabled]="(!formLogin.valid || !isLoger)">
                     Đăng nhập
                 </button>
             </form>
-
         </div>
     </div>
 </div>

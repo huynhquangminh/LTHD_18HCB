@@ -1,0 +1,47 @@
+<div class="login-page">
+  <div class="row justify-content-md-center">
+    <div class="col-md-4">
+      <img src="https://tienganhtflat.com/uploads/blog/666_57fdf7bdc2f25.jpg" width="150px" class="user-avatar" />
+      <h1>18HCB Bank</h1>
+      <form novalidate #forgotPassword="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-content">
+          <div class="form-group">
+            <input type="text" name="tendangnhap" class="form-control input-underline input-lg"
+              [(ngModel)]="modelForgotPassword.tendangnhap" placeholder="Tên đăng nhập" required>
+            <div class="validate-form" style="float: left;"
+              *ngIf="forgotPassword.controls.tendangnhap?.errors?.required && forgotPassword.controls.tendangnhap?.touched">
+              <span>(*) Tên đăng nhập không được trống !</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <input type="password" name="email" class="form-control input-underline input-lg"
+              [(ngModel)]="modelForgotPassword.email" placeholder="Email" required>
+            <div class="validate-form" style="float: left;"
+              *ngIf="forgotPassword.controls.email?.errors?.required && forgotPassword.controls.email?.touched">
+              <span>(*) Email không được trống !</span>
+            </div>
+          </div>
+          <div class="form-group">
+            <div>
+              <input style="width: 170px;" type="password" name="codeOTP" class="form-control input-underline input-lg" [(ngModel)]="codeOTP"
+                placeholder="Mã xác nhận" required>
+              <button (click)="getCodeOTP()">Lấy mã xác nhận </button>
+              <span style="font-size: 14px;" *ngIf="isCodeOTP">(*) Mã xác nhận đã được gửi về gmail!</span>
+              <span style="font-size: 14px;" *ngIf="!isCheckCodeOTP">(*) Mã xác nhận không đúng!</span>
+            </div>
+
+            <div class="validate-form" style="float: left;"
+              *ngIf="forgotPassword.controls.codeOTP?.errors?.required && forgotPassword.controls.codeOTP?.touched">
+              <span>(*) Mã xác nhận không được trống !</span>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn rounded-btn" [disabled]="(!forgotPassword.valid)">
+          Lấy mật khẩu mới
+        </button>
+      </form>
+
+    </div>
+  </div>
+</div>
