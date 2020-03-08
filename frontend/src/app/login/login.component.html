@@ -7,7 +7,7 @@
                 <div class="form-content">
                     <div class="form-group">
                         <input type="text" name="tendangnhap" class="form-control input-underline input-lg"
-                            [(ngModel)]="modelLogin.tendangnhap" placeholder="Tên đăng nhập" required>
+                            [(ngModel)]="modelLogin.tenDangNhap" placeholder="Tên đăng nhập" required>
                         <div class="validate-form" style="float: left;"
                             *ngIf="formLogin.controls.tendangnhap?.errors?.required && formLogin.controls.tendangnhap?.touched">
                             <span>(*) Tên đăng nhập không được trống !</span>
@@ -15,7 +15,7 @@
                     </div>
                     <div class="form-group">
                         <input type="password" name="matkhau" class="form-control input-underline input-lg"
-                            [(ngModel)]="modelLogin.matkhau" placeholder="Mật khẩu" required>
+                            [(ngModel)]="modelLogin.matKhau" placeholder="Mật khẩu" required>
                         <div class="validate-form" style="float: left;"
                             *ngIf="formLogin.controls.matkhau?.errors?.required && formLogin.controls.matkhau?.touched">
                             <span>(*) Mật khẩu không được trống !</span>

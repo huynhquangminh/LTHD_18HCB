@@ -13,6 +13,7 @@ import { NgbModalModule, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DialogErrorComponent } from './shared/component/dialog-error/dialog-error.component';
 import { FormsModule } from '@angular/forms';
 import { DialogDoimatkhauComponent } from './home/components/dialog-doimatkhau/dialog-doimatkhau.component';
+import { AppService } from './shared/services/app-service';
 
 @NgModule({
     imports: [
@@ -32,7 +33,7 @@ import { DialogDoimatkhauComponent } from './home/components/dialog-doimatkhau/d
         DialogErrorComponent,
         DialogDoimatkhauComponent
     ],
-    providers: [AuthGuard, NgbModalConfig],
+    providers: [AuthGuard, NgbModalConfig, AppService],
     bootstrap: [AppComponent],
     entryComponents: [
         TemplateDialogComfirmComponent,

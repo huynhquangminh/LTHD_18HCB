@@ -8,6 +8,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { QuenmatkhauComponent } from './quenmatkhau/quenmatkhau.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
         CommonModule,
         TranslateModule,
         LoginRoutingModule,
-        RecaptchaModule
+        RecaptchaModule,
+        HttpClientModule
     ],
     declarations: [LoginComponent, QuenmatkhauComponent]
 })
