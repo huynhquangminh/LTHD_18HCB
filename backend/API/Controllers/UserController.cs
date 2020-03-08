@@ -37,10 +37,6 @@ namespace API.Controllers
             _userService = userService;
         }
 
-        /// <summary>
-        /// Get all users
-        /// </summary>
-        /// <returns></returns>
         //[Authorize]
         //[HttpGet]
         //[Produces("application/json")]
@@ -51,11 +47,6 @@ namespace API.Controllers
         //    return Ok(result);
         //}
 
-        /// <summary>
-        /// Register new user
-        /// </summary>
-        /// <param name="user"></param>
-        /// <returns></returns>
         //[AllowAnonymous]
         //[HttpPost]
         //[Produces("application/json")]
@@ -69,11 +60,12 @@ namespace API.Controllers
         //}
 
         /// <summary>
-        /// Login account
+        /// Đăng nhập vào hệ thống
         /// </summary>
         /// <param name="tenDangNhap"></param>
         /// <param name="matKhau"></param>
-        /// <returns></returns>
+        /// <returns> Return user and token </returns>
+        /// <response code="200">Returns the user </response>
         [AllowAnonymous]
         [HttpPost]
         [Produces("application/json")]
@@ -95,7 +87,7 @@ namespace API.Controllers
                 //var stringRefreshToken = GenerateRefreshToken();
                 //user.RefreshToken = stringRefreshToken;
                 //var result = _userService.EditUserRefreshToken(user.UserName, user.RefreshToken);
-                response = Ok(new { user = user, token = stringToken
+                response = Ok(new { user, token = stringToken
                     //refreshToken = stringRefreshToken 
                 });
             }
@@ -116,11 +108,6 @@ namespace API.Controllers
             return new string[] { "Value1", "Value2", "Value3" };
         }
 
-        /// Refresh token
-        /// </summary>
-        /// <param name="token"></param>
-        /// <param name="refreshToken"></param>
-        /// <returns></returns>
         //[HttpPost]
         //[Produces("application/json")]
         //[Route("RefreshToken")]
@@ -148,10 +135,6 @@ namespace API.Controllers
         //    });
         //}
 
-        /// <summary>
-        /// Revoke api
-        /// </summary>
-        /// <returns></returns>
         //[Authorize]
         //[HttpPost]
         //[Produces("application/json")]

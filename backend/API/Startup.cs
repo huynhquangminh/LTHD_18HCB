@@ -40,7 +40,8 @@ namespace API
             // Cors config
             services.AddCors(options =>
             {
-                options.AddPolicy("CorsPolicy", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowCredentials().Build());
+                options.AddPolicy("MyPolicy", builder => builder.WithOrigins(
+                    new [] { "http://localhost:4200"}).AllowAnyMethod().AllowCredentials().Build());
             });
 
             services.AddControllers();
@@ -131,6 +132,8 @@ namespace API
             }
 
             app.UseHttpsRedirection();
+            // Enable Cors
+            app.UseCors("MyPolicy");
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
