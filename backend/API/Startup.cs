@@ -133,7 +133,7 @@ namespace API
 
             app.UseHttpsRedirection();
             // Enable Cors
-            app.UseCors("MyPolicy");
+            app.UseCors(options => options.WithOrigins("http://localhost:4200"));
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
