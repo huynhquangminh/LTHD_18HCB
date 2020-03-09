@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BusinessLogic.AutoMapperConfig;
 using BusinessLogic.Service.Interface;
 using BusinessObject;
 using DataAccess.Infrastructure;
@@ -84,7 +85,7 @@ namespace BusinessLogic.Service
             using (DalSession dal = new DalSession())
             {
                 var result = await dal.UnitOfWork.UserRepository.GetUserByUserName(userName);
-                return mapper.Map<UserBO>(result);
+                return MapperHelper.Map<UserDO, UserBO>(result);
             }
         }
 
