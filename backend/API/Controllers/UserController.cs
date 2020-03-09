@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using BusinessLogic.Service.Interface;
 using BusinessObject;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -68,6 +69,7 @@ namespace API.Controllers
         /// <response code="200">Returns the user </response>
         [AllowAnonymous]
         [HttpPost]
+        //[EnableCors("MyPolicy")]
         [Produces("application/json")]
         [Route("Login")]
         public async Task<IActionResult> Login(string tenDangNhap, string matKhau)
@@ -100,6 +102,7 @@ namespace API.Controllers
         /// </summary>
         /// <returns></returns>
         [Authorize]
+        [EnableCors("MyPolicy")]
         [HttpGet]
         [Produces("application/json")]
         [Route("GetValue")]
