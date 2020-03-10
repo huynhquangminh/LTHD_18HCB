@@ -105,15 +105,19 @@ namespace BusinessLogic.Service
 
         public async Task<UserBO> GetUserByTenDangNhap(string tenDangNhap)
         {
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<UserDO, UserBO>();
-            });
-            var mapper = config.CreateMapper();
             using (DalSession dal = new DalSession())
             {
                 var result = await dal.UnitOfWork.UserRepository.GetUserByTenDangNhap(tenDangNhap);
-                return mapper.Map<UserBO>(result);
+                return MapperHelper.Map<UserDO, UserBO>(result);
+            }
+        }
+
+        public async Task<UserBO> GetThongTinTaiKhoan(string maTaiKhoan)
+        {
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.UserRepository.GetThongTinTaiKhoan(maTaiKhoan);
+                return MapperHelper.Map<UserDO, UserBO>(result);
             }
         }
     }

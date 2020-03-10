@@ -15,5 +15,6 @@ namespace DataAccess.Interface
         Task<int> AddUser(UserDO user);
         Task<int> EditUserRefreshToken(string userName, string refreshToken);
         Task<UserDO> GetUserByTenDangNhap(string tenDangNhap);
+        Task<UserDO> GetThongTinTaiKhoan(string maTaiKhoan);
     }
 }

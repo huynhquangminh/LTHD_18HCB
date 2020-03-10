@@ -61,13 +61,6 @@ namespace API.Controllers
         //    return await _userService.AddUser(user);
         //}
 
-        ///// <summary>
-        ///// Đăng nhập vào hệ thống
-        ///// </summary>
-        ///// <param name="tenDangNhap"></param>
-        ///// <param name="matKhau"></param>
-        ///// <returns> Return user and token </returns>
-        ///// <response code="200">Returns the user </response>
         /// <summary>
         /// Đăng nhập vào hệ thống
         /// </summary>
@@ -76,7 +69,6 @@ namespace API.Controllers
         ///  <response code="200">Returns the user </response>
         [AllowAnonymous]
         [HttpPost]
-        //[EnableCors("MyPolicy")]
         [Produces("application/json")]
         [Route("Login")]
         public async Task<IActionResult> Login(LoginUserRequest request)
@@ -105,17 +97,31 @@ namespace API.Controllers
         }
 
         /// <summary>
-        /// Testing authorize
+        /// 
         /// </summary>
         /// <returns></returns>
         [Authorize]
-        [EnableCors("MyPolicy")]
         [HttpGet]
         [Produces("application/json")]
         [Route("GetValue")]
         public ActionResult<IEnumerable<string>> TestAuthentication()
         {
             return new string[] { "Value1", "Value2", "Value3" };
+        }
+
+        /// <summary>
+        /// Lấy thông tin tài khoản theo mã tài khoản
+        /// </summary>
+        /// <param name="maTaiKhoan"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("ThongTinTaiKhoan")]
+        public async Task<ActionResult<UserBO>> GetThongTinTaiKhoan(string maTaiKhoan)
+        {
+            var result = _userService.GetThongTinTaiKhoan(maTaiKhoan);
+            return await result;
         }
 
         //[HttpPost]

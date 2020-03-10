@@ -14,5 +14,6 @@ namespace BusinessLogic.Service.Interface
         Task<int> AddUser(UserBO user);
         Task<int> EditUserRefreshToken(string userName, string refreshToken);
         Task<UserBO> GetUserByTenDangNhap(string tenDangNhap);
+        Task<UserBO> GetThongTinTaiKhoan(string maTaiKhoan);
     }
 }
