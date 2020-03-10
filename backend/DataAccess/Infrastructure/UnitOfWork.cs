@@ -1,5 +1,6 @@
 ﻿using DataAccess.Interface;
 using DataAccess.Repository;
+using DataAccess.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,6 +11,7 @@ namespace DataAccess.UnitOfWork
     public sealed class UnitOfWork : IUnitOfWork
     {
         private IUserRepository _userRepository;
+        private ITaiKhoanTietKiemRepository _taiKhoanTietKiemRepository;
         public UnitOfWork(IDbConnection connection)
         {
             _id = Guid.NewGuid();
@@ -62,6 +64,14 @@ namespace DataAccess.UnitOfWork
             get
             {
                 return _userRepository ?? (_userRepository = new UserRepository(_connection, _transaction));
+            }
+        }
+
+        public ITaiKhoanTietKiemRepository TaiKhoanTietKiemRepository
+        {
+            get
+            {
+                return _taiKhoanTietKiemRepository ?? (_taiKhoanTietKiemRepository = new TaiKhoanTietKiemRepository(_connection, _transaction));
             }
         }
     }

@@ -17,6 +17,8 @@ namespace BusinessLogic.AutoMapperConfig
             {
                 config.CreateMap<UserBO, UserDO>();
                 config.CreateMap<UserDO, UserBO>();
+                config.CreateMap<TaiKhoanTietKiemBO, TaiKhoanTietKiemDO>();
+                config.CreateMap<TaiKhoanTietKiemDO, TaiKhoanTietKiemBO>();
             });
 
             staticMapper = config.CreateMapper();

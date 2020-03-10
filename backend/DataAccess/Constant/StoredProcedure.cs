@@ -16,6 +16,8 @@ namespace DataAccess.Constant
         // User
         public const string USER_GETBY_TENDANGNHAP = "GetUserByTenDangNhap";
         public const string USER_GET_THONGTINTAIKHOAN = "GetThongTinTaiKhoan";
-        public const string USER_GET_DSTAIKHOANTIETKIEM = "GetDsTaiKhoanTietKiem";
+
+        // TaiKhoanTietKiem
+        public const string TAIKHOANTIETKIEM_GET_BY_MATAIKHOAN = "GetDsTaiKhoanTietKiem";
     }
 }

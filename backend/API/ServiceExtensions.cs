@@ -63,6 +63,7 @@ namespace API
         public static void ConfigureBusinessLogicServices(this IServiceCollection services)
         {
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ITaiKhoanTietKiemService, TaiKhoanTietKiemService>();
         }
 
         /// <summary>
