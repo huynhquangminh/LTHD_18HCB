@@ -51,7 +51,6 @@ export class AuthService extends HandleErrorService {
     return this.httpPost('user/login?tenDangNhap=' + model.tenDangNhap + '&matKhau=' + model.matKhau, model).pipe(
       map((result: any) => {
         try {
-          console.log('result login', result);
           return result;
         } catch (error) {
           console.log(error);

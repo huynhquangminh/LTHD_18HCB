@@ -14,7 +14,8 @@ import { DialogErrorComponent } from './shared/component/dialog-error/dialog-err
 import { FormsModule } from '@angular/forms';
 import { DialogDoimatkhauComponent } from './home/components/dialog-doimatkhau/dialog-doimatkhau.component';
 import { AppService } from './shared/services/app-service';
-
+import { AngularWebStorageModule } from 'angular-web-storage';
+import { WebStorageSerivce } from './shared/services/webstorage.service';
 @NgModule({
     imports: [
         // CommonModule,
@@ -25,6 +26,7 @@ import { AppService } from './shared/services/app-service';
         AppRoutingModule,
         NgbModalModule,
         FormsModule,
+        AngularWebStorageModule
     ],
     declarations: [
         AppComponent,
@@ -33,7 +35,12 @@ import { AppService } from './shared/services/app-service';
         DialogErrorComponent,
         DialogDoimatkhauComponent
     ],
-    providers: [AuthGuard, NgbModalConfig, AppService],
+    providers: [
+        AuthGuard,
+        NgbModalConfig,
+        AppService,
+        WebStorageSerivce
+    ],
     bootstrap: [AppComponent],
     entryComponents: [
         TemplateDialogComfirmComponent,

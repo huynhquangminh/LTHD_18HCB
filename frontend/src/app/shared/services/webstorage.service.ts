@@ -1,86 +1,44 @@
-// import { WebStorageKey } from './../globlas/WebStorageKey';
-// import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { LocalStorageService, SessionStorageService } from 'angular-web-storage';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class WebstorageService {
 
-//   constructor(
-//     private localSt: LocalStorageService,
-//     private sessionSt: SessionStorageService
-//   ) {
+@Injectable()
+export class WebStorageSerivce {
+    constructor(
+        public local: LocalStorageService,
+        public session: SessionStorageService
 
-//   }
+    ) { }
 
-//   /**
-//    * storeLocalStorage
-//    * @param key key
-//    * @param data data
-//    */
-//   storeLocalStorage(key: WebStorageKey, data: any) {
-//     this.localSt.store(key, data);
-//   }
+    getLocalStorage(key: string) {
+        return this.local.get(key);
+    }
 
-//   /**
-//    * storeSessionStorage
-//    * @param key key
-//    * @param data data
-//    */
-//   storeSessionStorage(key: WebStorageKey, data: any) {
-//     this.sessionSt.store(key, data);
-//   }
+    setLocalStorage(key: string, vaule: any) {
+        this.local.set(key, vaule);
+    }
 
-//   /**
-//    * getLocalStorage
-//    * @param key key
-//    */
-//   getLocalStorage(key: WebStorageKey) {
-//     return this.localSt.retrieve(key)
-//       ;
-//   }
+    removeLocalStorage(key: string) {
+        this.local.remove(key);
+    }
 
-//   /**
-//    * getSessionStorage
-//    * @param key key
-//    */
-//   getSessionStorage(key: WebStorageKey) {
-//     return this.sessionSt.retrieve(key)
-//       ;
-//   }
+    clearLocalStorage() {
+        this.local.clear();
+    }
 
-//   /**
-//    * getSessionStorage
-//    * @param key key
-//    */
-//   getSessionStorageAsObserve(key: WebStorageKey) {
-//     return this.sessionSt.observe(key)
-//       ;
-//   }
+    getSessionStorage(key: string) {
+        return this.session.get(key);
+    }
 
-//   /**
-//    * removeLocalStorage
-//    * @param key key
-//    */
-//   removeLocalStorage(key: WebStorageKey) {
-//     this.localSt.clear(key)
-//       ;
-//   }
+    setSessionStorage(key: string, vaule: any) {
+        this.session.set(key, vaule);
+    }
 
-//   /**
-//    * removeSessionStorage
-//    * @param key key
-//    */
-//   removeSessionStorage(key: WebStorageKey) {
-//     this.sessionSt.clear(key)
-//       ;
-//   }
+    removeSessionStorage(key: string) {
+        this.session.remove(key);
+    }
 
-//   sessionClear() {
-//     this.sessionSt.clear();
-//   }
-
-//   localClear() {
-//     this.localSt.clear();
-//   }
-// }
+    clearSessionStorage() {
+        this.session.clear();
+    }
+}

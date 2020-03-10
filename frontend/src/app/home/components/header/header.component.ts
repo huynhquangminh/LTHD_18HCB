@@ -1,6 +1,11 @@
+import { AuthService } from './../../../shared/services/auth.service';
+import { WebKeyStorage } from './../../../shared/globlas/web-key-storage';
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { DialogServiceService } from 'src/app/shared/services/dialog-service.service';
+import { DialogDoimatkhauComponent } from '../dialog-doimatkhau/dialog-doimatkhau.component';
+import { WebStorageSerivce } from 'src/app/shared/services/webstorage.service';
 
 @Component({
     selector: 'app-header',
@@ -9,8 +14,14 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class HeaderComponent implements OnInit {
     public pushRightClass: string;
+    public userInfo: any;
 
-    constructor(private translate: TranslateService, public router: Router) {
+    constructor(
+        private dialogServiceService: DialogServiceService,
+        public router: Router,
+        private webStorageSerivce: WebStorageSerivce,
+        private authSerivce: AuthService
+    ) {
 
         this.router.events.subscribe(val => {
             if (
@@ -25,6 +36,7 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.pushRightClass = 'push-right';
+        this.userInfo = this.webStorageSerivce.getLocalStorage(WebKeyStorage.user_info);
     }
 
     isToggled(): boolean {
@@ -43,10 +55,12 @@ export class HeaderComponent implements OnInit {
     }
 
     onLoggedout() {
-        localStorage.removeItem('isLoggedin');
+        this.webStorageSerivce.clearLocalStorage();
+        this.authSerivce.isLogin = false;
+        this.router.navigateByUrl('/login');
     }
 
-    changeLang(language: string) {
-        this.translate.use(language);
+    showDialogChangePassword() {
+        this.dialogServiceService.showDialog(DialogDoimatkhauComponent);
     }
 }

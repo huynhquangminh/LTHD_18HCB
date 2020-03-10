@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { routerTransition } from '../router.animations';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
-import { AppService } from '../shared/services/app-service';
+import { WebStorageSerivce } from '../shared/services/webstorage.service';
+import { WebKeyStorage } from '../shared/globlas/web-key-storage';
 
 @Component({
     selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
     constructor(
         public router: Router,
         private authService: AuthService,
-        private appService: AppService
+        private webStorageSerivce: WebStorageSerivce
     ) { }
 
     ngOnInit() { }
@@ -30,6 +31,13 @@ export class LoginComponent implements OnInit {
         this.authService.login(this.modelLogin).subscribe(res => {
             if (res) {
                 this.authService.isLogin = true;
+                const result = res;
+                delete result.user.matKhau;
+                delete result.user.soTaiKhoan;
+                delete result.user.tenTaiKhoan;
+                delete result.user.soDu;
+                result['isLogin'] = this.authService.isLogin;
+                this.webStorageSerivce.setLocalStorage(WebKeyStorage.user_info, result);
                 this.router.navigateByUrl('/home');
             }
         });
