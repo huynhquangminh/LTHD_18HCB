@@ -13,7 +13,6 @@ import { NgbModalModule, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { DialogErrorComponent } from './shared/component/dialog-error/dialog-error.component';
 import { FormsModule } from '@angular/forms';
 import { DialogDoimatkhauComponent } from './home/components/dialog-doimatkhau/dialog-doimatkhau.component';
-import { AppService } from './shared/services/app-service';
 import { AngularWebStorageModule } from 'angular-web-storage';
 import { WebStorageSerivce } from './shared/services/webstorage.service';
 @NgModule({
@@ -38,7 +37,6 @@ import { WebStorageSerivce } from './shared/services/webstorage.service';
     providers: [
         AuthGuard,
         NgbModalConfig,
-        AppService,
         WebStorageSerivce
     ],
     bootstrap: [AppComponent],
