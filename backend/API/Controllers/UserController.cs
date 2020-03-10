@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using API.Models.Request;
 using BusinessLogic.Service.Interface;
 using BusinessObject;
 using Microsoft.AspNetCore.Authorization;
@@ -60,23 +61,29 @@ namespace API.Controllers
         //    return await _userService.AddUser(user);
         //}
 
+        ///// <summary>
+        ///// Đăng nhập vào hệ thống
+        ///// </summary>
+        ///// <param name="tenDangNhap"></param>
+        ///// <param name="matKhau"></param>
+        ///// <returns> Return user and token </returns>
+        ///// <response code="200">Returns the user </response>
         /// <summary>
         /// Đăng nhập vào hệ thống
         /// </summary>
-        /// <param name="tenDangNhap"></param>
-        /// <param name="matKhau"></param>
-        /// <returns> Return user and token </returns>
-        /// <response code="200">Returns the user </response>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        ///  <response code="200">Returns the user </response>
         [AllowAnonymous]
         [HttpPost]
         //[EnableCors("MyPolicy")]
         [Produces("application/json")]
         [Route("Login")]
-        public async Task<IActionResult> Login(string tenDangNhap, string matKhau)
+        public async Task<IActionResult> Login(LoginUserRequest request)
         {
             UserBO login = new UserBO();
-            login.TenTaiKhoan = tenDangNhap;
-            login.MatKhau = matKhau;
+            login.TenTaiKhoan = request.tenDangNhap;
+            login.MatKhau = request.matKhau;
 
             IActionResult response = Unauthorized();
 
