@@ -8,13 +8,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">0</th>
+    <tr *ngFor="let item of thongTinTaiKhoanModel">
+      <th scope="row">{{item.id}}</th>
       <td>
-        Tiền trả nợ
+        {{item.tenTaiKhoanTietKiem}}
       </td>
-      <td>20/2/2020</td>
-      <td>100,000,000 VND</td>
+      <td>{{item.ngayTao | date:'dd/MM/yyyy'}}</td>
+      <td>{{item.soTienTietKiem | currency: "VND" }} VND</td>
     </tr>
   </tbody>
 </table>

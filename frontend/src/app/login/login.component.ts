@@ -34,7 +34,6 @@ export class LoginComponent implements OnInit {
                 const result = res;
                 delete result.user.matKhau;
                 delete result.user.soTaiKhoan;
-                delete result.user.tenTaiKhoan;
                 delete result.user.soDu;
                 result['isLogin'] = this.authService.isLogin;
                 this.webStorageSerivce.setLocalStorage(WebKeyStorage.user_info, result);
