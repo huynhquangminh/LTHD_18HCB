@@ -127,7 +127,7 @@ namespace API.Controllers
 
         public Task<ActionResult<int>> DoiMatKhau(DoiMatKhauRequest request)
         {
-
+            return -1;
         }
 
         //[HttpPost]
