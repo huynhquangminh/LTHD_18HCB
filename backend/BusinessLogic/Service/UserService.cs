@@ -120,5 +120,26 @@ namespace BusinessLogic.Service
                 return MapperHelper.Map<UserDO, UserBO>(result);
             }
         }
+
+        public async Task<int> DoiMatKhau(string maTaiKhoan, string matKhauMoi)
+        {
+            var result = 0;
+
+            using (DalSession dal = new DalSession())
+            {
+                try
+                {
+                    dal.UnitOfWork.Begin();
+                    result = await dal.UnitOfWork.UserRepository.DoiMatKhau(maTaiKhoan, matKhauMoi);
+                    dal.UnitOfWork.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dal.UnitOfWork.Rollback();
+                    throw new AggregateException();
+                }
+                return result;
+            }
+        }
     }
 }

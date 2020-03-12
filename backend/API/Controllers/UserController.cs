@@ -124,6 +124,12 @@ namespace API.Controllers
             return await result;
         }
 
+
+        public Task<ActionResult<int>> DoiMatKhau(DoiMatKhauRequest request)
+        {
+
+        }
+
         //[HttpPost]
         //[Produces("application/json")]
         //[Route("RefreshToken")]
@@ -197,7 +203,7 @@ namespace API.Controllers
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Issuer"],
                 claims,
-                expires: DateTime.Now.AddMinutes(10),
+                expires: DateTime.Now.AddMinutes(15),
                 signingCredentials: credentials);
 
             var encodeToken = new JwtSecurityTokenHandler().WriteToken(token);

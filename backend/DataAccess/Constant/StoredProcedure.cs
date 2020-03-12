@@ -12,6 +12,7 @@ namespace DataAccess.Constant
         public const string USER_GETBY_USERNAME_PASSWORD = "sp_User_GetBy_UserName_Password";
         public const string USER_INSERT = "sp_User_Insert";
         public const string USER_EDIT_REFRESHTOKEN = "sp_User_Edit_RefreshToken";
+        public const string USER_DOIMATKHAU = "DoiMatKhau";
 
         // User
         public const string USER_GETBY_TENDANGNHAP = "GetUserByTenDangNhap";
