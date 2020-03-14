@@ -26,5 +26,8 @@ namespace DataAccess.Constant
         public const string DANHBA_THEM = "ThemDanhBa";
         public const string DANHBA_SUA = "SuaDanhBa";
         public const string DANHBA_XOA = "XoaDanhBa";
+
+        // ThongBao
+        public const string THONGBAO_GETDANHSACH = "GetDSThongBao";
     }
 }

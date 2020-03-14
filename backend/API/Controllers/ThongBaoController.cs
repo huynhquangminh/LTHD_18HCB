@@ -12,38 +12,38 @@ using Microsoft.Extensions.Configuration;
 namespace API.Controllers
 {
     /// <summary>
-    /// TaiKhoanTietKiem api
+    /// ThongBao api
     /// </summary>
     [Route("api/[controller]")]
     [ApiController]
-    public class TaiKhoanTietKiemController : ControllerBase
+    public class ThongBaoController : ControllerBase
     {
         private IConfiguration _config;
-        private readonly ITaiKhoanTietKiemService _taiKhoanTietKiemService;
+        private readonly IThongBaoService _thongBaoService;
 
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="config"></param>
-        /// <param name="taiKhoanTietKiemService"></param>
-        public TaiKhoanTietKiemController(IConfiguration config, ITaiKhoanTietKiemService taiKhoanTietKiemService)
+        /// <param name="thongBaoService"></param>
+        public ThongBaoController(IConfiguration config, IThongBaoService thongBaoService)
         {
             _config = config;
-            _taiKhoanTietKiemService = taiKhoanTietKiemService;
+            _thongBaoService = thongBaoService;
         }
 
         /// <summary>
-        /// Lấy danh sách tài khoản tiết kiệm theo mã tài khoản
+        /// Lấy danh sách thông báo theo mã tài khoản
         /// </summary>
         /// <param name="maTaiKhoan"></param>
         /// <returns></returns>
         [Authorize]
         [HttpGet]
         [Produces("application/json")]
-        [Route("GetDanhSachTheoMaTaiKhoan")]
-        public async Task<ActionResult<List<TaiKhoanTietKiemBO>>> GetDanhSachTheoMaTaiKhoan(string maTaiKhoan)
+        [Route("GetDSThongBao")]
+        public async Task<ActionResult<List<ThongBaoBO>>> GetDanhSachTheoMaTaiKhoan(string maTaiKhoan)
         {
-            var result = await _taiKhoanTietKiemService.GetDanhSachTheoMaTaiKhoan(maTaiKhoan);
+            var result = await _thongBaoService.GetDanhSachTheoMaTaiKhoan(maTaiKhoan);
             return Ok(result);
         }
     }

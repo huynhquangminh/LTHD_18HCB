@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using BusinessLogic.AutoMapperConfig;
 using BusinessLogic.Service.Interface;
 using BusinessObject;
 using DataAccess.Infrastructure;
@@ -11,20 +10,20 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.Service
 {
-    public class TaiKhoanTietKiemService : ITaiKhoanTietKiemService
+    public class ThongBaoService : IThongBaoService
     {
-        public async Task<List<TaiKhoanTietKiemBO>> GetDanhSachTheoMaTaiKhoan(string maTaiKhoan)
+        public async Task<List<ThongBaoBO>> GetDanhSachTheoMaTaiKhoan(string maTaiKhoan)
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<TaiKhoanTietKiemDO, TaiKhoanTietKiemBO>();
+                cfg.CreateMap<ThongBaoDO, ThongBaoBO>();
             });
 
             var mapper = config.CreateMapper();
             using (DalSession dal = new DalSession())
             {
-                var result = await dal.UnitOfWork.TaiKhoanTietKiemRepository.GetDanhSachTheoMaTaiKhoan(maTaiKhoan);
-                return mapper.Map<List<TaiKhoanTietKiemBO>>(result);
+                var result = await dal.UnitOfWork.ThongBaoRepository.GetDanhSachTheoMaTaiKhoan(maTaiKhoan);
+                return mapper.Map<List<ThongBaoBO>>(result);
             }
         }
     }

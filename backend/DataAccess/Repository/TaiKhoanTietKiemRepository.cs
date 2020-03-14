@@ -16,7 +16,6 @@ namespace DataAccess.Repository
         public TaiKhoanTietKiemRepository(IDbConnection dbConnection, IDbTransaction transaction)
        : base(dbConnection, transaction)
         {
-
         }
 
         public async Task<List<TaiKhoanTietKiemDO>> GetDanhSachTheoMaTaiKhoan(string maTaiKhoan)
