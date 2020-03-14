@@ -12,6 +12,7 @@ namespace DataAccess.UnitOfWork
     {
         private IUserRepository _userRepository;
         private ITaiKhoanTietKiemRepository _taiKhoanTietKiemRepository;
+        private IDanhBaRepository _danhBaRepository;
         public UnitOfWork(IDbConnection connection)
         {
             _id = Guid.NewGuid();
@@ -59,6 +60,7 @@ namespace DataAccess.UnitOfWork
             _transaction = null;
         }
 
+        // Repositories
         public IUserRepository UserRepository
         {
             get
@@ -72,6 +74,14 @@ namespace DataAccess.UnitOfWork
             get
             {
                 return _taiKhoanTietKiemRepository ?? (_taiKhoanTietKiemRepository = new TaiKhoanTietKiemRepository(_connection, _transaction));
+            }
+        }
+
+        public IDanhBaRepository DanhBaRepository
+        {
+            get
+            {
+                return _danhBaRepository ?? (_danhBaRepository = new DanhBaRepository(_connection, _transaction));
             }
         }
     }

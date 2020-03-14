@@ -125,10 +125,10 @@ namespace API.Controllers
         }
 
 
-        public Task<ActionResult<int>> DoiMatKhau(DoiMatKhauRequest request)
-        {
-            return -1;
-        }
+        //public Task<ActionResult<int>> DoiMatKhau(DoiMatKhauRequest request)
+        //{
+        //    return await -1;
+        //}
 
         //[HttpPost]
         //[Produces("application/json")]

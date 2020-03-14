@@ -33,10 +33,11 @@ namespace API.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Lấy danh sách tài khoản tiết kiệm theo mã tài khoản
         /// </summary>
         /// <param name="maTaiKhoan"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpGet]
         [Produces("application/json")]
         [Route("GetDanhSachTheoMaTaiKhoan")]

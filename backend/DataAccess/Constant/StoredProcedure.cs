@@ -20,5 +20,11 @@ namespace DataAccess.Constant
 
         // TaiKhoanTietKiem
         public const string TAIKHOANTIETKIEM_GET_BY_MATAIKHOAN = "GetDsTaiKhoanTietKiem";
+
+        // DanhBa
+        public const string DANHBA_GETDANHSACH = "GetDSDanhBa";
+        public const string DANHBA_THEM = "ThemDanhBa";
+        public const string DANHBA_SUA = "SuaDanhBa";
+        public const string DANHBA_XOA = "XoaDanhBa";
     }
 }
