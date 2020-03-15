@@ -67,7 +67,7 @@ namespace API.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [Authorize]
-        [HttpPost]
+        [HttpPut]
         [Produces("application/json")]
         [Route("SuaDanhBa")]
         public async Task<ActionResult<int>> SuaDanhBa(DanhBaBO request)
@@ -81,7 +81,7 @@ namespace API.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [Authorize]
-        [HttpPost]
+        [HttpDelete]
         [Produces("application/json")]
         [Route("XoaDanhBa")]
         public async Task<ActionResult<int>> XoaDanhBa(int id)
