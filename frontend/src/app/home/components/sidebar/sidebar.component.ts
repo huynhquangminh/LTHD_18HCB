@@ -1,6 +1,6 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { DialogServiceService } from 'src/app/shared/services/dialog-service.service';
+import { DialogService } from 'src/app/shared/services/dialog-service.service';
 import { DialogDoimatkhauComponent } from '../dialog-doimatkhau/dialog-doimatkhau.component';
 
 @Component({
@@ -18,7 +18,7 @@ export class SidebarComponent implements OnInit {
 
     constructor(
         public router: Router,
-        private dialogServiceService: DialogServiceService
+        private dialogServiceService: DialogService
         ) {
         this.router.events.subscribe(val => {
             if (

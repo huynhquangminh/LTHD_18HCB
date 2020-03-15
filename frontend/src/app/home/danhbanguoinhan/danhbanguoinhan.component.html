@@ -1,3 +1,36 @@
-<p>
-  danhbanguoinhan works!
-</p>
+<div>
+  <button class="btn rounded-btn" style="margin: 10px;" (click)="taoMoiDanhBa()">
+    <i class="material-icons">
+      note_add
+      </i> Thêm mới danh bạ
+  </button>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tên gợi nhớ</th>
+      <th scope="col">Tên ngân hàng </th>
+      <th scope="col">Số tài khoản</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">0</th>
+      <td>
+        xxxx
+      </td>
+      <td>xxxx</td>
+      <td>xxxxx</td>
+      <td>
+        <i class="material-icons" title="Delete" style="font-size: 35px; cursor: pointer;" (click)="xoaDanhBa()">
+          delete_forever
+        </i>
+        <i class="material-icons" title="Edit" style="font-size: 35px; cursor: pointer;" (click)="suaDanhBa()">
+          settings_applications
+        </i>
+      </td>
+    </tr>
+  </tbody>
+</table>

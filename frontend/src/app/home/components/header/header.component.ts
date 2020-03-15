@@ -3,7 +3,7 @@ import { WebKeyStorage } from './../../../shared/globlas/web-key-storage';
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { DialogServiceService } from 'src/app/shared/services/dialog-service.service';
+import { DialogService } from 'src/app/shared/services/dialog-service.service';
 import { DialogDoimatkhauComponent } from '../dialog-doimatkhau/dialog-doimatkhau.component';
 import { WebStorageSerivce } from 'src/app/shared/services/webstorage.service';
 import { ThongBaoService } from 'src/app/shared/services/thong-bao.service';
@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
     public listThongBao: any = [];
 
     constructor(
-        private dialogServiceService: DialogServiceService,
+        private dialogServiceService: DialogService,
         public router: Router,
         private webStorageSerivce: WebStorageSerivce,
         private authSerivce: AuthService,
@@ -40,7 +40,7 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
         this.pushRightClass = 'push-right';
         this.userInfo = this.webStorageSerivce.getLocalStorage(WebKeyStorage.user_info);
-        this.getDSThongBao(this.userInfo.user.maTk);
+        // this.getDSThongBao(this.userInfo.user.maTk);
     }
 
     isToggled(): boolean {

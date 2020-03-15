@@ -7,3 +7,12 @@
 <div class="modal-body">
   <span>{{textContent}}</span>
 </div>
+
+<div *ngIf="isDialogComfirm" style="float: right">
+  <button class="btn rounded-btn" style="margin: 10px; background-color: #e68686;" (click)="huybo()">
+    Hủy bỏ
+  </button>
+  <button class="btn rounded-btn" style="margin: 10px; background-color: #4c81c3;" (click)="dongy()">
+    Đồng ý
+  </button>
+</div>

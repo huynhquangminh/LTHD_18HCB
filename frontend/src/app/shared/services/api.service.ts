@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angul
 import { map, catchError, timeoutWith } from 'rxjs/operators';
 import { HandleErrorService } from './handle-error.service';
 import { HttpStatusCode } from '../globlas/enums';
-import { DialogServiceService } from './dialog-service.service';
+import { DialogService } from './dialog-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class ApiService extends HandleErrorService {
   protected env = '';
   public isLogin = false;
   constructor(
-    dialogServiceService: DialogServiceService,
+    dialogServiceService: DialogService,
     public httpClient: HttpClient,
     private webStorageSerivce: WebStorageSerivce
   ) {

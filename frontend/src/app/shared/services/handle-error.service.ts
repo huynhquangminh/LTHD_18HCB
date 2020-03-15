@@ -2,7 +2,7 @@ import { empty, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { HttpStatusCode } from '../globlas/enums';
-import { DialogServiceService } from './dialog-service.service';
+import { DialogService } from './dialog-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import { DialogServiceService } from './dialog-service.service';
 export class HandleErrorService {
 
   constructor(
-    public dialogServiceService: DialogServiceService
+    public dialogServiceService: DialogService
     ) {
     this.handleError = this.handleError.bind(this);
     this.handleError = this.extractData.bind(this);

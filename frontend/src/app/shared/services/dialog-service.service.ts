@@ -4,7 +4,7 @@ import { TemplateDialogComfirmComponent } from '../component/template-dialog-com
 @Injectable({
   providedIn: 'root'
 })
-export class DialogServiceService {
+export class DialogService {
 
   constructor(private modalService: NgbModal) { }
 
@@ -12,6 +12,19 @@ export class DialogServiceService {
   showDialogError(message: string) {
     const dialogRef = this.modalService.open(TemplateDialogComfirmComponent);
     dialogRef.componentInstance.textContent = message;
+  }
+
+  showDialogComfirm(message: string) {
+    const dialogRef = this.modalService.open(TemplateDialogComfirmComponent);
+    dialogRef.componentInstance.textContent = message;
+    dialogRef.componentInstance.isDialogComfirm = true;
+    return dialogRef.result.then(res => {
+      if (res) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 
   showDialog(nameComponent: any) {

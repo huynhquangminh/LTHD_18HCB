@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders, HttpResponse, HttpErrorResponse } from '@angul
 import { map, catchError, timeoutWith } from 'rxjs/operators';
 import { HandleErrorService } from './handle-error.service';
 import { HttpStatusCode } from '../globlas/enums';
-import { DialogServiceService } from './dialog-service.service';
+import { DialogService } from './dialog-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class AuthService extends HandleErrorService {
   protected options: any = { headers: this.headers, observe: 'response' };
   protected env = '';
   public isLogin = false;
-  constructor(dialogServiceService: DialogServiceService, public httpClient: HttpClient) {
+  constructor(dialogServiceService: DialogService, public httpClient: HttpClient) {
     super(dialogServiceService);
   }
   public httpPost(methodName, args, isFormData?: boolean): Observable<any> {
