@@ -12,6 +12,7 @@ import { DanhbanguoinhanComponent } from './danhbanguoinhan/danhbanguoinhan.comp
 import { ChuyenkhoannoiboComponent } from './chuyenkhoannoibo/chuyenkhoannoibo.component';
 import { ChuyenkhoanliennganhangComponent } from './chuyenkhoanliennganhang/chuyenkhoanliennganhang.component';
 import {MatIconModule} from '@angular/material/icon';
+import {MatBadgeModule} from '@angular/material/badge';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -29,7 +30,8 @@ import {MatIconModule} from '@angular/material/icon';
     NgbDropdownModule,
     TranslateModule,
     NgbModule,
-    MatIconModule
+    MatIconModule,
+    MatBadgeModule,
   ],
 })
 export class HomeModule { }

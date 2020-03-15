@@ -2,7 +2,7 @@
   <button class="btn rounded-btn" style="margin: 10px;" (click)="taoMoiDanhBa()">
     <i class="material-icons">
       note_add
-      </i> Thêm mới danh bạ
+    </i> Thêm mới danh bạ
   </button>
 </div>
 <table class="table table-striped">
@@ -16,18 +16,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">0</th>
+    <tr *ngFor="let item of listDanhBa">
+      <th scope="row">{{item.id}}</th>
+      <td>{{item.tenGoiNho}}</td>
+      <td>{{item.tenNganHang}}</td>
+      <td>{{item.soTaiKhoan}}</td>
       <td>
-        xxxx
-      </td>
-      <td>xxxx</td>
-      <td>xxxxx</td>
-      <td>
-        <i class="material-icons" title="Delete" style="font-size: 35px; cursor: pointer;" (click)="xoaDanhBa()">
+        <i class="material-icons" title="Delete" style="font-size: 35px; cursor: pointer;" (click)="xoaDanhBa(item.id)">
           delete_forever
         </i>
-        <i class="material-icons" title="Edit" style="font-size: 35px; cursor: pointer;" (click)="suaDanhBa()">
+        <i class="material-icons" title="Edit" style="font-size: 35px; cursor: pointer;" (click)="suaDanhBa(item)">
           settings_applications
         </i>
       </td>

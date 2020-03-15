@@ -35,4 +35,13 @@ $topnav-background-color: #222;
             }
         }
     }
+    .notication {
+        font-size: 12px;
+        margin: 5px;
+        width: 300px;
+        word-break: break-all;
+        border: none;
+        cursor: pointer;
+        border-bottom: 0.5px solid;
+    }
 }
