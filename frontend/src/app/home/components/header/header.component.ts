@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DialogServiceService } from 'src/app/shared/services/dialog-service.service';
 import { DialogDoimatkhauComponent } from '../dialog-doimatkhau/dialog-doimatkhau.component';
 import { WebStorageSerivce } from 'src/app/shared/services/webstorage.service';
+import { ThongBaoService } from 'src/app/shared/services/thong-bao.service';
 
 @Component({
     selector: 'app-header',
@@ -15,12 +16,14 @@ import { WebStorageSerivce } from 'src/app/shared/services/webstorage.service';
 export class HeaderComponent implements OnInit {
     public pushRightClass: string;
     public userInfo: any;
+    public listThongBao: any = [];
 
     constructor(
         private dialogServiceService: DialogServiceService,
         public router: Router,
         private webStorageSerivce: WebStorageSerivce,
-        private authSerivce: AuthService
+        private authSerivce: AuthService,
+        private thongBaoService: ThongBaoService
     ) {
 
         this.router.events.subscribe(val => {
@@ -37,6 +40,7 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
         this.pushRightClass = 'push-right';
         this.userInfo = this.webStorageSerivce.getLocalStorage(WebKeyStorage.user_info);
+        this.getDSThongBao(this.userInfo.user.maTk);
     }
 
     isToggled(): boolean {
@@ -62,5 +66,13 @@ export class HeaderComponent implements OnInit {
 
     showDialogChangePassword() {
         this.dialogServiceService.showDialog(DialogDoimatkhauComponent);
+    }
+
+    getDSThongBao(matk: string) {
+        this.thongBaoService.getThongBaoUser(matk).subscribe(res => {
+            if (res) {
+                this.listThongBao = res;
+            }
+        });
     }
 }
