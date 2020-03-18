@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { DialogDoimatkhauComponent } from './home/components/dialog-doimatkhau/dialog-doimatkhau.component';
 import { AngularWebStorageModule } from 'angular-web-storage';
 import { WebStorageSerivce } from './shared/services/webstorage.service';
+import { DialogTaodanhbaComponent } from './home/components/dialog-taodanhba/dialog-taodanhba.component';
 @NgModule({
     imports: [
         // CommonModule,
@@ -32,7 +33,8 @@ import { WebStorageSerivce } from './shared/services/webstorage.service';
         NotfoundpageComponent,
         TemplateDialogComfirmComponent,
         DialogErrorComponent,
-        DialogDoimatkhauComponent
+        DialogDoimatkhauComponent,
+        DialogTaodanhbaComponent
     ],
     providers: [
         AuthGuard,
@@ -43,7 +45,8 @@ import { WebStorageSerivce } from './shared/services/webstorage.service';
     entryComponents: [
         TemplateDialogComfirmComponent,
         DialogErrorComponent,
-        DialogDoimatkhauComponent
+        DialogDoimatkhauComponent,
+        DialogTaodanhbaComponent
     ]
 })
 export class AppModule { }

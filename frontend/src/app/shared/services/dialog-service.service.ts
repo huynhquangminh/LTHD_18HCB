@@ -27,7 +27,17 @@ export class DialogService {
     });
   }
 
-  showDialog(nameComponent: any) {
-    this.modalService.open(nameComponent);
+  showDialog(nameComponent: any, data: any = null) {
+    const dialogRef = this.modalService.open(nameComponent);
+    if (data) {
+      dialogRef.componentInstance.data = data;
+    }
+    return dialogRef.result.then(res => {
+      if (res) {
+        return true;
+      } else {
+        return false;
+      }
+    });
   }
 }

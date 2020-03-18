@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Tạo mới danh bạ </h4>
+  <button type="button" class="close" aria-label="Close" (click)="modal.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form novalidate #formNewsPhoneBook="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-content" style="height: 210px;">
+      <div class="form-group">
+        <input type="text" name="tenGoiNho" class="form-control input-underline input-lg"
+          [(ngModel)]="formNewsPhoneBookModel.tenGoiNho" placeholder="Tên gợi nhớ">
+      </div>
+      <div class="form-group">
+        <input type="text" name="tenNganHang" class="form-control input-underline input-lg"
+          [(ngModel)]="formNewsPhoneBookModel.tenNganHang" placeholder="Tên ngân hàng" required>
+        <div class="validate-form" style="float: left;"
+          *ngIf="formNewsPhoneBook.controls.tenNganHang?.errors?.required && formNewsPhoneBook.controls.tenNganHang?.touched">
+          <span>(*) Tên ngân hàng không được trống !</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="number" name="soTaiKhoan" class="form-control input-underline input-lg"
+          [(ngModel)]="formNewsPhoneBookModel.soTaiKhoan" placeholder="Số tài khoản" required>
+        <div class="validate-form" style="float: left;"
+          *ngIf="formNewsPhoneBook.controls.soTaiKhoan?.errors?.required && formNewsPhoneBook.controls.soTaiKhoan?.touched">
+          <span>(*) Số tài khoản không được trống !</span>
+        </div>
+      </div>
+    </div>
+    <button style="margin-left: 350px; background-color: #6194e2; " class="btn rounded-btn" [disabled]="(!formNewsPhoneBook.valid)">
+      Tạo mới
+    </button>
+  </form>
+</div>

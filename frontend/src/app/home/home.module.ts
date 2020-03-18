@@ -13,6 +13,7 @@ import { ChuyenkhoannoiboComponent } from './chuyenkhoannoibo/chuyenkhoannoibo.c
 import { ChuyenkhoanliennganhangComponent } from './chuyenkhoanliennganhang/chuyenkhoanliennganhang.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
+import { DialogTaodanhbaComponent } from './components/dialog-taodanhba/dialog-taodanhba.component';
 @NgModule({
   declarations: [
     HomeComponent,
