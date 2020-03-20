@@ -57,7 +57,7 @@ namespace API.Controllers
         //{
         //    var salt = BCrypt.Net.BCrypt.GenerateSalt(12);
         //    user.UserId = Guid.NewGuid().ToString();
-        //    user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, salt);
+        //user.Password = BCrypt.Net.BCrypt.HashPassword(user.Password, salt);
         //    return await _userService.AddUser(user);
         //}
 
@@ -124,11 +124,31 @@ namespace API.Controllers
             return await result;
         }
 
+        /// <summary>
+        /// Đổi mật khẩu
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPut]
+        [Produces("application/json")]
+        [Route("DoiMatKhau")]
+        public async Task<ActionResult<int>> DoiMatKhau(DoiMatKhauRequest request)
+        {
+            int result = 0;
+            string hashPassword = _userService.GetPasswordByMaTk(request.maTaiKhoan);
+            if (hashPassword != null)
+            {
+                bool checkPassword = BCryptService.CheckPassword(request.matKhau, hashPassword);
 
-        //public Task<ActionResult<int>> DoiMatKhau(DoiMatKhauRequest request)
-        //{
-        //    return await -1;
-        //}
+                if (checkPassword == true)
+                {
+                    string newPassword = BCryptService.HashPassword(request.matKhauMoi);
+                    result = await _userService.DoiMatKhau(request.maTaiKhoan, newPassword);
+                }
+            }
+            return  result;
+        }
 
         //[HttpPost]
         //[Produces("application/json")]

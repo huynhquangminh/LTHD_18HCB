@@ -31,6 +31,12 @@ namespace DataAccess
             return await Connection.QueryAsync<T>(storedProcedure, param, commandType: CommandType.StoredProcedure);
         }
 
+        public T QueryCommandSingle<T>(string storedProcedure, DynamicParameters param = null)
+        {
+            var result = Connection.Query<T>(storedProcedure, param, commandType: CommandType.StoredProcedure);
+            return result.FirstOrDefault();
+        }
+
         public async Task<T> QueryCommandSingleAsync<T>(string storedProcedure, DynamicParameters param = null)
         {
             var result = await Connection.QueryAsync<T>(storedProcedure, param, commandType: CommandType.StoredProcedure);

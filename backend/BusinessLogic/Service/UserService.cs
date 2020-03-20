@@ -141,5 +141,14 @@ namespace BusinessLogic.Service
                 return result;
             }
         }
+
+        public string GetPasswordByMaTk(string maTaiKhoan)
+        {
+            using (DalSession dal = new DalSession())
+            {
+                var result = dal.UnitOfWork.UserRepository.GetPasswordByMaTk(maTaiKhoan);
+                return result;
+            }
+        }
     }
 }

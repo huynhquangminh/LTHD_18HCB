@@ -8,6 +8,7 @@ namespace API.Models.Request
     public class DoiMatKhauRequest
     {
         public string maTaiKhoan { get; set; }
+        public string matKhau { get; set; }
         public string matKhauMoi { get; set; }
     }
 }

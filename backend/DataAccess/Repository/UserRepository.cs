@@ -143,5 +143,14 @@ namespace DataAccess.Repository
             var result = await ExecuteCommandAsync(StoredProcedure.USER_DOIMATKHAU, param);
             return result;
         }
+
+        public string GetPasswordByMaTk(string maTaiKhoan)
+        {
+            var param = new DynamicParameters();
+            param.Add("@matk", maTaiKhoan);
+
+            var result = QueryCommandSingle<string>(StoredProcedure.USER_GETPASSWORDBY_MATK, param);
+            return result;
+        }
     }
 }
