@@ -17,5 +17,6 @@ namespace BusinessLogic.Service.Interface
         Task<UserBO> GetThongTinTaiKhoan(string maTaiKhoan);
         Task<int> DoiMatKhau(string maTaiKhoan, string matKhauMoi);
         string GetPasswordByMaTk(string maTaiKhoan);
+        Task<int> QuenMatKhau(string maTaiKhoan, string tenDangNhap, string matKhauMoi);
     }
 }

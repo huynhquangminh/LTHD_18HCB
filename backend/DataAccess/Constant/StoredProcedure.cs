@@ -14,6 +14,7 @@ namespace DataAccess.Constant
         public const string USER_EDIT_REFRESHTOKEN = "sp_User_Edit_RefreshToken";
         public const string USER_DOIMATKHAU = "DoiMatKhau";
         public const string USER_GETPASSWORDBY_MATK = "GetPasswordByMaTk";
+        public const string USER_QUENMATKHAU = "QuenMatKhauUser";
 
         // User
         public const string USER_GETBY_TENDANGNHAP = "GetUserByTenDangNhap";

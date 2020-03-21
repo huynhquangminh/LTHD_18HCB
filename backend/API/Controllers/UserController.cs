@@ -85,7 +85,7 @@ namespace API.Controllers
 
             if (user != null)
             {
-                var stringToken = GenerateJSONWebToken(user);
+                var stringToken = GetJSONWebToken(user);
                 
                 //var stringRefreshToken = GenerateRefreshToken();
                 //user.RefreshToken = stringRefreshToken;
@@ -140,37 +140,69 @@ namespace API.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Gửi mã xác nhận qua email
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost]
-        [Route("SendMail")]
-        public async Task<IActionResult> SendMail(string email)
+        [Produces("application/json")]
+        [Route("SendMailOTP")]
+        public async Task<IActionResult> SendMailOTP(string email)
         {
-            var message = new MimeMessage();
-            message.From.Add(new MailboxAddress("App Banking", "appbanking01@gmail.com"));
-            message.To.Add(new MailboxAddress("Demo email", email));
-            message.Subject = "My First Email";
-            message.Body = new TextPart("plain")
+            // Generate OTP
+            var otp = SendMailService.GenerateOTP();
+
+            var subject = "Xác nhận quên mật khẩu";
+            StringBuilder body = new StringBuilder();
+            body.AppendFormat("Mã xác nhận của bạn là: {0}", otp);
+
+            try
             {
-                Text = "Subject email"
-            };
-
-            using (var client = new MailKit.Net.Smtp.SmtpClient())
+                var message = SendMailService.InitEmailMessage(email, subject, body.ToString());
+                SendMailService.SendMail(message);
+                return Ok(otp);
+            } catch (Exception ex)
             {
-                client.CheckCertificateRevocation = false;
-                client.Connect("smtp.gmail.com", 465, true);
+                return StatusCode(500);
+            }
+        }
 
-                //SMTP server authentication if needed
-                client.Authenticate("appbanking01@gmail.com", "bluesky@12345");
+        /// <summary>
+        /// Quên mật khẩu
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPut]
+        [Produces("application/json")]
+        [Route("QuenMatKhau")]
+        public async Task<IActionResult> QuenMatKhau(QuenMatKhauRequest request)
+        {
+            int result = 0;
+            string newPassword = SendMailService.GenerateString();
+            string newHashPassword = BCryptService.HashPassword(newPassword);
+            result = await _userService.QuenMatKhau(request.maTaiKhoan, request.tenDangNhap, newHashPassword);
 
-                client.Send(message);
+            if (result == 1)
+            {
+                var subject = "Xác nhận quên mật khẩu";
+                StringBuilder body = new StringBuilder();
+                body.AppendFormat("Mật khẩu mới của bạn là: {0}", newPassword);
 
-                client.Disconnect(true);
+                try
+                {
+                    var message = SendMailService.InitEmailMessage(request.email, subject, body.ToString());
+                    SendMailService.SendMail(message);
+                    return Ok(result);
+                }
+                catch (Exception ex)
+                {
+                    return StatusCode(500);
+                }
             }
 
-            return Ok(true);
+            return NotFound();
         }
 
         //[HttpPost]
@@ -230,7 +262,7 @@ namespace API.Controllers
             return null;
         }
 
-        private string GenerateJSONWebToken(UserBO userInfo)
+        private string GetJSONWebToken(UserBO userInfo)
         {
             var claims = new[]
             {
@@ -243,16 +275,6 @@ namespace API.Controllers
 
             var encodeToken = TokenService.GenerateJSONToken(claims);
             return encodeToken;
-        }
-
-        private string GenerateRefreshToken()
-        {
-            var randomNumber = new byte[32];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(randomNumber);
-                return Convert.ToBase64String(randomNumber);
-            }
         }
 
         private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)

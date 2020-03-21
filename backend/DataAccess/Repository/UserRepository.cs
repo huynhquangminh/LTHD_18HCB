@@ -152,5 +152,16 @@ namespace DataAccess.Repository
             var result = QueryCommandSingle<string>(StoredProcedure.USER_GETPASSWORDBY_MATK, param);
             return result;
         }
+
+        public Task<int> QuenMatKhau(string maTaiKhoan, string tenDangNhap, string matKhauMoi)
+        {
+            var param = new DynamicParameters();
+            param.Add("@matk", maTaiKhoan);
+            param.Add("@tendangnhap", tenDangNhap);
+            param.Add("@matkhaumoi", matKhauMoi);
+
+            var result = ExecuteCommandAsync(StoredProcedure.USER_QUENMATKHAU, param);
+            return result;
+        }
     }
 }

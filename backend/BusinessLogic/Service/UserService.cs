@@ -150,5 +150,26 @@ namespace BusinessLogic.Service
                 return result;
             }
         }
+
+        public async Task<int> QuenMatKhau(string maTaiKhoan, string tenDangNhap, string matKhauMoi)
+        {
+            var result = 0;
+
+            using (DalSession dal = new DalSession())
+            {
+                try
+                {
+                    dal.UnitOfWork.Begin();
+                    result = await dal.UnitOfWork.UserRepository.QuenMatKhau(maTaiKhoan, tenDangNhap, matKhauMoi);
+                    dal.UnitOfWork.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dal.UnitOfWork.Rollback();
+                    throw new AggregateException();
+                }
+                return result;
+            }
+        }
     }
 }
