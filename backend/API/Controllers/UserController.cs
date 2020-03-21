@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using API.Models.Request;
+using API.Services;
 using BusinessLogic.Service.Interface;
 using BusinessObject;
 using Microsoft.AspNetCore.Authorization;
@@ -15,6 +16,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using MimeKit;
 
 namespace API.Controllers
 {
@@ -97,19 +99,6 @@ namespace API.Controllers
         }
 
         /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [Authorize]
-        [HttpGet]
-        [Produces("application/json")]
-        [Route("GetValue")]
-        public ActionResult<IEnumerable<string>> TestAuthentication()
-        {
-            return new string[] { "Value1", "Value2", "Value3" };
-        }
-
-        /// <summary>
         /// Lấy thông tin tài khoản theo mã tài khoản
         /// </summary>
         /// <param name="maTaiKhoan"></param>
@@ -148,6 +137,40 @@ namespace API.Controllers
                 }
             }
             return  result;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("SendMail")]
+        public async Task<IActionResult> SendMail(string email)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("App Banking", "appbanking01@gmail.com"));
+            message.To.Add(new MailboxAddress("Demo email", email));
+            message.Subject = "My First Email";
+            message.Body = new TextPart("plain")
+            {
+                Text = "Subject email"
+            };
+
+            using (var client = new MailKit.Net.Smtp.SmtpClient())
+            {
+                client.CheckCertificateRevocation = false;
+                client.Connect("smtp.gmail.com", 465, true);
+
+                //SMTP server authentication if needed
+                client.Authenticate("appbanking01@gmail.com", "bluesky@12345");
+
+                client.Send(message);
+
+                client.Disconnect(true);
+            }
+
+            return Ok(true);
         }
 
         //[HttpPost]
@@ -197,7 +220,7 @@ namespace API.Controllers
         {
             UserBO user = null;
             user = _userService.GetUserByTenDangNhap(login.TenTaiKhoan).Result;
-            bool validPassword = BCrypt.Net.BCrypt.Verify(login.MatKhau, user.MatKhau);
+            bool validPassword = BCryptService.CheckPassword(login.MatKhau, user.MatKhau);
 
             if (validPassword)
             {
@@ -209,24 +232,16 @@ namespace API.Controllers
 
         private string GenerateJSONWebToken(UserBO userInfo)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
             var claims = new[]
             {
                 new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Sub, userInfo.TenTaiKhoan),
                 new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Email, userInfo.Email),
                 new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Jti, userInfo.Id)
             };
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityToken(
-                issuer: _config["Jwt:Issuer"],
-                audience: _config["Jwt:Issuer"],
-                claims,
-                expires: DateTime.Now.AddMinutes(15),
-                signingCredentials: credentials);
-
-            var encodeToken = new JwtSecurityTokenHandler().WriteToken(token);
+            var encodeToken = TokenService.GenerateJSONToken(claims);
             return encodeToken;
         }
 

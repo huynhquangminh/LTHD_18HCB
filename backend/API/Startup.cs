@@ -37,12 +37,18 @@ namespace API
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            StaticConfig = configuration;
         }
 
         /// <summary>
         /// Property Configuration
         /// </summary>
         public IConfiguration Configuration { get; }
+        
+        /// <summary>
+        /// Property Static Configuration
+        /// </summary>
+        public static IConfiguration StaticConfig { get; private set; }
 
         /// <summary>
         /// This method gets called by the runtime. Use this method to add services to the container.
