@@ -7,7 +7,6 @@ namespace API.Models.Request
 {
     public class QuenMatKhauRequest
     {
-        public string maTaiKhoan { get; set; }
         public string tenDangNhap { get; set; }
         public string email { get; set; }
     }

@@ -153,11 +153,11 @@ namespace DataAccess.Repository
             return result;
         }
 
-        public Task<int> QuenMatKhau(string maTaiKhoan, string tenDangNhap, string matKhauMoi)
+        public Task<int> QuenMatKhau(string tenDangNhap, string email, string matKhauMoi)
         {
             var param = new DynamicParameters();
-            param.Add("@matk", maTaiKhoan);
             param.Add("@tendangnhap", tenDangNhap);
+            param.Add("@email", email);
             param.Add("@matkhaumoi", matKhauMoi);
 
             var result = ExecuteCommandAsync(StoredProcedure.USER_QUENMATKHAU, param);

@@ -174,7 +174,7 @@ namespace API.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [AllowAnonymous]
-        [HttpPut]
+        [HttpPost]
         [Produces("application/json")]
         [Route("QuenMatKhau")]
         public async Task<IActionResult> QuenMatKhau(QuenMatKhauRequest request)
@@ -182,7 +182,7 @@ namespace API.Controllers
             int result = 0;
             string newPassword = SendMailService.GenerateString();
             string newHashPassword = BCryptService.HashPassword(newPassword);
-            result = await _userService.QuenMatKhau(request.maTaiKhoan, request.tenDangNhap, newHashPassword);
+            result = await _userService.QuenMatKhau(request.tenDangNhap, request.email, newHashPassword);
 
             if (result == 1)
             {

@@ -151,7 +151,7 @@ namespace BusinessLogic.Service
             }
         }
 
-        public async Task<int> QuenMatKhau(string maTaiKhoan, string tenDangNhap, string matKhauMoi)
+        public async Task<int> QuenMatKhau(string tenDangNhap, string email, string matKhauMoi)
         {
             var result = 0;
 
@@ -160,7 +160,7 @@ namespace BusinessLogic.Service
                 try
                 {
                     dal.UnitOfWork.Begin();
-                    result = await dal.UnitOfWork.UserRepository.QuenMatKhau(maTaiKhoan, tenDangNhap, matKhauMoi);
+                    result = await dal.UnitOfWork.UserRepository.QuenMatKhau(tenDangNhap, email, matKhauMoi);
                     dal.UnitOfWork.Commit();
                 }
                 catch (Exception ex)
