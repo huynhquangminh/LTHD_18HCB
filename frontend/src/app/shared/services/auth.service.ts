@@ -59,9 +59,11 @@ export class AuthService extends HandleErrorService {
     );
   }
 
-  logout() {
-    // this.webstorageService.sessionClear();
-    // this.webstorageService.localClear();
-    window.location.href = '/';
+  getCodeOTP(email: string) {
+    return this.httpPost('User/SendMailOTP?email=' + email, null);
+  }
+
+  getMatKhauMoi(params: any) {
+    return this.httpPost('User/QuenMatKhau', params);
   }
 }
