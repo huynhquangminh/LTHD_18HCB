@@ -22,10 +22,10 @@
             </div>
           </div>
           <div class="form-group">
-            <div>
+            <div style="display: flex;">
               <input style="width: 170px;" type="password" name="codeOTP" class="form-control input-underline input-lg"
                 [(ngModel)]="codeOTP" placeholder="Mã xác nhận" required>
-              <button type="button" (click)="getCodeOTP()" [disabled]="!(forgotPassword.controls.email && forgotPassword.controls.email.valid) ">Lấy mã xác nhận </button>
+              <button style="margin-left: 10px;" type="button" (click)="getCodeOTP()" [disabled]="!(forgotPassword.controls.email && forgotPassword.controls.email.valid) ">Lấy mã xác nhận </button>
               <span style="font-size: 14px;" *ngIf="isCodeOTP">(*) Mã xác nhận đã được gửi về gmail!</span>
               <span style="font-size: 14px;" *ngIf="!isCheckCodeOTP">(*) Mã xác nhận không đúng!</span>
             </div>

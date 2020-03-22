@@ -13,6 +13,12 @@ import { ChuyenkhoannoiboComponent } from './chuyenkhoannoibo/chuyenkhoannoibo.c
 import { ChuyenkhoanliennganhangComponent } from './chuyenkhoanliennganhang/chuyenkhoanliennganhang.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBadgeModule} from '@angular/material/badge';
+import {MatTabsModule} from '@angular/material/tabs';
+import { FormsModule } from '@angular/forms';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -32,6 +38,12 @@ import {MatBadgeModule} from '@angular/material/badge';
     NgbModule,
     MatIconModule,
     MatBadgeModule,
+    MatTabsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatMenuModule
   ],
 })
 export class HomeModule { }

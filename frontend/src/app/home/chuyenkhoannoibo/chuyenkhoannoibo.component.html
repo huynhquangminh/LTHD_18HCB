@@ -1,3 +1,93 @@
-<p>
-  chuyenkhoannoibo works!
-</p>
+<mat-tab-group mat-align-tabs="center" disablePagination="true" [selectedIndex]="indexTab" animationDuration="1000ms">
+  <mat-tab label="Thông tin" disabled="true">
+    <form style="width: 500px;margin: 0 auto;margin-top: 20px;" novalidate #cknoiboform="ngForm"
+      (ngSubmit)="onSubmitThongTin()">
+      <div class="form-content">
+        <div class="form-group">
+          <input readonly type="text" name="tennguoinhan" class="form-control input-underline input-lg"
+            [(ngModel)]="chuyenkhoanModel.tennguoinhan" placeholder="Tên Người nhận" required>
+        </div>
+        <div class="form-group">
+          <div style="width: 500px;" style="display: flex;">
+            <input type="number" name="sotaikhoan" class="form-control input-underline input-lg"
+              [(ngModel)]="chuyenkhoanModel.sotaikhoan" placeholder="Số tài khoản người nhận" required>
+            <button type="button" mat-button [matMenuTriggerFor]="menu">
+              <span class="material-icons">
+                perm_contact_calendar
+              </span></button>
+            <mat-menu #menu="matMenu" style="height: 40px;">
+              <ng-container *ngFor="let item of listDanhBaModel">
+                <button type="button" mat-menu-item (click)="chondanhba(item)">
+                  <span style="font-size: 12px;">Tên gợi nhớ: {{item.tendanhba}}</span><br>
+                  <span style="font-size: 12px;">Số tài khoản: {{item.sotaikhoan}}</span>
+                </button>
+              </ng-container>
+            </mat-menu>
+          </div>
+          <div class="validate-form" style="float: left;"
+            *ngIf="cknoiboform.controls.sotaikhoan?.errors?.required && cknoiboform.controls.sotaikhoan?.touched">
+            <span>(*) Số tài khoản người nhận không được trống!</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <input disabled="true" type="text" name="tennganhang" class="form-control " [value]="tennganhang"
+            placeholder="Tên ngân hàng">
+        </div>
+        <div class="form-group">
+          <input type="number" name="sotiengui" class="form-control input-underline input-lg"
+            [(ngModel)]="chuyenkhoanModel.sotiengui" placeholder="Số tiền gửi" required maxlength="10">
+          <div class="validate-form" style="float: left;"
+            *ngIf="cknoiboform.controls.sotiengui?.errors?.required && cknoiboform.controls.sotiengui?.touched">
+            <span>(*) Số tiền không được trống!</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control input-underline input-lg" name="noidungchuyentien" rows="3"
+            [(ngModel)]="chuyenkhoanModel.noidungchuyentien" placeholder="Nội dung chuyển tiền"></textarea>
+        </div>
+        <div class="form-group">
+          <label id="example-radio-group-label">Hình thức trả phí</label>
+          <mat-radio-group name="traphi" aria-labelledby="example-radio-group-label"
+            class="example-radio-group form-control" [(ngModel)]="chuyenkhoanModel.traphi">
+            <mat-radio-button class="example-radio-button" [value]="0">
+              Người gửi
+            </mat-radio-button>
+            <mat-radio-button class="example-radio-button" [value]="1">
+              Người nhận
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <button style="margin-left: 410px; background-color: #61b2e2;" class="btn rounded-btn"
+        [disabled]="(!cknoiboform.valid) ">
+        Xác nhận
+      </button>
+    </form>
+  </mat-tab>
+  <mat-tab label="Xác nhận" disabled="true">
+    <div style="width: 500px;margin: 0 auto;margin-top: 20px;">
+      <div style="background-color: #b9b6b6;line-height: 40px;">
+        <span>Tên tài khoản : {{chuyenkhoanModel.tennguoinhan}}</span> <br>
+        <span>Số tài khoản : {{chuyenkhoanModel.sotaikhoan}} </span> <br>
+        <span>Số tiền : {{chuyenkhoanModel.sotiengui | currency: "VND"}} </span> <br>
+        <span>Nội dung: {{chuyenkhoanModel.noidungchuyentien }} </span> <br>
+        <span>Trả phí: {{chuyenkhoanModel.traphi === 0 ? 'Người gửi' : ' Người nhận'}} </span>
+        <div class="form-group" style="display: flex;">
+          <span> Mã OTP : </span>
+          <input style="width: 150px !important; margin-left: 5px;" type="number" class="form-control input-underline input-lg"
+            [(ngModel)]="codeOTP">
+            <span style="font-size: 10px; margin-left: 5px;">Mã OTP đã được gửi tới mail đăng ký của bạn!</span>
+        </div>
+      </div>
+
+      <div style="display: flex;margin-top: 10px;margin-left: 280px;">
+        <button style=" background-color: #e0a4a7;" class="btn rounded-btn" (click)="back()">
+          Quay lại
+        </button>
+        <button style="margin-left: 12px; background-color: #61b2e2;" class="btn rounded-btn" (click)="xacnhan()">
+          Chuyển khoản
+        </button>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>
