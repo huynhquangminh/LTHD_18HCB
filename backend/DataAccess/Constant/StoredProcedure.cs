@@ -30,5 +30,11 @@ namespace DataAccess.Constant
 
         // ThongBao
         public const string THONGBAO_GETDANHSACH = "GetDSThongBao";
+
+        // NganHangLienKet
+        public const string NGANHANGLIENKET_GETALL = "GetDSNganHangLienKet";
+
+        // ThongTinChuyenTienNoiBo
+        public const string THONGTINCHUYENTIENNOIBO_CHUYENKHOANNOIBO = "ChuyenKhoanNoiBo";
     }
 }
