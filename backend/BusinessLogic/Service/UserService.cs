@@ -171,5 +171,14 @@ namespace BusinessLogic.Service
                 return result;
             }
         }
+
+        public async Task<UserBO> GetThongTinTaiKhoanBySoTaiKhoan(string soTaiKhoan)
+        {
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.UserRepository.GetThongTinTaiKhoanBySoTaiKhoan(soTaiKhoan);
+                return MapperHelper.Map<UserDO, UserBO>(result);
+            }
+        }
     }
 }
