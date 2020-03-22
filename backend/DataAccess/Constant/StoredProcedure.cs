@@ -15,10 +15,9 @@ namespace DataAccess.Constant
         public const string USER_DOIMATKHAU = "DoiMatKhau";
         public const string USER_GETPASSWORDBY_MATK = "GetPasswordByMaTk";
         public const string USER_QUENMATKHAU = "QuenMatKhauUser";
-
-        // User
         public const string USER_GETBY_TENDANGNHAP = "GetUserByTenDangNhap";
         public const string USER_GET_THONGTINTAIKHOAN = "GetThongTinTaiKhoan";
+        public const string USER_GET_THONGTINTAIKHOAN_SOTAIKHOAN = "GetThongTinTaiKhoanBySTK";
 
         // TaiKhoanTietKiem
         public const string TAIKHOANTIETKIEM_GET_BY_MATAIKHOAN = "GetDsTaiKhoanTietKiem";

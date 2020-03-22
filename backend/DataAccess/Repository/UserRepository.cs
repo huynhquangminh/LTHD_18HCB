@@ -133,6 +133,14 @@ namespace DataAccess.Repository
             var result = await QueryCommandSingleAsync<UserDO>(StoredProcedure.USER_GET_THONGTINTAIKHOAN, param);
             return result;
         }
+        public async Task<UserDO> GetThongTinTaiKhoanBySoTaiKhoan(string soTaiKhoan)
+        {
+            var param = new DynamicParameters();
+            param.Add("@sotaikhoan", soTaiKhoan);
+
+            var result = await QueryCommandSingleAsync<UserDO>(StoredProcedure.USER_GET_THONGTINTAIKHOAN_SOTAIKHOAN, param);
+            return result;
+        }
 
         public async Task<int> DoiMatKhau(string maTaiKhoan, string matKhauMoi)
         {

@@ -205,6 +205,21 @@ namespace API.Controllers
             return NotFound();
         }
 
+        /// <summary>
+        /// Lấy thông tin tài khoản theo số tài khoản
+        /// </summary>
+        /// <param name="maTaiKhoan"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("GetThongTinTaiKhoanBySoTaiKhoan")]
+        public async Task<ActionResult<UserBO>> GetThongTinTaiKhoanBySoTaiKhoan(string soTaiKhoan)
+        {
+            var result = _userService.GetThongTinTaiKhoanBySoTaiKhoan(soTaiKhoan);
+            return await result;
+        }
+
         //[HttpPost]
         //[Produces("application/json")]
         //[Route("RefreshToken")]
