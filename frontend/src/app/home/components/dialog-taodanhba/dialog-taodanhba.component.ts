@@ -18,8 +18,12 @@ export class DialogTaodanhbaComponent implements OnInit {
     maTk: '',
     tenGoiNho: '',
     tenNganHang: '',
-    soTaiKhoan: null
+    soTaiKhoan: null,
+    idNganHangLienKet: 0
   };
+  public dsNganHang: any = [
+    { id: 0, name: '18HCB Bank' }
+  ];
   public userInfo: any;
   constructor(
     public modal: NgbActiveModal,
@@ -39,6 +43,9 @@ export class DialogTaodanhbaComponent implements OnInit {
 
   onSubmit() {
     if (!this.data) {
+      this.formNewsPhoneBookModel.tenNganHang = this.dsNganHang.find(
+          item => item.id === this.formNewsPhoneBookModel.idNganHangLienKet
+      ).name;
       this.formNewsPhoneBookModel.maTk = this.userInfo.user.maTk;
       this.formNewsPhoneBookModel.soTaiKhoan = this.formNewsPhoneBookModel.soTaiKhoan.toString();
       this.danhBaService.themDanhBa(this.formNewsPhoneBookModel).subscribe(res => {

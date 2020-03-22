@@ -12,12 +12,13 @@
           [(ngModel)]="formNewsPhoneBookModel.tenGoiNho" placeholder="Tên gợi nhớ">
       </div>
       <div class="form-group">
-        <input type="text" name="tenNganHang" class="form-control input-underline input-lg"
-          [(ngModel)]="formNewsPhoneBookModel.tenNganHang" placeholder="Tên ngân hàng" required>
-        <div class="validate-form" style="float: left;"
-          *ngIf="formNewsPhoneBook.controls.tenNganHang?.errors?.required && formNewsPhoneBook.controls.tenNganHang?.touched">
-          <span>(*) Tên ngân hàng không được trống !</span>
-        </div>
+        <select 
+          [disabled]="data"
+          name="tenNganHang" 
+          class="form-control input-underline input-lg"
+          matNativeControl required [(value)]="formNewsPhoneBookModel.idNganHangLienKet">
+          <option *ngFor="let item of dsNganHang" [value]="item.id">{{item.name}}</option>
+        </select>
       </div>
 
       <div class="form-group">
@@ -29,7 +30,8 @@
         </div>
       </div>
     </div>
-    <button style="margin-left: 350px; background-color: #6194e2; " class="btn rounded-btn" [disabled]="(!formNewsPhoneBook.valid)">
+    <button style="margin-left: 350px; background-color: #6194e2; " class="btn rounded-btn"
+      [disabled]="(!formNewsPhoneBook.valid)">
       Tạo mới
     </button>
   </form>

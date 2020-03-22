@@ -9,4 +9,8 @@ export class TaikhoanthanhtoanService extends ApiService {
   getThongTinTaiKhoanThanhToan(matk: string) {
     return this.httpGet('user/thongtintaiKhoan?maTaiKhoan=' + matk);
   }
+
+  doiMatKhau(params: any = {}) {
+    return this.httpPut('user/doimatkhau', params);
+  }
 }

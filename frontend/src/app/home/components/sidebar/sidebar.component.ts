@@ -2,6 +2,8 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { DialogService } from 'src/app/shared/services/dialog-service.service';
 import { DialogDoimatkhauComponent } from '../dialog-doimatkhau/dialog-doimatkhau.component';
+import { WebStorageSerivce } from 'src/app/shared/services/webstorage.service';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -18,7 +20,9 @@ export class SidebarComponent implements OnInit {
 
     constructor(
         public router: Router,
-        private dialogServiceService: DialogService
+        private dialogServiceService: DialogService,
+        private webStorageSerivce: WebStorageSerivce,
+        private authSerivce: AuthService,
         ) {
         this.router.events.subscribe(val => {
             if (
@@ -72,6 +76,12 @@ export class SidebarComponent implements OnInit {
     }
 
     showDialogChangePassword() {
-        this.dialogServiceService.showDialog(DialogDoimatkhauComponent);
+        this.dialogServiceService.showDialog(DialogDoimatkhauComponent).then(res => {
+            if (res) {
+                this.webStorageSerivce.clearLocalStorage();
+                this.authSerivce.isLogin = false;
+                this.router.navigateByUrl('/login');
+            }
+        });
     }
 }

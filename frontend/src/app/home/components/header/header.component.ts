@@ -65,7 +65,13 @@ export class HeaderComponent implements OnInit {
     }
 
     showDialogChangePassword() {
-        this.dialogServiceService.showDialog(DialogDoimatkhauComponent);
+        this.dialogServiceService.showDialog(DialogDoimatkhauComponent).then(res => {
+            if (res) {
+                console.log('true');
+                // reload login;
+                this.onLoggedout();
+            }
+        });
     }
 
     getDSThongBao(matk: string) {

@@ -16,6 +16,7 @@ import { DialogDoimatkhauComponent } from './home/components/dialog-doimatkhau/d
 import { AngularWebStorageModule } from 'angular-web-storage';
 import { WebStorageSerivce } from './shared/services/webstorage.service';
 import { DialogTaodanhbaComponent } from './home/components/dialog-taodanhba/dialog-taodanhba.component';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
     imports: [
         // CommonModule,
@@ -26,7 +27,8 @@ import { DialogTaodanhbaComponent } from './home/components/dialog-taodanhba/dia
         AppRoutingModule,
         NgbModalModule,
         FormsModule,
-        AngularWebStorageModule
+        AngularWebStorageModule,
+        MatSelectModule
     ],
     declarations: [
         AppComponent,

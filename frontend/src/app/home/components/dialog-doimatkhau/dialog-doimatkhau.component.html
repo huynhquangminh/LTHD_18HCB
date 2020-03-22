@@ -6,35 +6,27 @@
 </div>
 <div class="modal-body">
   <form novalidate #changePassword="ngForm" (ngSubmit)="onSubmit()">
-    <div class="form-content" style="height: 250px;">
+    <div class="form-content" style="height: 150px;">
       <div class="form-group">
-        <input type="text" name="tendangnhap" class="form-control input-underline input-lg"
-          [(ngModel)]="changePassModel.tendangnhap" placeholder="Tên đăng nhập" required>
+        <input type="password" name="matKhau" class="form-control input-underline input-lg"
+          [(ngModel)]="changePassModel.matKhau" placeholder="Mật khẩu" required>
         <div class="validate-form" style="float: left;"
-          *ngIf="changePassword.controls.tendangnhap?.errors?.required && changePassword.controls.tendangnhap?.touched">
-          <span>(*) Tên đăng nhập không được trống !</span>
-        </div>
-      </div>
-      <div class="form-group">
-        <input type="password" name="matkhau" class="form-control input-underline input-lg"
-          [(ngModel)]="changePassModel.matkhau" placeholder="Mật khẩu" required>
-        <div class="validate-form" style="float: left;"
-          *ngIf="changePassword.controls.matkhau?.errors?.required && changePassword.controls.matkhau?.touched">
+          *ngIf="changePassword.controls.matKhau?.errors?.required && changePassword.controls.matKhau?.touched">
           <span>(*) Mật khẩu không được trống !</span>
         </div>
       </div>
 
       <div class="form-group">
-        <input type="password" name="matkhaumoi" class="form-control input-underline input-lg"
-          [(ngModel)]="changePassModel.matkhaumoi" placeholder="Mật khẩu mới" required>
+        <input type="password" name="matKhauMoi" class="form-control input-underline input-lg"
+          [(ngModel)]="changePassModel.matKhauMoi" placeholder="Mật khẩu mới" required>
         <div class="validate-form" style="float: left;"
-          *ngIf="changePassword.controls.matkhaumoi?.errors?.required && changePassword.controls.matkhaumoi?.touched">
+          *ngIf="changePassword.controls.matKhauMoi?.errors?.required && changePassword.controls.matKhauMoi?.touched">
           <span>(*) Mật khẩu mới không được trống !</span>
         </div>
       </div>
     </div>
-    <button style="margin-left: 350px;" class="btn rounded-btn" [disabled]="(!changePassword.valid)">
-      Đăng nhập
+    <button style="margin-left: 350px; background-color: #61b2e2;" class="btn rounded-btn" [disabled]="(!changePassword.valid)">
+        Đổi mật khẩu 
     </button>
   </form>
 </div>
