@@ -76,7 +76,8 @@
           <span> Mã OTP : </span>
           <input style="width: 150px !important; margin-left: 5px;" type="number" class="form-control input-underline input-lg"
             [(ngModel)]="codeOTP">
-            <span style="font-size: 10px; margin-left: 5px;">Mã OTP đã được gửi tới mail đăng ký của bạn!</span>
+            <button  type="button" style="font-size: 10px; margin-left: 5px;" (click)="getCodeOTP()">Lấy mã OTP</button>
+            <span style="font-size: 10px; margin-left: 5px;">Mã OTP sẽ gửi tới mail đăng ký của bạn!</span>
         </div>
       </div>
 
@@ -84,7 +85,7 @@
         <button style=" background-color: #e0a4a7;" class="btn rounded-btn" (click)="back()">
           Quay lại
         </button>
-        <button style="margin-left: 12px; background-color: #61b2e2;" class="btn rounded-btn" (click)="xacnhan()">
+        <button style="margin-left: 12px; background-color: #61b2e2;" class="btn rounded-btn" (click)="chuyenkhoan()">
           Chuyển khoản
         </button>
       </div>

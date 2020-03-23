@@ -13,4 +13,12 @@ export class TaikhoanthanhtoanService extends ApiService {
   doiMatKhau(params: any = {}) {
     return this.httpPut('user/doimatkhau', params);
   }
+
+  getDanhSachNganHangLienKet() {
+    return this.httpGet('NganHangLienKet/GetDanhSach');
+  }
+
+  chuyenKhoanNoiBo(params: any = {}) {
+    return this.httpPost('ThongTinChuyenTienNoiBo/ChuyenKhoanNoiBo', params);
+  }
 }

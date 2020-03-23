@@ -12,6 +12,7 @@ namespace BusinessObject
         public string TenNganHang { get; set; }
         public string SoTaiKhoan { get; set; }
 
+        public string TenTaiKhoan { get; set; }
         public int idNganHangLienKet { get; set; }
     }
 }
