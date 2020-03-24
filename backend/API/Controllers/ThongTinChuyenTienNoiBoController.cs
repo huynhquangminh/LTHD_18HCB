@@ -46,5 +46,35 @@ namespace API.Controllers
             var result = await _thongTinChuyenTienNoiBoService.ChuyenKhoanNoiBo(request);
             return Ok(result);
         }
+
+        /// <summary>
+        /// Lấy thông tin giao dịch gửi tiền nội bộ theo mã tài khoản
+        /// </summary>
+        /// <param name="maTaiKhoan"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("GetGiaoDichGuiTienNoiBo")]
+        public async Task<ActionResult<List<ThongTinChuyenTienNoiBoBO>>> GetGiaoDichGuiTienNoiBo(string maTaiKhoan)
+        {
+            var result = await _thongTinChuyenTienNoiBoService.GetGiaoDichGuiTienNoiBo(maTaiKhoan);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Lấy thông tin giao dịch nhận tiền nội bộ theo số tài khoản
+        /// </summary>
+        /// <param name="soTaiKhoan"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("GetGiaoDichNhanTienNoiBo")]
+        public async Task<ActionResult<List<ThongTinChuyenTienNoiBoBO>>> GetGiaoDichNhanTienNoiBo(string soTaiKhoan)
+        {
+            var result = await _thongTinChuyenTienNoiBoService.GetGiaoDichNhanTienNoiBo(soTaiKhoan);
+            return Ok(result);
+        }
     }
 }

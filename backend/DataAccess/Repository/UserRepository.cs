@@ -171,5 +171,16 @@ namespace DataAccess.Repository
             var result = ExecuteCommandAsync(StoredProcedure.USER_QUENMATKHAU, param);
             return result;
         }
+
+        public async Task<int> UpdateSoDuSauKhiChuyenKhoanNoiBo(string taiKhoanGui, string taiKhoanNhan, int soTienGui)
+        {
+            var param = new DynamicParameters();
+            param.Add("@taikhoangui", taiKhoanGui);
+            param.Add("@taikhoannhan", taiKhoanNhan);
+            param.Add("@sotiengui", soTienGui);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.USER_UPDATE_SODUSAUKHICHUYENKHOANNOIBO, param);
+            return result;
+        }
     }
 }

@@ -180,5 +180,26 @@ namespace BusinessLogic.Service
                 return MapperHelper.Map<UserDO, UserBO>(result);
             }
         }
+
+        public async Task<int> UpdateSoDuSauKhiChuyenKhoanNoiBo(string taiKhoanGui, string taiKhoanNhan, int soTienGui)
+        {
+            var result = 0;
+
+            using (DalSession dal = new DalSession())
+            {
+                try
+                {
+                    dal.UnitOfWork.Begin();
+                    result = await dal.UnitOfWork.UserRepository.UpdateSoDuSauKhiChuyenKhoanNoiBo(taiKhoanGui, taiKhoanNhan, soTienGui);
+                    dal.UnitOfWork.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dal.UnitOfWork.Rollback();
+                    throw new AggregateException();
+                }
+                return result;
+            }
+        }
     }
 }

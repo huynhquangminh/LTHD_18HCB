@@ -19,5 +19,6 @@ namespace BusinessLogic.Service.Interface
         Task<int> DoiMatKhau(string maTaiKhoan, string matKhauMoi);
         string GetPasswordByMaTk(string maTaiKhoan);
         Task<int> QuenMatKhau(string tenDangNhap, string email, string matKhauMoi);
+        Task<int> UpdateSoDuSauKhiChuyenKhoanNoiBo(string taiKhoanGui, string taiKhoanNhan, int soTienGui);
     }
 }

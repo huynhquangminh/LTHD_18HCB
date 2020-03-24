@@ -5,6 +5,7 @@ using DataObject;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,6 +32,24 @@ namespace DataAccess.Repository
 
             var result = await ExecuteCommandAsync(StoredProcedure.THONGTINCHUYENTIENNOIBO_CHUYENKHOANNOIBO, param);
             return result;
+        }
+
+        public async Task<List<ThongTinChuyenTienNoiBoDO>> GetGiaoDichGuiTienNoiBo(string maTaiKhoan)
+        {
+            var param = new DynamicParameters();
+            param.Add("@matk", maTaiKhoan);
+
+            var result = await QueryCommandAsyncWithParam<ThongTinChuyenTienNoiBoDO>(StoredProcedure.THONGTINCHUYENTIENNOIBO_GETGIAODICHGUITIENNOIBO, param);
+            return result.ToList();
+        }
+
+        public async Task<List<ThongTinChuyenTienNoiBoDO>> GetGiaoDichNhanTienNoiBo(string soTaiKhoan)
+        {
+            var param = new DynamicParameters();
+            param.Add("@sotaikhoan", soTaiKhoan);
+
+            var result = await QueryCommandAsyncWithParam<ThongTinChuyenTienNoiBoDO>(StoredProcedure.THONGTINCHUYENTIENNOIBO_GETGIAODICHNHANTIENNOIBO, param);
+            return result.ToList();
         }
     }
 }

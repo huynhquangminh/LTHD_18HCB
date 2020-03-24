@@ -208,7 +208,7 @@ namespace API.Controllers
         /// <summary>
         /// Lấy thông tin tài khoản theo số tài khoản
         /// </summary>
-        /// <param name="maTaiKhoan"></param>
+        /// <param name="soTaiKhoan"></param>
         /// <returns></returns>
         [Authorize]
         [HttpGet]
@@ -217,6 +217,21 @@ namespace API.Controllers
         public async Task<ActionResult<UserBO>> GetThongTinTaiKhoanBySoTaiKhoan(string soTaiKhoan)
         {
             var result = _userService.GetThongTinTaiKhoanBySoTaiKhoan(soTaiKhoan);
+            return await result;
+        }
+
+        /// <summary>
+        /// Cập nhật số dư sau khi chuyển khoản nội bộ
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPut]
+        [Produces("application/json")]
+        [Route("UpdateSoDuSauKhiChuyenKhoanNoiBo")]
+        public async Task<ActionResult<int>> UpdateSoDuSauKhiChuyenKhoanNoiBo(UpdateSoDuRequest request)
+        {
+            var result = _userService.UpdateSoDuSauKhiChuyenKhoanNoiBo(request.TaiKhoanGui, request.TaiKhoanNhan, request.SoTienGui);
             return await result;
         }
 

@@ -38,5 +38,33 @@ namespace BusinessLogic.Service
                 return result;
             }
         }
+
+        public async Task<List<ThongTinChuyenTienNoiBoBO>> GetGiaoDichGuiTienNoiBo(string maTaiKhoan)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ThongTinChuyenTienNoiBoDO, ThongTinChuyenTienNoiBoBO>();
+            });
+            var mapper = config.CreateMapper();
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.ThongTinChuyenTienNoiBoRepository.GetGiaoDichGuiTienNoiBo(maTaiKhoan);
+                return mapper.Map<List<ThongTinChuyenTienNoiBoBO>>(result);
+            }
+        }
+
+        public async Task<List<ThongTinChuyenTienNoiBoBO>> GetGiaoDichNhanTienNoiBo(string soTaiKhoan)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ThongTinChuyenTienNoiBoDO, ThongTinChuyenTienNoiBoBO>();
+            });
+            var mapper = config.CreateMapper();
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.ThongTinChuyenTienNoiBoRepository.GetGiaoDichNhanTienNoiBo(soTaiKhoan);
+                return mapper.Map<List<ThongTinChuyenTienNoiBoBO>>(result);
+            }
+        }
     }
 }
