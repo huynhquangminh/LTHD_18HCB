@@ -76,7 +76,7 @@ namespace API.Controllers
         public async Task<IActionResult> Login(LoginUserRequest request)
         {
             UserBO login = new UserBO();
-            login.TenTaiKhoan = request.tenDangNhap;
+            login.TenDangNhap = request.tenDangNhap;
             login.MatKhau = request.matKhau;
 
             IActionResult response = Unauthorized();
@@ -86,13 +86,11 @@ namespace API.Controllers
             if (user != null)
             {
                 var stringToken = GetJSONWebToken(user);
-                
-                //var stringRefreshToken = GenerateRefreshToken();
-                //user.RefreshToken = stringRefreshToken;
-                //var result = _userService.EditUserRefreshToken(user.UserName, user.RefreshToken);
-                response = Ok(new { user, token = stringToken
-                    //refreshToken = stringRefreshToken 
-                });
+
+                var stringRefreshToken = TokenService.GenerateRefreshToken();
+                user.RefreshToken = stringRefreshToken;
+                var result = _userService.EditUserRefreshToken(user.MaTk, user.RefreshToken);
+                response = Ok(new { user, token = stringToken });
             }
 
             return response;
@@ -235,53 +233,70 @@ namespace API.Controllers
             return await result;
         }
 
-        //[HttpPost]
-        //[Produces("application/json")]
-        //[Route("RefreshToken")]
-        //public async Task<IActionResult> Refresh(string token, string refreshToken)
-        //{
-        //    var princial = GetPrincipalFromExpiredToken(token);
-        //    var userName = princial.Claims.ToList()[0].Value;
-        //    var user = _userService.GetUserByUserName(userName).Result;
+        /// <summary>
+        /// Refresh token
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="refreshToken"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPut]
+        [Produces("application/json")]
+        [Route("RefreshToken")]
+        public async Task<IActionResult> RefreshToken(string token, string refreshToken)
+        {
+            if (token != null)
+            {
+                var princial = GetPrincipalFromExpiredToken(token);
+                var maTaiKhoan = princial.Claims.ToList()[2].Value;
+                var user = _userService.GetUserByMaTaiKhoan(maTaiKhoan).Result;
 
-        //    // Check current request token of user
-        //    if (user == null || user.RefreshToken != refreshToken)
-        //    {
-        //        return BadRequest();
-        //    }
+                // Check current request token of user
+                if (user == null || user.RefreshToken != refreshToken)
+                {
+                    return BadRequest();
+                }
 
-        //    var newJwtToken = GenerateJSONWebToken(user);
-        //    var newRefreshToken = GenerateRefreshToken();
+                var newJwtToken = GetJSONWebToken(user);
+                var newRefreshToken = TokenService.GenerateRefreshToken();
+                user.RefreshToken = newRefreshToken;
+                var result = _userService.EditUserRefreshToken(user.MaTk, user.RefreshToken);
 
-        //    var result = _userService.EditUserRefreshToken(userName, refreshToken);
+                return new ObjectResult(new
+                {
+                    result,
+                    token = newJwtToken,
+                    refreshToken = newRefreshToken
+                });
+            }
 
-        //    return new ObjectResult(new
-        //    {
-        //        token = newJwtToken,
-        //        refreshToken = newRefreshToken
-        //    });
-        //}
+            return NotFound();
+        }
 
-        //[Authorize]
-        //[HttpPost]
-        //[Produces("application/json")]
-        //[Route("RevokeToken")]
-        //public async Task<IActionResult> Revoke()
-        //{
-        //    var userName = User.Claims.ToList()[0].Value;
+        /// <summary>
+        /// Revoke token
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPut]
+        [Produces("application/json")]
+        [Route("RevokeToken")]
+        public async Task<IActionResult> RevokeToken()
+        {
+            var maTaiKhoan = User.Claims.ToList()[2].Value;
 
-        //    var user = _userService.GetUserByUserName(userName).Result;
-        //    if (user == null) return BadRequest();
+            var user = _userService.GetUserByMaTaiKhoan(maTaiKhoan).Result;
+            if (user == null) return BadRequest();
 
-        //    user.RefreshToken = null;
-        //    var result = _userService.EditUserRefreshToken(userName, null);
-        //    return NoContent();
-        //}
+            user.RefreshToken = null;
+            var result = _userService.EditUserRefreshToken(user.MaTk, user.RefreshToken);
+            return NoContent();
+        }
 
         private UserBO AuthenticateUser(UserBO login)
         {
             UserBO user = null;
-            user = _userService.GetUserByTenDangNhap(login.TenTaiKhoan).Result;
+            user = _userService.GetUserByTenDangNhap(login.TenDangNhap).Result;
             bool validPassword = BCryptService.CheckPassword(login.MatKhau, user.MatKhau);
 
             if (validPassword)
@@ -298,7 +313,7 @@ namespace API.Controllers
             {
                 new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Sub, userInfo.TenTaiKhoan),
                 new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Email, userInfo.Email),
-                new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Jti, userInfo.Id)
+                new Claim(Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames.Jti, userInfo.MaTk)
             };
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);

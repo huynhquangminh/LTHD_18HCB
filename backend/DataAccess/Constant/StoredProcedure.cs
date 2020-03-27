@@ -11,11 +11,12 @@ namespace DataAccess.Constant
         public const string USER_GETBY_USERNAME = "sp_User_GetBy_UserName";
         public const string USER_GETBY_USERNAME_PASSWORD = "sp_User_GetBy_UserName_Password";
         public const string USER_INSERT = "sp_User_Insert";
-        public const string USER_EDIT_REFRESHTOKEN = "sp_User_Edit_RefreshToken";
+        public const string USER_EDIT_REFRESHTOKEN = "EditUserRefreshToken";
         public const string USER_DOIMATKHAU = "DoiMatKhau";
         public const string USER_GETPASSWORDBY_MATK = "GetPasswordByMaTk";
         public const string USER_QUENMATKHAU = "QuenMatKhauUser";
-        public const string USER_GETBY_TENDANGNHAP = "GetUserByTenDangNhap";
+        public const string USER_GETBY_TENDANGNHAP = "GetUserByTenDangNhap_v2";
+        public const string USER_GETBY_MATAIKHOAN = "GetUserByMaTaiKhoan";
         public const string USER_GET_THONGTINTAIKHOAN = "GetThongTinTaiKhoan";
         public const string USER_GET_THONGTINTAIKHOAN_SOTAIKHOAN = "GetThongTinTaiKhoanBySTK";
         public const string USER_UPDATE_SODUSAUKHICHUYENKHOANNOIBO = "UpdateSoDuSauKhiChuyenKhoanNoiBo";

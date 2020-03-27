@@ -40,7 +40,7 @@ namespace BusinessLogic.Service
             }
         }
 
-        public async Task<int> EditUserRefreshToken(string userName, string refreshToken)
+        public async Task<int> EditUserRefreshToken(string maTaiKhoan, string refreshToken)
         {
             var result = 0;
 
@@ -49,7 +49,7 @@ namespace BusinessLogic.Service
                 try
                 {
                     dal.UnitOfWork.Begin();
-                    result = await dal.UnitOfWork.UserRepository.EditUserRefreshToken(userName, refreshToken);
+                    result = await dal.UnitOfWork.UserRepository.EditUserRefreshToken(maTaiKhoan, refreshToken);
                     dal.UnitOfWork.Commit();
                 } catch (Exception ex)
                 {
@@ -199,6 +199,15 @@ namespace BusinessLogic.Service
                     throw new AggregateException();
                 }
                 return result;
+            }
+        }
+
+        public async Task<UserBO> GetUserByMaTaiKhoan(string maTaiKhoan)
+        {
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.UserRepository.GetUserByMaTaiKhoan(maTaiKhoan);
+                return MapperHelper.Map<UserDO, UserBO>(result);
             }
         }
     }

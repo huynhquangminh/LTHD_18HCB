@@ -24,10 +24,10 @@ namespace DataAccess.Repository
             throw new NotImplementedException();
         }
 
-        public Task<int> EditUserRefreshToken(string userName, string refreshToken)
-        {
-            throw new NotImplementedException();
-        }
+        //public Task<int> EditUserRefreshToken(string userName, string refreshToken)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public Task<List<UserDO>> GetAllUser()
         {
@@ -64,16 +64,16 @@ namespace DataAccess.Repository
         //    return result;
         //}
 
-        //public async Task<int> EditUserRefreshToken(string userName, string refreshToken)
-        //{
-        //    var param = new DynamicParameters();
+        public async Task<int> EditUserRefreshToken(string maTaiKhoan, string refreshToken)
+        {
+            var param = new DynamicParameters();
 
-        //    param.Add("@UserName", userName);
-        //    param.Add("@RefreshToken", refreshToken);
+            param.Add("@mataikhoan", maTaiKhoan);
+            param.Add("@refreshtoken", refreshToken);
 
-        //    var result = await ExecuteCommandAsync(StoredProcedure.USER_EDIT_REFRESHTOKEN, param);
-        //    return result;
-        //}
+            var result = await ExecuteCommandAsync(StoredProcedure.USER_EDIT_REFRESHTOKEN, param);
+            return result;
+        }
 
         /// <summary>
         /// Get all user
@@ -180,6 +180,15 @@ namespace DataAccess.Repository
             param.Add("@sotiengui", soTienGui);
 
             var result = await ExecuteCommandAsync(StoredProcedure.USER_UPDATE_SODUSAUKHICHUYENKHOANNOIBO, param);
+            return result;
+        }
+
+        public async Task<UserDO> GetUserByMaTaiKhoan(string maTaiKhoan)
+        {
+            var param = new DynamicParameters();
+            param.Add("@mataikhoan", maTaiKhoan);
+
+            var result = await QueryCommandSingleAsync<UserDO>(StoredProcedure.USER_GETBY_MATAIKHOAN, param);
             return result;
         }
     }

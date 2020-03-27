@@ -11,8 +11,10 @@ namespace BusinessObject
         public string Image { get; set; }
         public string SoTaiKhoan { get; set; }
         public string TenTaiKhoan { get; set; }
+        public string TenDangNhap { get; set; }
         public string MatKhau { get; set; }
         public decimal SoDu { get; set; }
         public int IdLoaiTaiKhoan { get; set; }
+        public string RefreshToken { get; set; }
     }
 }
