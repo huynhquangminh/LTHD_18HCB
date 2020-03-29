@@ -68,6 +68,7 @@ namespace API
             services.AddTransient<IThongBaoService, ThongBaoService>();
             services.AddTransient<INganHangLienKetService, NganHangLienKetService>();
             services.AddTransient<IThongTinChuyenTienNoiBoService, ThongTinChuyenTienNoiBoService>();
+            services.AddTransient<INhacNoService, NhacNoService>();
         }
 
         /// <summary>

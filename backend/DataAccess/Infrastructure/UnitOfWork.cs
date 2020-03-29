@@ -16,6 +16,8 @@ namespace DataAccess.UnitOfWork
         private IThongBaoRepository _thongBaoRepository;
         private INganHangLienKetRepository _nganHangLienKetRepository;
         private IThongTinChuyenTienNoiBoRepository _thongTinChuyenTienNoiBoRepository;
+        private INhacNoRepository _nhacNoRepository;
+
         public UnitOfWork(IDbConnection connection)
         {
             _id = Guid.NewGuid();
@@ -109,6 +111,15 @@ namespace DataAccess.UnitOfWork
             get
             {
                 return _thongTinChuyenTienNoiBoRepository ?? (_thongTinChuyenTienNoiBoRepository = new ThongTinChuyenTienNoiBoRepository(_connection, _transaction));
+            }
+        }
+
+        public INhacNoRepository NhacNoRepository
+        {
+            get
+            {
+                return _nhacNoRepository ?? (_nhacNoRepository = new NhacNoRepository(_connection,
+                    _transaction));
             }
         }
     }

@@ -41,5 +41,11 @@ namespace DataAccess.Constant
         public const string THONGTINCHUYENTIENNOIBO_CHUYENKHOANNOIBO = "ChuyenKhoanNoiBo";
         public const string THONGTINCHUYENTIENNOIBO_GETGIAODICHNHANTIENNOIBO = "XemGiaoDichNhanTienNoiBo";
         public const string THONGTINCHUYENTIENNOIBO_GETGIAODICHGUITIENNOIBO = "XemGiaoDichGuiTienNoiBo";
+
+        // NhacNo
+        public const string NHACNO_GETDANHSACHNO = "GetDSNo";
+        public const string NHACNO_GETDANHSACHNGUOINO = "GetDSNguoiNo";
+        public const string NHACNO_THEM = "ThemNhacNo";
+        public const string NHACNO_UPDATETRANGTHAI = "UpdateTrangThaiNhacNo";
     }
 }
