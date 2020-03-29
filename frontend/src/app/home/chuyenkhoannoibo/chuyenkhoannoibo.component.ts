@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from './../../shared/services/auth.service';
 import { map } from 'rxjs/operators';
 import { DanhBaService } from './../../shared/services/danh-ba.service';
@@ -31,7 +32,8 @@ export class ChuyenkhoannoiboComponent implements OnInit {
     private taikhoanService: TaikhoanthanhtoanService,
     private danhBaService: DanhBaService,
     private webStorageSerivce: WebStorageSerivce,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -86,8 +88,8 @@ export class ChuyenkhoannoiboComponent implements OnInit {
     if (this.checkOTP()) {
       const params: any = {
         id: null,
-        maTk: this.userInfo.user.maTK,
-        ngayGd:  new Date().toLocaleDateString('en-GB'),
+        MaTk: this.userInfo.user.maTk,
+        ngayGd:  new Date().toLocaleDateString(),
         stkGui: this.userInfo.user.soTaiKhoan,
         stkNhan: this.chuyenkhoanModel.sotaikhoan,
         soTienGui: this.chuyenkhoanModel.sotiengui,
@@ -97,7 +99,13 @@ export class ChuyenkhoannoiboComponent implements OnInit {
       };
       this.taikhoanService.chuyenKhoanNoiBo(params).subscribe(res => {
         if (res) {
-          alert('pass');
+          const request = {
+            taiKhoanGui: this.userInfo.user.soTaiKhoan,
+            taiKhoanNhan: this.chuyenkhoanModel.sotaikhoan,
+            soTienGui : this.chuyenkhoanModel.sotiengui
+          };
+          this.updateThongSoDu(request);
+          // this.router.navigateByUrl('/payment-account');
         }
       });
     }
@@ -117,5 +125,13 @@ export class ChuyenkhoannoiboComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  updateThongSoDu(params) {
+    this.taikhoanService.updateSoDuTaiKhoan(params).subscribe(res => {
+      if (res) {
+        this.router.navigateByUrl('/home');
+      }
+    });
   }
 }

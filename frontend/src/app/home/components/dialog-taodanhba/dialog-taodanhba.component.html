@@ -17,17 +17,21 @@
           name="tenNganHang" 
           class="form-control input-underline input-lg"
           matNativeControl required [(value)]="formNewsPhoneBookModel.idNganHangLienKet">
-          <option *ngFor="let item of dsNganHang" [value]="item.id">{{item.name}}</option>
+          <option *ngFor="let item of dsNganHang" [value]="item.id">{{item.tenNganHang}}</option>
         </select>
       </div>
 
       <div class="form-group">
         <input type="number" name="soTaiKhoan" class="form-control input-underline input-lg"
-          [(ngModel)]="formNewsPhoneBookModel.soTaiKhoan" placeholder="Số tài khoản" required>
+          [(ngModel)]="formNewsPhoneBookModel.soTaiKhoan" placeholder="Số tài khoản" (blur)="getThongTinTaiKhoan()" required>
         <div class="validate-form" style="float: left;"
           *ngIf="formNewsPhoneBook.controls.soTaiKhoan?.errors?.required && formNewsPhoneBook.controls.soTaiKhoan?.touched">
           <span>(*) Số tài khoản không được trống !</span>
         </div>
+      </div>
+      <div class="form-group">
+        <input readonly type="text" name="tenTaiKhoan"  class="form-control input-underline input-lg"
+          [(ngModel)]="formNewsPhoneBookModel.tenTaiKhoan" placeholder="(*) Tên tài khoản" required>
       </div>
     </div>
     <button style="margin-left: 350px; background-color: #6194e2; " class="btn rounded-btn"

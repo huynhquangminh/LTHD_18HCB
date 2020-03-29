@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { empty, throwError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpClient } from '@angular/common/http';
@@ -9,8 +10,9 @@ import { DialogService } from './dialog-service.service';
 })
 export class HandleErrorService {
 
+  public router: Router;
   constructor(
-    public dialogServiceService: DialogService
+    public dialogServiceService: DialogService,
     ) {
     this.handleError = this.handleError.bind(this);
     this.handleError = this.extractData.bind(this);
@@ -64,6 +66,10 @@ export class HandleErrorService {
       // Bad request
       case HttpStatusCode.BadRequest:
         this.dialogServiceService.showDialogError(`message error code: ${statusCode}`);
+        break;
+      case HttpStatusCode.Unauthorized:
+        // this.dialogServiceService.showDialogError(`message error code: ${statusCode}`);
+        this.router.navigateByUrl('/login');
         break;
       default:
         // Unexpected error

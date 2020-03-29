@@ -48,6 +48,7 @@ namespace DataAccess.Repository
             param.Add("@tengoinho", danhBa.TenGoiNho);
             param.Add("@tennganhang", danhBa.TenNganHang);
             param.Add("@sotaikhoan", danhBa.SoTaiKhoan);
+            param.Add("@tentaikhoan", danhBa.TenTaiKhoan);
             param.Add("@idnganhanglienket", danhBa.idNganHangLienKet);
 
             var result = await ExecuteCommandAsync(StoredProcedure.DANHBA_THEM, param);

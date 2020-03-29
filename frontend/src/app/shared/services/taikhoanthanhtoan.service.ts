@@ -21,4 +21,20 @@ export class TaikhoanthanhtoanService extends ApiService {
   chuyenKhoanNoiBo(params: any = {}) {
     return this.httpPost('ThongTinChuyenTienNoiBo/ChuyenKhoanNoiBo', params);
   }
+
+  getThongTinTaiKhoanBySoTaiKhoan(stk: any) {
+    return this.httpGet('User/GetThongTinTaiKhoanBySoTaiKhoan?soTaiKhoan=' + stk);
+  }
+
+  getLichSuChuyenTien(matk: any) {
+    return this.httpGet('ThongTinChuyenTienNoiBo/GetGiaoDichGuiTienNoiBo?maTaiKhoan=' + matk);
+  }
+
+  getLichSuNhanTien(matk: any) {
+    return this.httpGet('ThongTinChuyenTienNoiBo/GetGiaoDichNhanTienNoiBo?soTaiKhoan=' + matk);
+  }
+
+  updateSoDuTaiKhoan(params: any) {
+    return this.httpPut('User/UpdateSoDuSauKhiChuyenKhoanNoiBo', params);
+  }
 }

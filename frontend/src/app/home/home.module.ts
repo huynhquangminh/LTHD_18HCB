@@ -19,6 +19,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatMenuModule} from '@angular/material/menu';
+import { LichsugiaodichComponent } from './lichsugiaodich/lichsugiaodich.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -29,6 +30,7 @@ import {MatMenuModule} from '@angular/material/menu';
     DanhbanguoinhanComponent,
     ChuyenkhoannoiboComponent,
     ChuyenkhoanliennganhangComponent,
+    LichsugiaodichComponent,
   ],
   imports: [
     CommonModule,

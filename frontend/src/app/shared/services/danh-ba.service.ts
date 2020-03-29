@@ -22,4 +22,8 @@ export class DanhBaService extends ApiService {
     return this.httpPut('DanhBa/SuaDanhBa', request);
   }
 
+  getDsNganHangLienKet() {
+      return this.httpGet('NganHangLienKet/GetDanhSach');
+  }
+
 }
