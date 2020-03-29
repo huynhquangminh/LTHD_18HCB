@@ -26,5 +26,24 @@ namespace DataAccess.Repository
             var result = await QueryCommandAsyncWithParam<ThongBaoDO>(StoredProcedure.THONGBAO_GETDANHSACH, param);
             return result.ToList();
         }
+
+        public async Task<int> Them(string maTaiKhoan, string noiDung)
+        {
+            var param = new DynamicParameters();
+            param.Add("@matk", maTaiKhoan);
+            param.Add("@noidung", noiDung);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.THONGBAO_THEM, param);
+            return result;
+        }
+
+        public async Task<int> Update(int id)
+        {
+            var param = new DynamicParameters();
+            param.Add("@id", id);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.THONGBAO_UPDATE, param);
+            return result;
+        }
     }
 }

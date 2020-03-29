@@ -26,5 +26,23 @@ namespace BusinessLogic.Service
                 return mapper.Map<List<ThongBaoBO>>(result);
             }
         }
+
+        public async Task<int> Them(string maTaiKhoan, string noiDung)
+        {
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.ThongBaoRepository.Them(maTaiKhoan, noiDung);
+                return result;
+            }
+        }
+
+        public async Task<int> Update(int id)
+        {
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.ThongBaoRepository.Update(id);
+                return result;
+            }
+        }
     }
 }

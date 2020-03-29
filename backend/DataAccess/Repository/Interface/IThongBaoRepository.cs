@@ -9,5 +9,7 @@ namespace DataAccess.Repository.Interface
     public interface IThongBaoRepository
     {
         Task<List<ThongBaoDO>> GetDanhSachTheoMaTaiKhoan(string maTaiKhoan);
+        Task<int> Them(string maTaiKhoan, string noiDung);
+        Task<int> Update(int id);
     }
 }
