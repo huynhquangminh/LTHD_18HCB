@@ -1,0 +1,55 @@
+<form style="width: 500px;margin: 0 auto;margin-top: 20px;" novalidate #formthemnhacno="ngForm" (ngSubmit)="onSubmit()">
+  <div class="form-content">
+    <div class="form-group">
+      <input readonly type="text" name="tennguoino" class="form-control input-underline input-lg"
+        [(ngModel)]="themNhacNoModel.tennguoino" placeholder="Tên tài khoản người nợ" required>
+    </div>
+    <div class="form-group">
+      <div style="width: 500px;" style="display: flex;">
+        <input type="number" name="sotaikhoanno" class="form-control input-underline input-lg"
+          [(ngModel)]="themNhacNoModel.sotaikhoanno" placeholder="Số tài khoản người nợ" (blur)="getThongTinTaiKhoan()"
+          required>
+        <button type="button" mat-button [matMenuTriggerFor]="menu">
+          <span class="material-icons">
+            perm_contact_calendar
+          </span></button>
+        <mat-menu #menu="matMenu" style="height: 40px;">
+          <ng-container *ngFor="let item of listDanhBaModel">
+            <button type="button" mat-menu-item (click)="chondanhba(item)">
+              <span style="font-size: 12px;">Tên gợi nhớ: {{item.tendanhba}}</span><br>
+              <span style="font-size: 12px;">Số tài khoản: {{item.sotaikhoan}}</span>
+            </button>
+          </ng-container>
+        </mat-menu>
+      </div>
+      <div class="validate-form" style="float: left;"
+        *ngIf="formthemnhacno.controls.sotaikhoanno?.errors?.required && formthemnhacno.controls.sotaikhoanno?.touched">
+        <span>(*) Số tài khoản người nhận không được trống!</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <input disabled="true" type="text" name="tennganhang" class="form-control " [value]="tennganhang"
+        placeholder="Tên ngân hàng">
+    </div>
+    <div class="form-group">
+      <input type="number" name="sotienno" class="form-control input-underline input-lg"
+        [(ngModel)]="themNhacNoModel.soTienNo" placeholder="Số tiền nợ" required maxlength="10">
+      <div class="validate-form" style="float: left;"
+        *ngIf="formthemnhacno.controls.sotienno?.errors?.required && formthemnhacno.controls.sotienno?.touched">
+        <span>(*) Số tiền không được trống!</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <textarea class="form-control input-underline input-lg" name="noidungnhacno" rows="3"
+        [(ngModel)]="themNhacNoModel.noiDungNhacNo" placeholder="Nội dung nhắc nợ" required></textarea>
+      <div class="validate-form" style="float: left;"
+        *ngIf="formthemnhacno.controls.noidungnhacno?.errors?.required && formthemnhacno.controls.noidungnhacno?.touched">
+        <span>(*) Nội dung không được trống!</span>
+      </div>
+    </div>
+  </div>
+  <button style="margin-left: 380px; background-color: #61b2e2;" class="btn rounded-btn"
+    [disabled]="(!formthemnhacno.valid) ">
+    Tạo nhắc nợ
+  </button>
+</form>

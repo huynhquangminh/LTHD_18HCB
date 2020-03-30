@@ -7,6 +7,7 @@ import { map, catchError, timeoutWith } from 'rxjs/operators';
 import { HandleErrorService } from './handle-error.service';
 import { HttpStatusCode } from '../globlas/enums';
 import { DialogService } from './dialog-service.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +20,11 @@ export class ApiService extends HandleErrorService {
   public isLogin = false;
   constructor(
     dialogServiceService: DialogService,
+    router: Router,
     public httpClient: HttpClient,
     private webStorageSerivce: WebStorageSerivce
   ) {
-    super(dialogServiceService);
+    super(dialogServiceService, router);
   }
 
   protected setTokenForHeader() {

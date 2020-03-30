@@ -1,0 +1,65 @@
+<div style="height: 350px; overflow: auto;">
+  <span>Danh sách người nợ </span>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Ngày tạo </th>
+        <th scope="col">Tên tài khoản nợ  </th>
+        <th scope="col">Số tài khoản nợ  </th>
+        <th scope="col">Số tiền nợ</th>
+        <th scope="col">Nội dung nhắc nợ</th>
+        <th scope="col">Nội dung hủy nhắc nợ</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">#</th>
+      </tr>
+    </thead>
+    <tbody >
+      <tr *ngFor="let item of listDanhSachNguoiNo; let stt = index">
+        <th scope="row">{{stt+1}}</th>
+        <td>
+          {{item.ngayTao | date:'dd/MM/yyyy'}}
+        </td>
+        <td>{{item.tenTaiKhoan}}</td>
+        <td>{{item.soTaiKhoan}}</td>
+        <td>{{item.soTienNo | currency: "VND" }} VND</td>
+        <td>{{item.noiDungNhacNo }}</td>
+        <td>{{item.noiDungHuyNhacNo }}</td>
+        <td *ngIf="item.trangThai === -1">Đã hủy</td>
+        <td *ngIf="item.trangThai === 0">Chưa trả nợ</td>
+        <td *ngIf="item.trangThai === 1">Đã trả nợ</td>
+        <td *ngIf="item.trangThai === 0">
+          <button (click)="huynhacno(item)">Hủy</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div style="height: 350px; overflow: auto; margin-top: 20px;">
+  <span>Danh sách nợ của bạn </span>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Ngày tạo </th>
+        <th scope="col">Tên tài khoản nợ</th>
+        <th scope="col">Số tài khoản nợ</th>
+        <th scope="col">Số tiền nợ</th>
+        <th scope="col">Nội dung nợ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listDanhSachNo">
+        <th scope="row">{{item.id}}</th>
+        <td>
+          {{item.ngayTao | date:'dd/MM/yyyy'}}
+        </td>
+        <td>{{item.tenTaiKhoan}}</td>
+        <td>{{item.soTaiKhoan}}</td>
+        <td>{{item.soTienNo | currency: "VND" }} VND</td>
+        <td>{{item.noiDungNhacNo }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

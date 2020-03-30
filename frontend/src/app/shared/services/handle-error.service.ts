@@ -9,10 +9,9 @@ import { DialogService } from './dialog-service.service';
   providedIn: 'root'
 })
 export class HandleErrorService {
-
-  public router: Router;
   constructor(
     public dialogServiceService: DialogService,
+    public router: Router
     ) {
     this.handleError = this.handleError.bind(this);
     this.handleError = this.extractData.bind(this);

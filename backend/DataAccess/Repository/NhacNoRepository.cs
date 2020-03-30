@@ -33,7 +33,7 @@ namespace DataAccess.Repository
             var param = new DynamicParameters();
             param.Add("@matk", maTaiKhoan);
 
-            var result = await QueryCommandAsyncWithParam<NhacNoDO>(StoredProcedure.NHACNO_GETDANHSACHNGUOINO, param);
+            var result = await QueryCommandAsyncWithParam<NhacNoDO>(StoredProcedure.NHACNO_GETDANHSACHNO, param);
             return result.ToList();
         }
 
@@ -55,6 +55,7 @@ namespace DataAccess.Repository
         public async Task<int> UpdateTrangThai(NhacNo_UpdateDO nhacNo)
         {
             var param = new DynamicParameters();
+            param.Add("@id", nhacNo.id);
             param.Add("@matk", nhacNo.MaTk);
             param.Add("@trangthai", nhacNo.TrangThai);
             param.Add("@noidunghuynhacno", nhacNo.NoiDungHuyNhacNo);

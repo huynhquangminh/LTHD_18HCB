@@ -11,7 +11,7 @@ namespace DataObject
         public string MaTkNo { get; set; }
         public int SoTienNo { get; set; }
         public string NoiDungNhacNo { get; set; }
-        public DateTime NgayTao {get; set; }
+        public string NgayTao {get; set; }
         public string NoiDungHuyNhacNo { get; set; }
         public int TrangThai { get; set; }
         public string TenTaiKhoan { get; set; }

@@ -20,6 +20,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatMenuModule} from '@angular/material/menu';
 import { LichsugiaodichComponent } from './lichsugiaodich/lichsugiaodich.component';
+import { LichsunhacnoComponent } from './lichsunhacno/lichsunhacno.component';
+import { ThemnhacnoComponent } from './themnhacno/themnhacno.component';
 @NgModule({
   declarations: [
     HomeComponent,
@@ -31,6 +33,8 @@ import { LichsugiaodichComponent } from './lichsugiaodich/lichsugiaodich.compone
     ChuyenkhoannoiboComponent,
     ChuyenkhoanliennganhangComponent,
     LichsugiaodichComponent,
+    LichsunhacnoComponent,
+    ThemnhacnoComponent,
   ],
   imports: [
     CommonModule,

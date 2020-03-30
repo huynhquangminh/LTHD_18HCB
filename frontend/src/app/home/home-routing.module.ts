@@ -7,6 +7,8 @@ import { TaikhoantietkiemComponent } from './taikhoantietkiem/taikhoantietkiem.c
 import { DanhbanguoinhanComponent } from './danhbanguoinhan/danhbanguoinhan.component';
 import { ChuyenkhoannoiboComponent } from './chuyenkhoannoibo/chuyenkhoannoibo.component';
 import { LichsugiaodichComponent } from './lichsugiaodich/lichsugiaodich.component';
+import { LichsunhacnoComponent } from './lichsunhacno/lichsunhacno.component';
+import { ThemnhacnoComponent } from './themnhacno/themnhacno.component';
 const routes: Routes = [
     {
         path: '',
@@ -19,9 +21,8 @@ const routes: Routes = [
             { path: 'internal-transfer', component: ChuyenkhoannoiboComponent },
             { path: 'interbank-transfer', component: ChuyenkhoanliennganhangComponent },
             { path: 'transaction-history', component: LichsugiaodichComponent },
-            // { path: 'grid', loadChildren: () => import('./grid/grid.module').then(m => m.GridModule) },
-            // { path: 'components', loadChildren: () => import('./bs-component/bs-component.module').then(m => m.BsComponentModule) },
-            // { path: 'blank-page', loadChildren: () => import('./blank-page/blank-page.module').then(m => m.BlankPageModule) }
+            { path: 'debt-reminder', component: LichsunhacnoComponent },
+            { path: 'create-debt-reminder', component: ThemnhacnoComponent },
         ]
     }
 ];
