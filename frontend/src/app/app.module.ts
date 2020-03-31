@@ -17,6 +17,9 @@ import { AngularWebStorageModule } from 'angular-web-storage';
 import { WebStorageSerivce } from './shared/services/webstorage.service';
 import { DialogTaodanhbaComponent } from './home/components/dialog-taodanhba/dialog-taodanhba.component';
 import { MatSelectModule } from '@angular/material/select';
+import { DialogThongbaoComponent } from './shared/component/dialog-thongbao/dialog-thongbao.component';
+import {MatRippleModule} from '@angular/material/core';
+import { DialogThanhtoannoComponent } from './home/components/dialog-thanhtoanno/dialog-thanhtoanno.component';
 @NgModule({
     imports: [
         // CommonModule,
@@ -28,7 +31,8 @@ import { MatSelectModule } from '@angular/material/select';
         NgbModalModule,
         FormsModule,
         AngularWebStorageModule,
-        MatSelectModule
+        MatSelectModule,
+        MatRippleModule
     ],
     declarations: [
         AppComponent,
@@ -36,7 +40,9 @@ import { MatSelectModule } from '@angular/material/select';
         TemplateDialogComfirmComponent,
         DialogErrorComponent,
         DialogDoimatkhauComponent,
-        DialogTaodanhbaComponent
+        DialogTaodanhbaComponent,
+        DialogThongbaoComponent,
+        DialogThanhtoannoComponent
     ],
     providers: [
         AuthGuard,
@@ -48,7 +54,9 @@ import { MatSelectModule } from '@angular/material/select';
         TemplateDialogComfirmComponent,
         DialogErrorComponent,
         DialogDoimatkhauComponent,
-        DialogTaodanhbaComponent
+        DialogTaodanhbaComponent,
+        DialogThongbaoComponent,
+        DialogThanhtoannoComponent
     ]
 })
 export class AppModule { }

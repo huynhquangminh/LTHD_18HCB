@@ -47,11 +47,13 @@
         <th scope="col">Số tài khoản nợ</th>
         <th scope="col">Số tiền nợ</th>
         <th scope="col">Nội dung nợ</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">#</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of listDanhSachNo">
-        <th scope="row">{{item.id}}</th>
+      <tr *ngFor="let item of listDanhSachNo;let stt = index">
+        <th scope="row">{{stt + 1}}</th>
         <td>
           {{item.ngayTao | date:'dd/MM/yyyy'}}
         </td>
@@ -59,6 +61,12 @@
         <td>{{item.soTaiKhoan}}</td>
         <td>{{item.soTienNo | currency: "VND" }} VND</td>
         <td>{{item.noiDungNhacNo }}</td>
+        <td *ngIf="item.trangThai === -1">Đã hủy</td>
+        <td *ngIf="item.trangThai === 0">Chưa trả nợ</td>
+        <td *ngIf="item.trangThai === 1">Đã trả nợ</td>
+        <td *ngIf="item.trangThai === 0">
+          <button (click)="showDialogThanhToanNo(item)">Thanh toán</button>
+        </td>
       </tr>
     </tbody>
   </table>

@@ -1,0 +1,34 @@
+<div>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Danh sách thông báo </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.close()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nội dung</th>
+          <th scope="col">Trạng thái</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of listThongBao; let stt = index">
+          <th scope="row">{{stt+1}}</th>
+          <td matRipple style="cursor: pointer;" (click)="updateThongBao(item)">
+            {{item.noiDung}}
+          </td>
+          <td>
+            <span *ngIf="item.trangThai">
+              <i class="material-icons">
+                done
+              </i>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -15,7 +15,7 @@ export class DialogDoimatkhauComponent implements OnInit {
   public changePassModel = {
     maTaiKhoan: '',
     matKhau: '',
-    matkhaumoi: ''
+    matKhauMoi: ''
   };
   userInfo: any;
   constructor(

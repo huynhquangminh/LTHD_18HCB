@@ -34,7 +34,7 @@ import { ThemnhacnoComponent } from './themnhacno/themnhacno.component';
     ChuyenkhoanliennganhangComponent,
     LichsugiaodichComponent,
     LichsunhacnoComponent,
-    ThemnhacnoComponent,
+    ThemnhacnoComponent
   ],
   imports: [
     CommonModule,

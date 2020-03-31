@@ -18,7 +18,8 @@ export class NhacNoService extends ApiService {
     return this.httpPost('NhacNo/Them', params);
   }
 
-  huyNhacNo(params: any) {
+  updateTrangThaiNo(params: any) {
     return this.httpPut('NhacNo/UpdateTrangThai', params);
   }
+
 }

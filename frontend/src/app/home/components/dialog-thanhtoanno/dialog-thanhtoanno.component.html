@@ -1,0 +1,45 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Thanh toán nợ </h4>
+  <button type="button" class="close" aria-label="Close" (click)="modal.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form style="width: 400px;margin: 0 auto;margin-top: 10px;" novalidate #formthanhtoanno="ngForm"
+    (ngSubmit)="onSubmit()">
+    <div class="form-content">
+      <div class="form-group">
+        <input readonly type="text" name="tennguoinhan" class="form-control input-underline input-lg"
+          [(ngModel)]="thanhToanNoModel.tennguoinhan" placeholder="Tên Người nhận" required>
+      </div>
+      <div class="form-group">
+        <div>
+          <input readonly type="number" name="sotaikhoan" class="form-control input-underline input-lg"
+            [(ngModel)]="thanhToanNoModel.sotaikhoan" placeholder="Số tài khoản người nhận" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <input disabled="true" type="text" name="tennganhang" class="form-control " [value]="tennganhang"
+          placeholder="Tên ngân hàng">
+      </div>
+      <div class="form-group">
+        <input readonly type="number" name="sotiengui" class="form-control input-underline input-lg"
+          [(ngModel)]="thanhToanNoModel.sotiengui" placeholder="Số tiền gửi" required maxlength="10">
+      </div>
+      <div class="form-group">
+        <textarea class="form-control input-underline input-lg" name="noidungchuyentien" rows="2"
+          [(ngModel)]="thanhToanNoModel.noidungchuyentien" placeholder="Nội dung chuyển tiền"></textarea>
+      </div>
+    </div>
+    <div class="form-group" style="display: flex;">
+      <input style="width: 150px !important; margin-left: 5px;" type="number" name="code" class="form-control input-underline input-lg"
+        [(ngModel)]="codeOTP" placeholder="Code OTP">
+        <button  type="button" style="font-size: 10px; margin-left: 5px;" (click)="getCodeOTP()">Lấy mã OTP</button>
+        <span style="font-size: 10px; margin-left: 5px;">Mã OTP sẽ gửi tới mail đăng ký của bạn!</span>
+    </div>
+    <button style="margin-left: 300px; background-color: #61b2e2;" class="btn rounded-btn"
+      [disabled]="(!formthanhtoanno.valid) ">
+      Thanh toán nợ
+    </button>
+  </form>
+</div>

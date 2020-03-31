@@ -105,7 +105,6 @@ export class ChuyenkhoannoiboComponent implements OnInit {
             soTienGui : this.chuyenkhoanModel.sotiengui
           };
           this.updateThongSoDu(request);
-          // this.router.navigateByUrl('/payment-account');
         }
       });
     }
