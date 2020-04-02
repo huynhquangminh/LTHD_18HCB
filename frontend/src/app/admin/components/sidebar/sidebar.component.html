@@ -1,0 +1,84 @@
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
+    <div class="list-group">
+        <a routerLink="/manager" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-fw fa-dashboard"></i>&nbsp;
+            <span>Trang chủ </span>
+        </a>
+        <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('home', 0)">
+                <i class="fa fa-plus"></i>&nbsp;
+                <span>Chức năng Nhân viên</span>
+            </a>
+            <li class="nested" [class.expand]="showMenu[0] === 'home'">
+                <ul class="submenu">
+                    <li>
+                        <a routerLink="./list-account" [routerLinkActive]="['router-link-active']" class="hiden-decoration" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Danh sách tài khoản</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLink="./money-transactions" [routerLinkActive]="['router-link-active']" class="hiden-decoration" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Chuyển tiền cho khách hàng</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="hiden-decoration" class="hiden-decoration" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Liên kết ngân hàng</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
+        <!-- <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('home1', 1)">
+                <i class="fa fa-plus"></i>&nbsp;
+                <span>Quản lý nhắc nợ </span>
+            </a>
+            <li class="nested" [class.expand]="showMenu[1] === 'home1'">
+                <ul class="submenu">
+                    <li>
+                        <a class="hiden-decoration" routerLink="./create-debt-reminder" [routerLinkActive]="['router-link-active']">
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Tạo nhắc nợ </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="hiden-decoration" routerLink="./debt-reminder" [routerLinkActive]="['router-link-active']" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Xem nhắc nợ</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </div> -->
+        <!-- <div class="nested-menu">
+            <a class="list-group-item" (click)="addExpandClass('home2', 2)">
+                <i class="fa fa-plus"></i>&nbsp;
+                <span>Cài đặt </span>
+            </a>
+            <li class="nested" [class.expand]="showMenu[2] === 'home2'">
+                <ul class="submenu">
+                    <li>
+                        <a style="cursor: pointer;" class="hiden-decoration" (click)="showDialogChangePassword()" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Đổi mật khẩu </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="hiden-decoration" routerLink="./transaction-history" [routerLinkActive]="['router-link-active']" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Xem lịch sử giao dịch</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </div> -->
+    </div>
+    <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
+        <i class="fa fa-fw fa-angle-double-{{collapsed?'right':'left'}}"></i>&nbsp;
+        <span>Thu gọn</span>
+    </div>
+</nav>
