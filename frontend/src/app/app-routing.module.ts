@@ -7,7 +7,6 @@ import { CanActiveGuardService } from './shared/services/guard/can-active-guard.
 
 const routes: Routes = [
     { path: '',  redirectTo: 'login', pathMatch: 'full' },
-    { path: 'index', loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule), canActivate: [AuthGuard] },
     { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [CanActiveGuardService]  },
     { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
     { path: '**', component: NotfoundpageComponent },

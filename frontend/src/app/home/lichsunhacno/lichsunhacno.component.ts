@@ -55,7 +55,7 @@ export class LichsunhacnoComponent implements OnInit {
       if (res) {
         const pr = {
           maTaiKhoan: item.maTkNo,
-          noiDung: 'Bạn có 1 nhắc nợ đã hủy từ tài khoản tên : ' + this.userInfo.user.tenTaiKhoan
+          noiDung: 'Ban co 1 nhac no da huy tu tai khoan ten : : ' + this.userInfo.user.tenTaiKhoan
         };
         this.thongBaoService.themThongBao(pr).subscribe(result => {
           if (result) {
@@ -91,9 +91,4 @@ export class LichsunhacnoComponent implements OnInit {
       }
     });
   }
-
-  updateTrangThaiNo() {
-
-  }
-
 }
