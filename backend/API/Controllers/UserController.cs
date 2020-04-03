@@ -41,15 +41,34 @@ namespace API.Controllers
             _userService = userService;
         }
 
-        //[Authorize]
-        //[HttpGet]
-        //[Produces("application/json")]
-        //[Route("GetAllUsers")]
-        //public async Task<ActionResult<List<UserBO>>> GetAll()
-        //{
-        //    var result = await _userService.GetAllUsers();
-        //    return Ok(result);
-        //}
+        /// <summary>
+        /// Láy tất cả thông tin tài khoản người dùng
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("GetAllUsers")]
+        public async Task<ActionResult<List<UserBO>>> GetAll()
+        {
+            var result = await _userService.GetAllUsers();
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Tìm kiếm thông tin tài khoản
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("TimKiemThongTinTaiKhoan")]
+        public async Task<ActionResult<List<UserBO>>> TimKiemThongTinTaiKhoan(string key)
+        {
+            var result = await _userService.TimKiemThongTinTaiKhoan(key);
+            return Ok(result);
+        }
 
         //[AllowAnonymous]
         //[HttpPost]
@@ -281,12 +300,25 @@ namespace API.Controllers
         private UserBO AuthenticateUser(UserBO login)
         {
             UserBO user = null;
+            UserBO userAdmin = null;
             user = _userService.GetUserByTenDangNhap(login.TenTaiKhoan).Result;
-            bool validPassword = BCryptService.CheckPassword(login.MatKhau, user.MatKhau);
 
-            if (validPassword)
+            if (user != null)
             {
-                return user;
+                bool validPassword = BCryptService.CheckPassword(login.MatKhau, user.MatKhau);
+
+                if (validPassword)
+                {
+                    if (user.IdLoaiTaiKhoan == 1)
+                    {
+                        return user;
+                    } 
+                    else
+                    {
+                        userAdmin = _userService.GetThongTinTaiKhoanAdmin(user.MaTk).Result;
+                        return userAdmin;
+                    }
+                }
             }
 
             return null;

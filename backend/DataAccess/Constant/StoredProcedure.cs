@@ -7,7 +7,7 @@ namespace DataAccess.Constant
     public static class StoredProcedure
     {
         // User
-        public const string USER_GETALL = "sp_User_GetAll";
+        public const string USER_GETALL = "GetAllUser";
         public const string USER_GETBY_USERNAME = "sp_User_GetBy_UserName";
         public const string USER_GETBY_USERNAME_PASSWORD = "sp_User_GetBy_UserName_Password";
         public const string USER_INSERT = "sp_User_Insert";
@@ -17,8 +17,10 @@ namespace DataAccess.Constant
         public const string USER_QUENMATKHAU = "QuenMatKhauUser";
         public const string USER_GETBY_TENDANGNHAP = "GetUserByTenDangNhap";
         public const string USER_GET_THONGTINTAIKHOAN = "GetThongTinTaiKhoan";
+        public const string USER_GET_THONGTINTAIKHOAN_ADMIN = "GetThongTinTaiKhoanAdmin";
         public const string USER_GET_THONGTINTAIKHOAN_SOTAIKHOAN = "GetThongTinTaiKhoanBySTK";
         public const string USER_UPDATE_SODUSAUKHICHUYENKHOANNOIBO = "UpdateSoDuSauKhiChuyenKhoanNoiBo";
+        public const string USER_TIMKIEM_THONGTINTAIKHOAN = "TimKiemThongTinTaiKhoan";
 
         // TaiKhoanTietKiem
         public const string TAIKHOANTIETKIEM_GET_BY_MATAIKHOAN = "GetDsTaiKhoanTietKiem";

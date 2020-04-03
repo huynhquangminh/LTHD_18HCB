@@ -201,5 +201,35 @@ namespace BusinessLogic.Service
                 return result;
             }
         }
+
+        public async Task<List<UserBO>> TimKiemThongTinTaiKhoan(string key)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<UserDO, UserBO>();
+            });
+            var mapper = config.CreateMapper();
+
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.UserRepository.TimKiemThongTinTaiKhoan(key);
+                return mapper.Map<List<UserBO>>(result);
+            }
+        }
+
+        public async Task<UserBO> GetThongTinTaiKhoanAdmin(string maTaiKhoan)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<UserDO, UserBO>();
+            });
+            var mapper = config.CreateMapper();
+
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.UserRepository.GetThongTinTaiKhoanAdmin(maTaiKhoan);
+                return mapper.Map<UserBO>(result);
+            }
+        }
     }
 }

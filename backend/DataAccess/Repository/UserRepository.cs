@@ -29,9 +29,10 @@ namespace DataAccess.Repository
             throw new NotImplementedException();
         }
 
-        public Task<List<UserDO>> GetAllUser()
+        public async Task<List<UserDO>> GetAllUser()
         {
-            throw new NotImplementedException();
+            var result = await QueryCommandAsync<UserDO>(StoredProcedure.USER_GETALL);
+            return result.ToList();
         }
 
         public Task<UserDO> GetUserByUserName(string userName)
@@ -180,6 +181,24 @@ namespace DataAccess.Repository
             param.Add("@sotiengui", soTienGui);
 
             var result = await ExecuteCommandAsync(StoredProcedure.USER_UPDATE_SODUSAUKHICHUYENKHOANNOIBO, param);
+            return result;
+        }
+
+        public async Task<List<UserDO>> TimKiemThongTinTaiKhoan(string key)
+        {
+            var param = new DynamicParameters();
+            param.Add("@key", key);
+
+            var result = await QueryCommandAsyncWithParam<UserDO>(StoredProcedure.USER_TIMKIEM_THONGTINTAIKHOAN, param);
+            return result.ToList();
+        }
+
+        public async Task<UserDO> GetThongTinTaiKhoanAdmin(string maTaiKhoan)
+        {
+            var param = new DynamicParameters();
+            param.Add("@matk", maTaiKhoan);
+
+            var result = await QueryCommandSingleAsync<UserDO>(StoredProcedure.USER_GET_THONGTINTAIKHOAN_ADMIN, param);
             return result;
         }
     }
