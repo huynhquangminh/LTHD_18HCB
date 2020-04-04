@@ -16,6 +16,7 @@ namespace DataAccess.Constant
         public const string USER_GETPASSWORDBY_MATK = "GetPasswordByMaTk";
         public const string USER_QUENMATKHAU = "QuenMatKhauUser";
         public const string USER_GETBY_TENDANGNHAP = "GetUserByTenDangNhap";
+        public const string USER_GETTHONGTINTAIKHOANKHACHHANG = "GetThongTinTaiKhoanKhachHang";
         public const string USER_GET_THONGTINTAIKHOAN = "GetThongTinTaiKhoan";
         public const string USER_GET_THONGTINTAIKHOAN_ADMIN = "GetThongTinTaiKhoanAdmin";
         public const string USER_GET_THONGTINTAIKHOAN_SOTAIKHOAN = "GetThongTinTaiKhoanBySTK";

@@ -301,6 +301,7 @@ namespace API.Controllers
         {
             UserBO user = null;
             UserBO userAdmin = null;
+            UserBO userKhachHang = null;
             user = _userService.GetUserByTenDangNhap(login.TenTaiKhoan).Result;
 
             if (user != null)
@@ -311,7 +312,8 @@ namespace API.Controllers
                 {
                     if (user.IdLoaiTaiKhoan == 1)
                     {
-                        return user;
+                        userKhachHang = _userService.GetThongTinTaiKhoanKhachHang(user.MaTk).Result;
+                        return userKhachHang;
                     } 
                     else
                     {

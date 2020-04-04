@@ -89,6 +89,20 @@ namespace BusinessLogic.Service
             }
         }
 
+        public async Task<UserBO> GetThongTinTaiKhoanKhachHang(string maTaiKhoan)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<UserDO, UserBO>();
+            });
+            var mapper = config.CreateMapper();
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.UserRepository.GetThongTinTaiKhoanKhachHang(maTaiKhoan);
+                return MapperHelper.Map<UserDO, UserBO>(result);
+            }
+        }
+
         public async Task<UserBO> GetUserByUserNamePassword(string userName, string password)
         {
             var config = new MapperConfiguration(cfg =>

@@ -35,8 +35,8 @@ export class LoginComponent implements OnInit {
                 delete result.user.matKhau;
                 delete result.user.soDu;
                 result['isLogin'] = this.authService.isLogin;
+                this.webStorageSerivce.setLocalStorage(WebKeyStorage.user_info, result);
                 if (res.user.idLoaiTaiKhoan === 1) {
-                    this.webStorageSerivce.setLocalStorage(WebKeyStorage.user_info, result);
                     this.router.navigateByUrl('/home');
                 } else {
                     this.router.navigateByUrl('/manager');
