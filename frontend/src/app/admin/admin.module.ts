@@ -8,6 +8,8 @@ import { GiaodichchuyentienComponent } from './giaodichchuyentien/giaodichchuyen
 import { AdminRoutingModule } from './admin-routing.module';
 import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
+import { LichsutaikhoanComponent } from './lichsutaikhoan/lichsutaikhoan.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
     HeaderComponent,
     DanhsachtaikhoanComponent,
     GiaodichchuyentienComponent,
+    LichsutaikhoanComponent,
   ],
   imports: [
     CommonModule,
@@ -23,6 +26,7 @@ import { TranslateModule } from '@ngx-translate/core';
     NgbDropdownModule,
     TranslateModule,
     NgbModule,
+    FormsModule,
   ]
 })
 export class AdminModule { }

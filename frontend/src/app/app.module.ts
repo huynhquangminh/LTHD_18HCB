@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { DialogThongbaoComponent } from './shared/component/dialog-thongbao/dialog-thongbao.component';
 import {MatRippleModule} from '@angular/material/core';
 import { DialogThanhtoannoComponent } from './home/components/dialog-thanhtoanno/dialog-thanhtoanno.component';
+import { DialogThemtaikhoanComponent } from './admin/components/dialog-themtaikhoan/dialog-themtaikhoan.component';
 @NgModule({
     imports: [
         // CommonModule,
@@ -42,7 +43,8 @@ import { DialogThanhtoannoComponent } from './home/components/dialog-thanhtoanno
         DialogDoimatkhauComponent,
         DialogTaodanhbaComponent,
         DialogThongbaoComponent,
-        DialogThanhtoannoComponent
+        DialogThanhtoannoComponent,
+        DialogThemtaikhoanComponent
     ],
     providers: [
         AuthGuard,
@@ -56,7 +58,8 @@ import { DialogThanhtoannoComponent } from './home/components/dialog-thanhtoanno
         DialogDoimatkhauComponent,
         DialogTaodanhbaComponent,
         DialogThongbaoComponent,
-        DialogThanhtoannoComponent
+        DialogThanhtoannoComponent,
+        DialogThemtaikhoanComponent
     ]
 })
 export class AppModule { }
