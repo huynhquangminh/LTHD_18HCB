@@ -56,9 +56,9 @@ namespace API.Controllers
         [HttpGet]
         [Produces("application/json")]
         [Route("GetGiaoDichGuiTienNoiBo")]
-        public async Task<ActionResult<List<ThongTinChuyenTienNoiBoBO>>> GetGiaoDichGuiTienNoiBo(string maTaiKhoan)
+        public async Task<ActionResult<List<ThongTinChuyenTienNoiBoBO>>> GetGiaoDichGuiTienNoiBo(string soTaiKhoan)
         {
-            var result = await _thongTinChuyenTienNoiBoService.GetGiaoDichGuiTienNoiBo(maTaiKhoan);
+            var result = await _thongTinChuyenTienNoiBoService.GetGiaoDichGuiTienNoiBo(soTaiKhoan);
             return Ok(result);
         }
 

@@ -34,10 +34,10 @@ namespace DataAccess.Repository
             return result;
         }
 
-        public async Task<List<ThongTinChuyenTienNoiBoDO>> GetGiaoDichGuiTienNoiBo(string maTaiKhoan)
+        public async Task<List<ThongTinChuyenTienNoiBoDO>> GetGiaoDichGuiTienNoiBo(string soTaiKhoan)
         {
             var param = new DynamicParameters();
-            param.Add("@matk", maTaiKhoan);
+            param.Add("@stk", soTaiKhoan);
 
             var result = await QueryCommandAsyncWithParam<ThongTinChuyenTienNoiBoDO>(StoredProcedure.THONGTINCHUYENTIENNOIBO_GETGIAODICHGUITIENNOIBO, param);
             return result.ToList();

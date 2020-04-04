@@ -39,7 +39,7 @@ namespace BusinessLogic.Service
             }
         }
 
-        public async Task<List<ThongTinChuyenTienNoiBoBO>> GetGiaoDichGuiTienNoiBo(string maTaiKhoan)
+        public async Task<List<ThongTinChuyenTienNoiBoBO>> GetGiaoDichGuiTienNoiBo(string soTaiKhoan)
         {
             var config = new MapperConfiguration(cfg =>
             {
@@ -48,7 +48,7 @@ namespace BusinessLogic.Service
             var mapper = config.CreateMapper();
             using (DalSession dal = new DalSession())
             {
-                var result = await dal.UnitOfWork.ThongTinChuyenTienNoiBoRepository.GetGiaoDichGuiTienNoiBo(maTaiKhoan);
+                var result = await dal.UnitOfWork.ThongTinChuyenTienNoiBoRepository.GetGiaoDichGuiTienNoiBo(soTaiKhoan);
                 return mapper.Map<List<ThongTinChuyenTienNoiBoBO>>(result);
             }
         }

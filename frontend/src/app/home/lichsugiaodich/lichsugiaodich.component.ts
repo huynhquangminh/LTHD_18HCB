@@ -19,20 +19,20 @@ export class LichsugiaodichComponent implements OnInit {
 
   ngOnInit() {
     this.userInfo = this.webStorageSerivce.getLocalStorage(WebKeyStorage.user_info);
-    this.getLichSuChuyenTien(this.userInfo.user.maTk);
-    this.getLichSuNhanTien(this.userInfo.user.maTk);
+    this.getLichSuChuyenTien(this.userInfo.user.soTaiKhoan);
+    this.getLichSuNhanTien(this.userInfo.user.soTaiKhoan);
   }
 
-  getLichSuChuyenTien(matk) {
-    this.taikhoanService.getLichSuChuyenTien(matk).subscribe(res => {
+  getLichSuChuyenTien(sotaikhoan) {
+    this.taikhoanService.getLichSuChuyenTien(sotaikhoan).subscribe(res => {
       if (res) {
         this.listChuyenTien = res;
       }
     });
   }
 
-  getLichSuNhanTien(matk) {
-    this.taikhoanService.getLichSuNhanTien(matk).subscribe(res => {
+  getLichSuNhanTien(sotaikhoan) {
+    this.taikhoanService.getLichSuNhanTien(sotaikhoan).subscribe(res => {
       if (res) {
         this.listNhanTien = res;
       }

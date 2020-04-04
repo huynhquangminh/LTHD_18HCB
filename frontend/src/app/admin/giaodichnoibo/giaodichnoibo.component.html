@@ -1,0 +1,55 @@
+<form style="width: 500px;margin: 0 auto;margin-top: 20px;" novalidate #formgiaodich="ngForm"
+  (ngSubmit)="onSubmitThongTin()">
+  <div class="form-content">
+    <div class="form-group">
+      <input readonly type="text" name="tennguoigui" class="form-control input-underline input-lg"
+        [(ngModel)]="giaoDichModel.tennguoigui" placeholder="Tên người gửi" required>
+    </div>
+    <div class="form-group">
+      <input readonly type="text" name="tennguoinhan" class="form-control input-underline input-lg"
+        [(ngModel)]="giaoDichModel.tennguoinhan" placeholder="Tên Người nhận" required>
+    </div>
+    <div class="form-group">
+      <div>
+        <input type="number" name="sotaikhoan" class="form-control input-underline input-lg"
+          [(ngModel)]="giaoDichModel.sotaikhoan" placeholder="Số tài khoản người nhận" (blur)="thongtintaikhoagui()" required>
+      </div>
+      <div class="validate-form" style="float: left;"
+        *ngIf="formgiaodich.controls.sotaikhoan?.errors?.required && formgiaodich.controls.sotaikhoan?.touched">
+        <span>(*) Số tiền không được trống!</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <input disabled="true" type="text" name="tennganhang" class="form-control " [value]="tennganhang"
+        placeholder="Tên ngân hàng">
+    </div>
+    <div class="form-group">
+      <input type="number" name="sotiengui" class="form-control input-underline input-lg"
+        [(ngModel)]="giaoDichModel.sotiengui" placeholder="Số tiền gửi" required maxlength="10">
+      <div class="validate-form" style="float: left;"
+        *ngIf="formgiaodich.controls.sotiengui?.errors?.required && formgiaodich.controls.sotiengui?.touched">
+        <span>(*) Số tiền không được trống!</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <textarea class="form-control input-underline input-lg" name="noidungchuyentien" rows="3"
+        [(ngModel)]="giaoDichModel.noidungchuyentien" placeholder="Nội dung chuyển tiền"></textarea>
+    </div>
+    <div class="form-group">
+      <label id="example-radio-group-label">Hình thức trả phí</label>
+      <mat-radio-group name="traphi" aria-labelledby="example-radio-group-label"
+        class="example-radio-group form-control" [(ngModel)]="giaoDichModel.traphi">
+        <mat-radio-button class="example-radio-button" [value]="0">
+          Người gửi
+        </mat-radio-button>
+        <mat-radio-button class="example-radio-button" [value]="1">
+          Người nhận
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+  <button style="margin-left: 390px; background-color: #61b2e2;" class="btn rounded-btn"
+    [disabled]="(!formgiaodich.valid) ">
+    Chuyển tiền
+  </button>
+</form>

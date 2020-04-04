@@ -15,7 +15,7 @@ import { DialogThongbaoComponent } from 'src/app/shared/component/dialog-thongba
 })
 export class HeaderComponent implements OnInit {
     public pushRightClass: string;
-
+    public userInfo: any;
     constructor(
         public router: Router,
         private webStorageSerivce: WebStorageSerivce,
@@ -35,6 +35,7 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {
         this.pushRightClass = 'push-right';
+        this.userInfo = this.webStorageSerivce.getLocalStorage(WebKeyStorage.user_info);
     }
 
     isToggled(): boolean {

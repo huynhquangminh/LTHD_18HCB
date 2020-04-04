@@ -22,14 +22,14 @@ export class LichsutaikhoanComponent implements OnInit {
       if (res) {
         this.tentaikhoan = res.tenTaiKhoan;
         this.sotaikhoan = res.soTaiKhoan;
-        this.getLichSuChuyenTien(res.maTk);
+        this.getLichSuChuyenTien(res.soTaiKhoan);
         this.getLichSuNhanTien(res.soTaiKhoan);
       }
     });
   }
 
-  getLichSuChuyenTien(matk) {
-    this.taikhoanService.getLichSuChuyenTien(matk).subscribe(res => {
+  getLichSuChuyenTien(sotaikhoan) {
+    this.taikhoanService.getLichSuChuyenTien(sotaikhoan).subscribe(res => {
       if (res) {
         this.listChuyenTien = res;
       }

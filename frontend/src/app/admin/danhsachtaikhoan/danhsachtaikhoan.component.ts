@@ -43,6 +43,12 @@ export class DanhsachtaikhoanComponent implements OnInit {
     this.commonService.listChangeTaiKhoanDetail(item);
     this.router.navigateByUrl('manager/history-transactions');
   }
+
+  chuyentien(item) {
+    this.commonService.listChangeTaiKhoanDetail(item);
+    this.router.navigateByUrl('manager/internal-transactions');
+  }
+
   timkiemTaiKhoan() {
     if (this.keySearch === '') {
       this.getDanhSachTaiKhoan();

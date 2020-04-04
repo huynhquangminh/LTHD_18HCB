@@ -26,8 +26,8 @@ export class TaikhoanthanhtoanService extends ApiService {
     return this.httpGet('User/GetThongTinTaiKhoanBySoTaiKhoan?soTaiKhoan=' + stk);
   }
 
-  getLichSuChuyenTien(matk: any) {
-    return this.httpGet('ThongTinChuyenTienNoiBo/GetGiaoDichGuiTienNoiBo?maTaiKhoan=' + matk);
+  getLichSuChuyenTien(sotaikhoan: any) {
+    return this.httpGet('ThongTinChuyenTienNoiBo/GetGiaoDichGuiTienNoiBo?soTaiKhoan=' + sotaikhoan);
   }
 
   getLichSuNhanTien(sotaikhoan: any) {

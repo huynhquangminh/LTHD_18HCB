@@ -10,6 +10,8 @@ import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 import { LichsutaikhoanComponent } from './lichsutaikhoan/lichsutaikhoan.component';
+import { GiaodichnoiboComponent } from './giaodichnoibo/giaodichnoibo.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { LichsutaikhoanComponent } from './lichsutaikhoan/lichsutaikhoan.compone
     DanhsachtaikhoanComponent,
     GiaodichchuyentienComponent,
     LichsutaikhoanComponent,
+    GiaodichnoiboComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +30,7 @@ import { LichsutaikhoanComponent } from './lichsutaikhoan/lichsutaikhoan.compone
     TranslateModule,
     NgbModule,
     FormsModule,
+    MatRadioModule,
   ]
 })
 export class AdminModule { }
