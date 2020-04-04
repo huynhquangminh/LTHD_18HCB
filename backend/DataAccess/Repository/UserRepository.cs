@@ -19,11 +19,6 @@ namespace DataAccess.Repository
 
         }
 
-        public Task<int> AddUser(UserDO user)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<int> EditUserRefreshToken(string userName, string refreshToken)
         {
             throw new NotImplementedException();
@@ -171,14 +166,14 @@ namespace DataAccess.Repository
             return result;
         }
 
-        public Task<int> QuenMatKhau(string tenDangNhap, string email, string matKhauMoi)
+        public async Task<int> QuenMatKhau(string tenDangNhap, string email, string matKhauMoi)
         {
             var param = new DynamicParameters();
             param.Add("@tendangnhap", tenDangNhap);
             param.Add("@email", email);
             param.Add("@matkhaumoi", matKhauMoi);
 
-            var result = ExecuteCommandAsync(StoredProcedure.USER_QUENMATKHAU, param);
+            var result = await ExecuteCommandAsync(StoredProcedure.USER_QUENMATKHAU, param);
             return result;
         }
 
@@ -208,6 +203,32 @@ namespace DataAccess.Repository
             param.Add("@matk", maTaiKhoan);
 
             var result = await QueryCommandSingleAsync<UserDO>(StoredProcedure.USER_GET_THONGTINTAIKHOAN_ADMIN, param);
+            return result;
+        }
+
+        public async Task<int> ThemTaiKhoanDangNhap(TaiKhoanDangNhapDO taiKhoanDangNhap)
+        {
+            var param = new DynamicParameters();
+            param.Add("@tendangnhap", taiKhoanDangNhap.TenDangNhap);
+            param.Add("@matkhau", taiKhoanDangNhap.MatKhau);
+            param.Add("@idloaitaikhoan", taiKhoanDangNhap.IdLoaiTaiKhoan);
+            param.Add("@mataikhoan", taiKhoanDangNhap.MaTaiKhoan);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.USER_THEM_TAIKHOANDANGNHAP, param);
+            return result;
+        }
+
+        public async Task<int> ThemThongTinTaiKhoanKhachHang(TaiKhoanKhachHangDO taiKhoanKhachHang)
+        {
+            var param = new DynamicParameters();
+            param.Add("@mataikhoan", taiKhoanKhachHang.MaTk);
+            param.Add("@email", taiKhoanKhachHang.Email);
+            param.Add("@sdt", taiKhoanKhachHang.Sdt);
+            param.Add("@sotaikhoan", taiKhoanKhachHang.SoTaiKhoan);
+            param.Add("@tentaikhoan", taiKhoanKhachHang.TenTaiKhoan);
+            param.Add("@sodu", taiKhoanKhachHang.SoDu);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.USER_THEM_THONGTINTAIKHOANKHACHHANG, param);
             return result;
         }
     }

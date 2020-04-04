@@ -12,7 +12,7 @@ namespace BusinessLogic.Service.Interface
         Task<UserBO> GetUserByUserName(string userName);
         Task<UserBO> GetThongTinTaiKhoanKhachHang(string maTaiKhoan);
         Task<UserBO> GetUserByUserNamePassword(string userName, string password);
-        Task<int> AddUser(UserBO user);
+        //Task<int> AddUser(UserBO user);
         Task<int> EditUserRefreshToken(string userName, string refreshToken);
         Task<UserBO> GetUserByTenDangNhap(string tenDangNhap);
         Task<UserBO> GetThongTinTaiKhoan(string maTaiKhoan);
@@ -23,5 +23,7 @@ namespace BusinessLogic.Service.Interface
         string GetPasswordByMaTk(string maTaiKhoan);
         Task<int> QuenMatKhau(string tenDangNhap, string email, string matKhauMoi);
         Task<int> UpdateSoDuSauKhiChuyenKhoanNoiBo(string taiKhoanGui, string taiKhoanNhan, int soTienGui);
+        Task<int> ThemTaiKhoanDangNhap(TaiKhoanDangNhapBO taiKhoanDangNhap);
+        Task<int> ThemThongTinTaiKhoanKhachHang(TaiKhoanKhachHangBO taiKhoanKhachHang);
     }
 }

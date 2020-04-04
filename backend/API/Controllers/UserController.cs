@@ -254,6 +254,59 @@ namespace API.Controllers
             return await result;
         }
 
+        /// <summary>
+        /// Đăng ký tài khoản khách hàng
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost]
+        [Produces("application/json")]
+        [Route("DangKyTaiKhoanKhachHang")]
+        public async Task<ActionResult<int>> DangKyTaiKhoanKhachHang(DangKyRequest request)
+        {
+            var result = 0;
+
+            string maTaiKhoan = GenerateMaTaiKhoan(request.Sdt);
+
+            string password = SendMailService.GenerateString();
+            string hashPassword = BCryptService.HashPassword(password);
+            string soTaiKhoan = GenerateSoTaiKhoan(request.Sdt);
+
+            TaiKhoanDangNhapBO taiKhoanDangNhap = new TaiKhoanDangNhapBO();
+            taiKhoanDangNhap.MaTaiKhoan = maTaiKhoan;
+            taiKhoanDangNhap.TenDangNhap = request.TenDangNhap;
+            taiKhoanDangNhap.MatKhau = hashPassword;
+            taiKhoanDangNhap.IdLoaiTaiKhoan = 1;
+
+            TaiKhoanKhachHangBO taiKhoanKhachHang = new TaiKhoanKhachHangBO();
+            taiKhoanKhachHang.MaTk = maTaiKhoan;
+            taiKhoanKhachHang.Sdt = request.Sdt;
+            taiKhoanKhachHang.Email = request.Email;
+            taiKhoanKhachHang.SoTaiKhoan = soTaiKhoan;
+            taiKhoanKhachHang.TenTaiKhoan = request.HoTen;
+            taiKhoanKhachHang.SoDu = 0;
+
+            var themTaiKhoanResult = _userService.ThemTaiKhoanDangNhap(taiKhoanDangNhap);
+            
+            if (themTaiKhoanResult.Result == 1)
+            {
+                // Send mail after create success
+                var subject = "Đăng ký tài khoản";
+                StringBuilder body = new StringBuilder();
+                body.AppendFormat("Mật khẩu của bạn là: {0}", password);
+                var message = SendMailService.InitEmailMessage(request.Email, subject, body.ToString());
+                SendMailService.SendMail(message);
+
+                result = _userService.ThemThongTinTaiKhoanKhachHang(taiKhoanKhachHang).Result;
+                return result;
+
+            } else
+            {
+                return StatusCode(500);
+            }
+        }
+
         //[HttpPost]
         //[Produces("application/json")]
         //[Route("RefreshToken")]
@@ -360,6 +413,32 @@ namespace API.Controllers
                 throw new SecurityTokenException("Invalid token");
 
             return principal;
+        }
+
+        private string GenerateMaTaiKhoan(string soDienThoai)
+        {
+            var autoGen = AutoGenerateNumber(3);
+            string maTaiKhoan = $"tk{soDienThoai.Substring(soDienThoai.Length - 3)}{autoGen}";
+            
+            return maTaiKhoan;
+        }
+
+        private string GenerateSoTaiKhoan(string soDienThoai)
+        {
+            var autoGen = AutoGenerateNumber(3);
+            string soTaiKhoan = $"{soDienThoai.Substring(soDienThoai.Length - 4)}{soDienThoai.Substring(0, 4)}{autoGen}";
+
+            return soTaiKhoan;
+        }
+
+        private string AutoGenerateNumber(int count)
+        {
+            const string chars = "0123456789";
+            var random = new Random();
+            var autoGen = new string(Enumerable.Repeat(chars, count)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+
+            return autoGen;
         }
     }
 }

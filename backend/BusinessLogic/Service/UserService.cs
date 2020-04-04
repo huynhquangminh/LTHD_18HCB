@@ -13,32 +13,32 @@ namespace BusinessLogic.Service
 {
     public class UserService : IUserService
     {
-        public async Task<int> AddUser(UserBO user)
-        {
-            var result = 0;
-            var config = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<UserBO, UserDO>();
-            });
+        //public async Task<int> AddUser(UserBO user)
+        //{
+        //    var result = 0;
+        //    var config = new MapperConfiguration(cfg =>
+        //    {
+        //        cfg.CreateMap<UserBO, UserDO>();
+        //    });
 
-            var mapper = config.CreateMapper();
-            var addParam = mapper.Map<UserDO>(user);
+        //    var mapper = config.CreateMapper();
+        //    var addParam = mapper.Map<UserDO>(user);
 
-            using (DalSession dal = new DalSession())
-            {
-                try
-                {
-                    dal.UnitOfWork.Begin();
-                    result = await dal.UnitOfWork.UserRepository.AddUser(addParam);
-                    dal.UnitOfWork.Commit();
-                } catch(Exception ex)
-                {
-                    dal.UnitOfWork.Rollback();
-                    throw new AggregateException();
-                }
-                return result;
-            }
-        }
+        //    using (DalSession dal = new DalSession())
+        //    {
+        //        try
+        //        {
+        //            dal.UnitOfWork.Begin();
+        //            result = await dal.UnitOfWork.UserRepository.AddUser(addParam);
+        //            dal.UnitOfWork.Commit();
+        //        } catch(Exception ex)
+        //        {
+        //            dal.UnitOfWork.Rollback();
+        //            throw new AggregateException();
+        //        }
+        //        return result;
+        //    }
+        //}
 
         public async Task<int> EditUserRefreshToken(string userName, string refreshToken)
         {
@@ -243,6 +243,62 @@ namespace BusinessLogic.Service
             {
                 var result = await dal.UnitOfWork.UserRepository.GetThongTinTaiKhoanAdmin(maTaiKhoan);
                 return mapper.Map<UserBO>(result);
+            }
+        }
+
+        public async Task<int> ThemTaiKhoanDangNhap(TaiKhoanDangNhapBO taiKhoanDangNhap)
+        {
+            var result = 0;
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TaiKhoanDangNhapBO, TaiKhoanDangNhapDO>();
+            });
+
+            var mapper = config.CreateMapper();
+            var addParam = mapper.Map<TaiKhoanDangNhapDO>(taiKhoanDangNhap);
+
+            using (DalSession dal = new DalSession())
+            {
+                try
+                {
+                    dal.UnitOfWork.Begin();
+                    result = await dal.UnitOfWork.UserRepository.ThemTaiKhoanDangNhap(addParam);
+                    dal.UnitOfWork.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dal.UnitOfWork.Rollback();
+                    throw new AggregateException();
+                }
+                return result;
+            }
+        }
+
+        public async Task<int> ThemThongTinTaiKhoanKhachHang(TaiKhoanKhachHangBO taiKhoanKhachHang)
+        {
+            var result = 0;
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TaiKhoanKhachHangBO, TaiKhoanKhachHangDO>();
+            });
+
+            var mapper = config.CreateMapper();
+            var addParam = mapper.Map<TaiKhoanKhachHangDO>(taiKhoanKhachHang);
+
+            using (DalSession dal = new DalSession())
+            {
+                try
+                {
+                    dal.UnitOfWork.Begin();
+                    result = await dal.UnitOfWork.UserRepository.ThemThongTinTaiKhoanKhachHang(addParam);
+                    dal.UnitOfWork.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dal.UnitOfWork.Rollback();
+                    throw new AggregateException(ex);
+                }
+                return result;
             }
         }
     }

@@ -13,7 +13,6 @@ namespace DataAccess.Interface
         Task<UserDO> GetUserByUserName(string userName);
         Task<UserDO> GetThongTinTaiKhoanKhachHang(string maTaiKhoan);
         Task<UserDO> GetUserByUserNamePassword(string userName, string password);
-        Task<int> AddUser(UserDO user);
         Task<int> EditUserRefreshToken(string userName, string refreshToken);
         Task<UserDO> GetUserByTenDangNhap(string tenDangNhap);
         Task<UserDO> GetThongTinTaiKhoan(string maTaiKhoan);
@@ -24,5 +23,7 @@ namespace DataAccess.Interface
         string GetPasswordByMaTk(string maTaiKhoan);
         Task<int> QuenMatKhau(string tenDangNhap, string email, string matKhauMoi);
         Task<int> UpdateSoDuSauKhiChuyenKhoanNoiBo(string taiKhoanGui, string taiKhoanNhan, int soTienGui);
+        Task<int> ThemTaiKhoanDangNhap(TaiKhoanDangNhapDO taiKhoanDangNhap);
+        Task<int> ThemThongTinTaiKhoanKhachHang(TaiKhoanKhachHangDO taiKhoanKhachHang);
     }
 }
