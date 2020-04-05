@@ -34,6 +34,12 @@ namespace DataAccess.Repository
             return result;
         }
 
+        public async Task<List<ThongTinChuyenTienNoiBoDO>> GetDanhSachGiaoDich()
+        {
+            var result = await QueryCommandAsync<ThongTinChuyenTienNoiBoDO>(StoredProcedure.THONGTINCHUYENTIENNOIBO_GETDANHSACHGIAODICH);
+            return result.ToList();
+        }
+
         public async Task<List<ThongTinChuyenTienNoiBoDO>> GetGiaoDichGuiTienNoiBo(string soTaiKhoan)
         {
             var param = new DynamicParameters();
@@ -50,6 +56,26 @@ namespace DataAccess.Repository
 
             var result = await QueryCommandAsyncWithParam<ThongTinChuyenTienNoiBoDO>(StoredProcedure.THONGTINCHUYENTIENNOIBO_GETGIAODICHNHANTIENNOIBO, param);
             return result.ToList();
+        }
+
+        public async Task<List<ThongTinChuyenTienNoiBoDO>> TimKiemGiaoDich(string key)
+        {
+            var param = new DynamicParameters();
+            param.Add("@key", key);
+
+            var result = await QueryCommandAsyncWithParam<ThongTinChuyenTienNoiBoDO>(StoredProcedure.THONGTINCHUYENTIENNOIBO_TIMKIEMGIAODICH, param);
+
+            return result.ToList();
+        }
+
+        public async Task<int> XoaGiaoDich(int id)
+        {
+            var param = new DynamicParameters();
+            param.Add("@id", id);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.THONGTINCHUYENTIENNOIBO_XOA_GIAODICH, param);
+
+            return result;
         }
     }
 }

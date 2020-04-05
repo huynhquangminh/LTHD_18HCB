@@ -39,6 +39,20 @@ namespace BusinessLogic.Service
             }
         }
 
+        public async Task<List<ThongTinChuyenTienNoiBoBO>> GetDanhSachGiaoDich()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ThongTinChuyenTienNoiBoDO, ThongTinChuyenTienNoiBoBO>();
+            });
+            var mapper = config.CreateMapper();
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.ThongTinChuyenTienNoiBoRepository.GetDanhSachGiaoDich();
+                return mapper.Map<List<ThongTinChuyenTienNoiBoBO>>(result);
+            }
+        }
+
         public async Task<List<ThongTinChuyenTienNoiBoBO>> GetGiaoDichGuiTienNoiBo(string soTaiKhoan)
         {
             var config = new MapperConfiguration(cfg =>
@@ -64,6 +78,41 @@ namespace BusinessLogic.Service
             {
                 var result = await dal.UnitOfWork.ThongTinChuyenTienNoiBoRepository.GetGiaoDichNhanTienNoiBo(soTaiKhoan);
                 return mapper.Map<List<ThongTinChuyenTienNoiBoBO>>(result);
+            }
+        }
+
+        public async Task<List<ThongTinChuyenTienNoiBoBO>> TimKiemGiaoDich(string key)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ThongTinChuyenTienNoiBoDO, ThongTinChuyenTienNoiBoBO>();
+            });
+            var mapper = config.CreateMapper();
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.ThongTinChuyenTienNoiBoRepository.TimKiemGiaoDich(key);
+                return mapper.Map<List<ThongTinChuyenTienNoiBoBO>>(result);
+            }
+        }
+
+        public async Task<int> XoaGiaoDich(int id)
+        {
+            var result = 0;
+
+            using (DalSession dal = new DalSession())
+            {
+                try
+                {
+                    dal.UnitOfWork.Begin();
+                    result = await dal.UnitOfWork.ThongTinChuyenTienNoiBoRepository.XoaGiaoDich(id);
+                    dal.UnitOfWork.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dal.UnitOfWork.Rollback();
+                    throw new AggregateException(ex);
+                }
+                return result;
             }
         }
     }

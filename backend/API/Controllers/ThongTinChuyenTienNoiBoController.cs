@@ -50,7 +50,7 @@ namespace API.Controllers
         /// <summary>
         /// Lấy thông tin giao dịch gửi tiền nội bộ theo mã tài khoản
         /// </summary>
-        /// <param name="maTaiKhoan"></param>
+        /// <param name="soTaiKhoan"></param>
         /// <returns></returns>
         [Authorize]
         [HttpGet]
@@ -74,6 +74,50 @@ namespace API.Controllers
         public async Task<ActionResult<List<ThongTinChuyenTienNoiBoBO>>> GetGiaoDichNhanTienNoiBo(string soTaiKhoan)
         {
             var result = await _thongTinChuyenTienNoiBoService.GetGiaoDichNhanTienNoiBo(soTaiKhoan);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Lấy danh sách giao dịch
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("GetDanhSachGiaoDich")]
+        public async Task<ActionResult<List<ThongTinChuyenTienNoiBoBO>>> GetDanhSachGiaoDich()
+        {
+            var result = await _thongTinChuyenTienNoiBoService.GetDanhSachGiaoDich();
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Tìm kiếm giao dịch
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("TimKiemGiaoDich")]
+        public async Task<ActionResult<List<ThongTinChuyenTienNoiBoBO>>> TimKiemGiaoDich(string key)
+        {
+            var result = await _thongTinChuyenTienNoiBoService.TimKiemGiaoDich(key);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Xóa giao dịch
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpDelete]
+        [Produces("application/json")]
+        [Route("TimKiemGiaoDich")]
+        public async Task<ActionResult<List<ThongTinChuyenTienNoiBoBO>>> XoaGiaoDich(int id)
+        {
+            var result = await _thongTinChuyenTienNoiBoService.XoaGiaoDich(id);
             return Ok(result);
         }
     }
