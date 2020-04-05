@@ -351,5 +351,48 @@ namespace BusinessLogic.Service
                 return result;
             }
         }
+
+        public async Task<List<TaiKhoanNhanVienBO>> GetDanhSachTaiKhoanAdmin()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TaiKhoanNhanVienDO, TaiKhoanNhanVienBO>();
+            });
+            var mapper = config.CreateMapper();
+
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.UserRepository.GetDanhSachTaiKhoanAdmin();
+                return mapper.Map<List<TaiKhoanNhanVienBO>>(result);
+            }
+        }
+
+        public async Task<int> ThemTaiKhoanNhanVien(TaiKhoanNhanVienBO taiKhoanNhanVien)
+        {
+            var result = 0;
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TaiKhoanNhanVienBO, TaiKhoanNhanVienDO>();
+            });
+
+            var mapper = config.CreateMapper();
+            var addParam = mapper.Map<TaiKhoanNhanVienDO>(taiKhoanNhanVien);
+
+            using (DalSession dal = new DalSession())
+            {
+                try
+                {
+                    dal.UnitOfWork.Begin();
+                    result = await dal.UnitOfWork.UserRepository.ThemTaiKhoanNhanVien(addParam);
+                    dal.UnitOfWork.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dal.UnitOfWork.Rollback();
+                    throw new AggregateException(ex);
+                }
+                return result;
+            }
+        }
     }
 }

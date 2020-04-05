@@ -133,6 +133,20 @@ namespace API.Controllers
         }
 
         /// <summary>
+        /// Lấy danh sách tài khoản admin
+        /// </summary>
+        /// <returns></returns>
+        [Authorize]
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("GetDanhSachTaiKhoanAdmin")]
+        public async Task<ActionResult<List<TaiKhoanNhanVienBO>>> GetDanhSachTaiKhoanAdmin()
+        {
+            var result = _userService.GetDanhSachTaiKhoanAdmin();
+            return await result;
+        }
+
+        /// <summary>
         /// Đổi mật khẩu
         /// </summary>
         /// <param name="request"></param>
@@ -308,6 +322,59 @@ namespace API.Controllers
         }
 
         /// <summary>
+        /// Đăng ký tài khoản nhân viên
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost]
+        [Produces("application/json")]
+        [Route("DangKyTaiKhoanNhanVien")]
+        public async Task<ActionResult<int>> DangKyTaiKhoanNhanVien(DangKyNhanVienRequest request)
+        {
+            var result = 0;
+
+            string maTaiKhoan = GenerateMaTaiKhoanNhanVien(request.Sdt);
+
+            string password = SendMailService.GenerateString();
+            string hashPassword = BCryptService.HashPassword(password);
+
+            TaiKhoanDangNhapBO taiKhoanDangNhap = new TaiKhoanDangNhapBO();
+            taiKhoanDangNhap.MaTaiKhoan = maTaiKhoan;
+            taiKhoanDangNhap.TenDangNhap = request.TenDangNhap;
+            taiKhoanDangNhap.MatKhau = hashPassword;
+            taiKhoanDangNhap.IdLoaiTaiKhoan = 2;
+
+            TaiKhoanNhanVienBO taiKhoanNhanVien = new TaiKhoanNhanVienBO();
+            taiKhoanNhanVien.MaTk = maTaiKhoan;
+            taiKhoanNhanVien.TenNhanVien = request.TenNhanVien;
+            taiKhoanNhanVien.Cmnd = request.Cmnd;
+            taiKhoanNhanVien.Sdt = request.Sdt;
+            taiKhoanNhanVien.Email = request.Email;
+            taiKhoanNhanVien.DiaChi = request.DiaChi;
+
+            var themTaiKhoanResult = _userService.ThemTaiKhoanDangNhap(taiKhoanDangNhap);
+
+            if (themTaiKhoanResult.Result == 1)
+            {
+                // Send mail after create success
+                var subject = "Đăng ký tài khoản nhân viên";
+                StringBuilder body = new StringBuilder();
+                body.AppendFormat("Mật khẩu của bạn là: {0}", password);
+                var message = SendMailService.InitEmailMessage(request.Email, subject, body.ToString());
+                SendMailService.SendMail(message);
+
+                result = _userService.ThemTaiKhoanNhanVien(taiKhoanNhanVien).Result;
+                return result;
+
+            }
+            else
+            {
+                return StatusCode(500);
+            }
+        }
+
+        /// <summary>
         /// Cập nhật thông tin tài khoản khách hàng
         /// </summary>
         /// <param name="request"></param>
@@ -340,7 +407,7 @@ namespace API.Controllers
         {
             var taiKhoanNhanVien = new TaiKhoanNhanVienBO();
             taiKhoanNhanVien.Id = request.Id;
-            taiKhoanNhanVien.TenNv = request.TenNv;
+            taiKhoanNhanVien.TenNhanVien = request.TenNv;
             taiKhoanNhanVien.Cmnd = request.Cmnd;
             taiKhoanNhanVien.Email = request.Email;
             taiKhoanNhanVien.Sdt = request.Sdt;
@@ -477,6 +544,14 @@ namespace API.Controllers
             var autoGen = AutoGenerateNumber(3);
             string maTaiKhoan = $"tk{soDienThoai.Substring(soDienThoai.Length - 3)}{autoGen}";
             
+            return maTaiKhoan;
+        }
+
+        private string GenerateMaTaiKhoanNhanVien(string soDienThoai)
+        {
+            var autoGen = AutoGenerateNumber(3);
+            string maTaiKhoan = $"nv{soDienThoai.Substring(soDienThoai.Length - 3)}{autoGen}";
+
             return maTaiKhoan;
         }
 

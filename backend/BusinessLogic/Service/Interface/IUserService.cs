@@ -19,12 +19,14 @@ namespace BusinessLogic.Service.Interface
         Task<UserBO> GetThongTinTaiKhoanAdmin(string maTaiKhoan);
         Task<UserBO> GetThongTinTaiKhoanBySoTaiKhoan(string soTaiKhoan);
         Task<List<UserBO>> TimKiemThongTinTaiKhoan(string key);
+        Task<List<TaiKhoanNhanVienBO>> GetDanhSachTaiKhoanAdmin();
         Task<int> DoiMatKhau(string maTaiKhoan, string matKhauMoi);
         string GetPasswordByMaTk(string maTaiKhoan);
         Task<int> QuenMatKhau(string tenDangNhap, string email, string matKhauMoi);
         Task<int> UpdateSoDuSauKhiChuyenKhoanNoiBo(string taiKhoanGui, string taiKhoanNhan, int soTienGui);
         Task<int> ThemTaiKhoanDangNhap(TaiKhoanDangNhapBO taiKhoanDangNhap);
         Task<int> ThemThongTinTaiKhoanKhachHang(TaiKhoanKhachHangBO taiKhoanKhachHang);
+        Task<int> ThemTaiKhoanNhanVien(TaiKhoanNhanVienBO taiKhoanNhanVien);
         Task<int> UpdateThongTinTaiKhoanKhachHang(TaiKhoanKhachHangBO taiKhoanKhachHang);
         Task<int> UpdateThongTinTaiKhoanNhanVien(TaiKhoanNhanVienBO taiKhoanNhanVien);
         Task<int> XoaTaiKhoan(string maTaiKhoan);

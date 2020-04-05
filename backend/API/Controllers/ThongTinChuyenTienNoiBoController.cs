@@ -114,7 +114,7 @@ namespace API.Controllers
         [Authorize]
         [HttpDelete]
         [Produces("application/json")]
-        [Route("TimKiemGiaoDich")]
+        [Route("XoaGiaoDich")]
         public async Task<ActionResult<List<ThongTinChuyenTienNoiBoBO>>> XoaGiaoDich(int id)
         {
             var result = await _thongTinChuyenTienNoiBoService.XoaGiaoDich(id);

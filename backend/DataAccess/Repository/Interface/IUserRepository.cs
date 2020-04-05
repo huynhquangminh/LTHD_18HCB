@@ -19,12 +19,14 @@ namespace DataAccess.Interface
         Task<UserDO> GetThongTinTaiKhoanAdmin(string maTaiKhoan);
         Task<UserDO> GetThongTinTaiKhoanBySoTaiKhoan(string soTaiKhoan);
         Task<List<UserDO>> TimKiemThongTinTaiKhoan(string key);
+        Task<List<TaiKhoanNhanVienDO>> GetDanhSachTaiKhoanAdmin();
         Task<int> DoiMatKhau(string maTaiKhoan, string matKhauMoi);
         string GetPasswordByMaTk(string maTaiKhoan);
         Task<int> QuenMatKhau(string tenDangNhap, string email, string matKhauMoi);
         Task<int> UpdateSoDuSauKhiChuyenKhoanNoiBo(string taiKhoanGui, string taiKhoanNhan, int soTienGui);
         Task<int> ThemTaiKhoanDangNhap(TaiKhoanDangNhapDO taiKhoanDangNhap);
         Task<int> ThemThongTinTaiKhoanKhachHang(TaiKhoanKhachHangDO taiKhoanKhachHang);
+        Task<int> ThemTaiKhoanNhanVien(TaiKhoanNhanVienDO taiKhoanNhanVien);
         Task<int> UpdateThongTinTaiKhoanKhachHang(TaiKhoanKhachHangDO taiKhoanKhachHang);
         Task<int> UpdateThongTinTaiKhoanNhanVien(TaiKhoanNhanVienDO taiKhoanNhanVien);
         Task<int> XoaTaiKhoan(string maTaiKhoan);

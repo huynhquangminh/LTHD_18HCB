@@ -20,10 +20,12 @@ namespace DataAccess.Constant
         public const string USER_GET_THONGTINTAIKHOAN = "GetThongTinTaiKhoan";
         public const string USER_GET_THONGTINTAIKHOAN_ADMIN = "GetThongTinTaiKhoanAdmin";
         public const string USER_GET_THONGTINTAIKHOAN_SOTAIKHOAN = "GetThongTinTaiKhoanBySTK";
+        public const string USER_GETDANHSACHTAIKHOANADMIN = "GetDanhSachTaiKhoanAdmin";
         public const string USER_UPDATE_SODUSAUKHICHUYENKHOANNOIBO = "UpdateSoDuSauKhiChuyenKhoanNoiBo";
         public const string USER_TIMKIEM_THONGTINTAIKHOAN = "TimKiemThongTinTaiKhoan";
         public const string USER_THEM_TAIKHOANDANGNHAP = "ThemTaiKhoanDangNhap";
         public const string USER_THEM_THONGTINTAIKHOANKHACHHANG = "ThemThongTinTaiKhoanKhachHang";
+        public const string USER_THEM_THONGTINTAIKHOANNHANVIEN = "ThemTaiKhoanNhanVien";
         public const string USER_XOA_TAIKHOAN = "XoaTaiKhoan";
         public const string USER_UPDATE_THONGTINTAIKHOANKHACHHANG = "UpdateThongTinTaiKhoanKhachHang";
         public const string USER_UPDATE_THONGTINTAIKHOANNHANVIEN = "UpdateThongTinTaiKhoanNhanVien";
