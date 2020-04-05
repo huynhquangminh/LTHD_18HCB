@@ -231,5 +231,37 @@ namespace DataAccess.Repository
             var result = await ExecuteCommandAsync(StoredProcedure.USER_THEM_THONGTINTAIKHOANKHACHHANG, param);
             return result;
         }
+
+        public async Task<int> UpdateThongTinTaiKhoanKhachHang(TaiKhoanKhachHangDO taiKhoanKhachHang)
+        {
+            var param = new DynamicParameters();
+            param.Add("@id", taiKhoanKhachHang.Id);
+            param.Add("@email", taiKhoanKhachHang.Email);
+            param.Add("@sdt", taiKhoanKhachHang.Sdt);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.USER_UPDATE_THONGTINTAIKHOANKHACHHANG, param);
+            return result;
+        }
+
+        public async Task<int> UpdateThongTinTaiKhoanNhanVien(TaiKhoanNhanVienDO taiKhoanNhanVien)
+        {
+            var param = new DynamicParameters();
+            param.Add("@id", taiKhoanNhanVien.Id);
+            param.Add("@email", taiKhoanNhanVien.Email);
+            param.Add("@sdt", taiKhoanNhanVien.Sdt);
+            param.Add("@tennv", taiKhoanNhanVien.TenNv);
+            param.Add("@cmnd", taiKhoanNhanVien.Cmnd);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.USER_UPDATE_THONGTINTAIKHOANNHANVIEN, param);
+            return result;
+        }
+        public async Task<int> XoaTaiKhoan(string maTaiKhoan)
+        {
+            var param = new DynamicParameters();
+            param.Add("@matk", maTaiKhoan);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.USER_XOA_TAIKHOAN, param);
+            return result;
+        }
     }
 }

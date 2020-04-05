@@ -25,5 +25,8 @@ namespace DataAccess.Interface
         Task<int> UpdateSoDuSauKhiChuyenKhoanNoiBo(string taiKhoanGui, string taiKhoanNhan, int soTienGui);
         Task<int> ThemTaiKhoanDangNhap(TaiKhoanDangNhapDO taiKhoanDangNhap);
         Task<int> ThemThongTinTaiKhoanKhachHang(TaiKhoanKhachHangDO taiKhoanKhachHang);
+        Task<int> UpdateThongTinTaiKhoanKhachHang(TaiKhoanKhachHangDO taiKhoanKhachHang);
+        Task<int> UpdateThongTinTaiKhoanNhanVien(TaiKhoanNhanVienDO taiKhoanNhanVien);
+        Task<int> XoaTaiKhoan(string maTaiKhoan);
     }
 }

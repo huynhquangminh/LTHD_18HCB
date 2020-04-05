@@ -307,6 +307,63 @@ namespace API.Controllers
             }
         }
 
+        /// <summary>
+        /// Cập nhật thông tin tài khoản khách hàng
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPut]
+        [Produces("application/json")]
+        [Route("UpdateThongTinTaiKhoanKhachHang")]
+        public async Task<ActionResult<int>> UpdateThongTinTaiKhoanKhachHang(UpdateThongTinTaiKhoanKhachHangRequest request)
+        {
+            var taiKhoanKhachHang = new TaiKhoanKhachHangBO();
+            taiKhoanKhachHang.Id = request.Id;
+            taiKhoanKhachHang.Email = request.Email;
+            taiKhoanKhachHang.Sdt = request.Sdt;
+
+            var result = _userService.UpdateThongTinTaiKhoanKhachHang(taiKhoanKhachHang);
+            return await result;
+        }
+
+        /// <summary>
+        /// Cập nhật thông tin tài khoản nhân viên
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPut]
+        [Produces("application/json")]
+        [Route("UpdateThongTinTaiKhoanNhanVien")]
+        public async Task<ActionResult<int>> UpdateThongTinTaiKhoanNhanVien(UpdateThongTinTaiKhoanNhanVienRequest request)
+        {
+            var taiKhoanNhanVien = new TaiKhoanNhanVienBO();
+            taiKhoanNhanVien.Id = request.Id;
+            taiKhoanNhanVien.TenNv = request.TenNv;
+            taiKhoanNhanVien.Cmnd = request.Cmnd;
+            taiKhoanNhanVien.Email = request.Email;
+            taiKhoanNhanVien.Sdt = request.Sdt;
+
+            var result = _userService.UpdateThongTinTaiKhoanNhanVien(taiKhoanNhanVien);
+            return await result;
+        }
+
+        /// <summary>
+        /// Xóa tài khoản theo mã tài khoản
+        /// </summary>
+        /// <param name="maTaiKhoan"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpDelete]
+        [Produces("application/json")]
+        [Route("XoaTaiKhoan")]
+        public async Task<ActionResult<int>> XoaTaiKhoan(string maTaiKhoan)
+        {
+            var result = _userService.XoaTaiKhoan(maTaiKhoan);
+            return await result;
+        }
+
         //[HttpPost]
         //[Produces("application/json")]
         //[Route("RefreshToken")]

@@ -6,6 +6,7 @@ namespace DataObject
 {
     public class TaiKhoanKhachHangDO
     {
+        public int Id { get; set; }
         public string MaTk { get; set; }
         public string Email { get; set; }
         public string Sdt { get; set; }

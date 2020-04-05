@@ -24,6 +24,9 @@ namespace DataAccess.Constant
         public const string USER_TIMKIEM_THONGTINTAIKHOAN = "TimKiemThongTinTaiKhoan";
         public const string USER_THEM_TAIKHOANDANGNHAP = "ThemTaiKhoanDangNhap";
         public const string USER_THEM_THONGTINTAIKHOANKHACHHANG = "ThemThongTinTaiKhoanKhachHang";
+        public const string USER_XOA_TAIKHOAN = "XoaTaiKhoan";
+        public const string USER_UPDATE_THONGTINTAIKHOANKHACHHANG = "UpdateThongTinTaiKhoanKhachHang";
+        public const string USER_UPDATE_THONGTINTAIKHOANNHANVIEN = "UpdateThongTinTaiKhoanNhanVien";
 
         // TaiKhoanTietKiem
         public const string TAIKHOANTIETKIEM_GET_BY_MATAIKHOAN = "GetDsTaiKhoanTietKiem";
@@ -44,8 +47,11 @@ namespace DataAccess.Constant
 
         // ThongTinChuyenTienNoiBo
         public const string THONGTINCHUYENTIENNOIBO_CHUYENKHOANNOIBO = "ChuyenKhoanNoiBo";
+        public const string THONGTINCHUYENTIENNOIBO_GETDANHSACHGIAODICH = "GetDanhSachGiaoDich";
+        public const string THONGTINCHUYENTIENNOIBO_TIMKIEMGIAODICH = "TimKiemGiaoDich";
         public const string THONGTINCHUYENTIENNOIBO_GETGIAODICHNHANTIENNOIBO = "XemGiaoDichNhanTienNoiBo";
         public const string THONGTINCHUYENTIENNOIBO_GETGIAODICHGUITIENNOIBO = "XemGiaoDichGuiTienNoiBo";
+        public const string THONGTINCHUYENTIENNOIBO_XOA_GIAODICH = "XoaGiaoDich";
 
         // NhacNo
         public const string NHACNO_GETDANHSACHNO = "GetDSNo";

@@ -13,33 +13,6 @@ namespace BusinessLogic.Service
 {
     public class UserService : IUserService
     {
-        //public async Task<int> AddUser(UserBO user)
-        //{
-        //    var result = 0;
-        //    var config = new MapperConfiguration(cfg =>
-        //    {
-        //        cfg.CreateMap<UserBO, UserDO>();
-        //    });
-
-        //    var mapper = config.CreateMapper();
-        //    var addParam = mapper.Map<UserDO>(user);
-
-        //    using (DalSession dal = new DalSession())
-        //    {
-        //        try
-        //        {
-        //            dal.UnitOfWork.Begin();
-        //            result = await dal.UnitOfWork.UserRepository.AddUser(addParam);
-        //            dal.UnitOfWork.Commit();
-        //        } catch(Exception ex)
-        //        {
-        //            dal.UnitOfWork.Rollback();
-        //            throw new AggregateException();
-        //        }
-        //        return result;
-        //    }
-        //}
-
         public async Task<int> EditUserRefreshToken(string userName, string refreshToken)
         {
             var result = 0;
@@ -291,6 +264,83 @@ namespace BusinessLogic.Service
                 {
                     dal.UnitOfWork.Begin();
                     result = await dal.UnitOfWork.UserRepository.ThemThongTinTaiKhoanKhachHang(addParam);
+                    dal.UnitOfWork.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dal.UnitOfWork.Rollback();
+                    throw new AggregateException(ex);
+                }
+                return result;
+            }
+        }
+
+        public async Task<int> UpdateThongTinTaiKhoanKhachHang(TaiKhoanKhachHangBO taiKhoanKhachHang)
+        {
+            var result = 0;
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TaiKhoanKhachHangBO, TaiKhoanKhachHangDO>();
+            });
+
+            var mapper = config.CreateMapper();
+            var addParam = mapper.Map<TaiKhoanKhachHangDO>(taiKhoanKhachHang);
+
+            using (DalSession dal = new DalSession())
+            {
+                try
+                {
+                    dal.UnitOfWork.Begin();
+                    result = await dal.UnitOfWork.UserRepository.UpdateThongTinTaiKhoanKhachHang(addParam);
+                    dal.UnitOfWork.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dal.UnitOfWork.Rollback();
+                    throw new AggregateException(ex);
+                }
+                return result;
+            }
+        }
+
+        public async Task<int> UpdateThongTinTaiKhoanNhanVien(TaiKhoanNhanVienBO taiKhoanNhanVien)
+        {
+            var result = 0;
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TaiKhoanNhanVienBO, TaiKhoanNhanVienDO>();
+            });
+
+            var mapper = config.CreateMapper();
+            var addParam = mapper.Map<TaiKhoanNhanVienDO>(taiKhoanNhanVien);
+
+            using (DalSession dal = new DalSession())
+            {
+                try
+                {
+                    dal.UnitOfWork.Begin();
+                    result = await dal.UnitOfWork.UserRepository.UpdateThongTinTaiKhoanNhanVien(addParam);
+                    dal.UnitOfWork.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dal.UnitOfWork.Rollback();
+                    throw new AggregateException(ex);
+                }
+                return result;
+            }
+        }
+
+        public async Task<int> XoaTaiKhoan(string maTaiKhoan)
+        {
+            var result = 0;
+
+            using (DalSession dal = new DalSession())
+            {
+                try
+                {
+                    dal.UnitOfWork.Begin();
+                    result = await dal.UnitOfWork.UserRepository.XoaTaiKhoan(maTaiKhoan);
                     dal.UnitOfWork.Commit();
                 }
                 catch (Exception ex)
