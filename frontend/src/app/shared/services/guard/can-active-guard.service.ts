@@ -21,6 +21,7 @@ export class CanActiveGuardService implements CanActivate {
     // if (this.authService.isLogin) {
     //   return true;
     // } else {
+    //   this.webStorageSerivce.clearLocalStorage();
     //   this.router.navigate(['/login']);
     // }
     // return false;

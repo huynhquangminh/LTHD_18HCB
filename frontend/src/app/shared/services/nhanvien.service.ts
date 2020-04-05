@@ -13,4 +13,8 @@ export class NhanvienService extends ApiService {
   timkiemTaiKhoan(key: any) {
     return this.httpGet('User/TimKiemThongTinTaiKhoan?key=' + key);
   }
+
+  themTaiKhoanKhachHang(params: any) {
+    return this.httpPost('User/DangKyTaiKhoanKhachHang', params);
+  }
 }

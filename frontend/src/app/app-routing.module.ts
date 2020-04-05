@@ -7,8 +7,8 @@ import { CanActiveGuardService } from './shared/services/guard/can-active-guard.
 
 const routes: Routes = [
     { path: '',  redirectTo: 'login', pathMatch: 'full' },
-    { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [CanActiveGuardService]  },
-    { path: 'manager', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)  },
+    { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate: [CanActiveGuardService]},
+    { path: 'manager', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate: [CanActiveGuardService]},
     { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginModule) },
     { path: '**', component: NotfoundpageComponent },
 ];
