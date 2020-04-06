@@ -39,7 +39,11 @@ export class LoginComponent implements OnInit {
                 if (res.user.idLoaiTaiKhoan === 1) {
                     this.router.navigateByUrl('/home');
                 } else {
-                    this.router.navigateByUrl('/manager');
+                    if (res.user.idLoaiTaiKhoan === 2) {
+                        this.router.navigateByUrl('/manager');
+                    } else {
+                        this.router.navigateByUrl('/manager/customer-account-management');
+                    }
                 }
             }
         });

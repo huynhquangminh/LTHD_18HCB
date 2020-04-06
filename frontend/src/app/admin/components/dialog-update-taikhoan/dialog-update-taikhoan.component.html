@@ -1,0 +1,40 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Sửa thông tin tài khoản </h4>
+  <button type="button" class="close" aria-label="Close" (click)="modal.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form style="width: 400px;margin: 0 auto;margin-top: 10px;" novalidate #formthemtk="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-content">
+      <div class="form-group">
+        <div>
+          <input  type="text" name="email" class="form-control input-underline input-lg"
+            [(ngModel)]="themTaiKhoanModel.email" placeholder="Email" required  email>
+        </div>
+        <div class="validate-form" style="float: left;"
+          *ngIf="formthemtk.controls.email?.errors?.required && formthemtk.controls.email?.touched">
+          <span>Email không được trống!</span>
+        </div>
+        <div class="validate-form" style="float: left;"
+          *ngIf="formthemtk.controls.email?.errors?.email && formthemtk.controls.email?.touched">
+          <span>Email không hợp lệ!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          <input type="number" name="sodienthoai" class="form-control input-underline input-lg"
+          [(ngModel)]="themTaiKhoanModel.sodienthoai" placeholder="Số điện thoại" required maxlength="11">
+        </div>
+        <div class="validate-form" style="float: left;"
+          *ngIf="formthemtk.controls.sodienthoai?.errors?.required && formthemtk.controls.sodienthoai?.touched">
+          <span>Số điện thoại không được trống!</span>
+        </div>
+      </div>
+    </div>
+    <button class="btn rounded-btn btn-the-moi"
+      [disabled]="(!formthemtk.valid) ">
+      Thây đổi
+    </button>
+  </form>
+</div>

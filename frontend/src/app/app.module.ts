@@ -1,3 +1,4 @@
+import { DialogUpdateTaikhoanComponent } from './admin/components/dialog-update-taikhoan/dialog-update-taikhoan.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -21,6 +22,7 @@ import { DialogThongbaoComponent } from './shared/component/dialog-thongbao/dial
 import {MatRippleModule} from '@angular/material/core';
 import { DialogThanhtoannoComponent } from './home/components/dialog-thanhtoanno/dialog-thanhtoanno.component';
 import { DialogThemtaikhoanComponent } from './admin/components/dialog-themtaikhoan/dialog-themtaikhoan.component';
+import { DialogTaikhoanNhanvienComponent } from './admin/components/dialog-taikhoan-nhanvien/dialog-taikhoan-nhanvien.component';
 @NgModule({
     imports: [
         // CommonModule,
@@ -44,7 +46,9 @@ import { DialogThemtaikhoanComponent } from './admin/components/dialog-themtaikh
         DialogTaodanhbaComponent,
         DialogThongbaoComponent,
         DialogThanhtoannoComponent,
-        DialogThemtaikhoanComponent
+        DialogThemtaikhoanComponent,
+        DialogUpdateTaikhoanComponent,
+        DialogTaikhoanNhanvienComponent
     ],
     providers: [
         AuthGuard,
@@ -59,7 +63,9 @@ import { DialogThemtaikhoanComponent } from './admin/components/dialog-themtaikh
         DialogTaodanhbaComponent,
         DialogThongbaoComponent,
         DialogThanhtoannoComponent,
-        DialogThemtaikhoanComponent
+        DialogThemtaikhoanComponent,
+        DialogUpdateTaikhoanComponent,
+        DialogTaikhoanNhanvienComponent
     ]
 })
 export class AppModule { }

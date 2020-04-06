@@ -5,6 +5,9 @@ import { DanhsachtaikhoanComponent } from './danhsachtaikhoan/danhsachtaikhoan.c
 import { GiaodichchuyentienComponent } from './giaodichchuyentien/giaodichchuyentien.component';
 import { LichsutaikhoanComponent } from './lichsutaikhoan/lichsutaikhoan.component';
 import { GiaodichnoiboComponent } from './giaodichnoibo/giaodichnoibo.component';
+import { QuanlytaikhoankhachhangComponent } from './quanlytaikhoankhachhang/quanlytaikhoankhachhang.component';
+import { QuanlytaikhoannhanvienComponent } from './quanlytaikhoannhanvien/quanlytaikhoannhanvien.component';
+import { QuanlygiaodichComponent } from './quanlygiaodich/quanlygiaodich.component';
 const routes: Routes = [
     {
         path: '',
@@ -15,6 +18,9 @@ const routes: Routes = [
             { path: 'money-transactions', component: GiaodichchuyentienComponent },
             { path: 'history-transactions', component: LichsutaikhoanComponent },
             { path: 'internal-transactions', component: GiaodichnoiboComponent },
+            { path: 'customer-account-management', component: QuanlytaikhoankhachhangComponent },
+            { path: 'employee-account-management', component: QuanlytaikhoannhanvienComponent },
+            { path: 'transaction-management', component: QuanlygiaodichComponent },
         ]
     }
 ];

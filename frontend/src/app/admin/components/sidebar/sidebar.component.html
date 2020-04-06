@@ -1,10 +1,10 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
     <div class="list-group">
-        <a routerLink="/manager" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;
             <span>Trang chủ </span>
         </a>
-        <div class="nested-menu">
+        <div class="nested-menu" *ngIf="userInfo.user.idLoaiTaiKhoan === 2">
             <a class="list-group-item" (click)="addExpandClass('home', 0)">
                 <i class="fa fa-plus"></i>&nbsp;
                 <span>Chức năng Nhân viên</span>
@@ -32,28 +32,34 @@
                 </ul>
             </li>
         </div>
-        <!-- <div class="nested-menu">
+        <div class="nested-menu" *ngIf="userInfo.user.idLoaiTaiKhoan === 3">
             <a class="list-group-item" (click)="addExpandClass('home1', 1)">
                 <i class="fa fa-plus"></i>&nbsp;
-                <span>Quản lý nhắc nợ </span>
+                <span>Quản trị hệ thống</span>
             </a>
             <li class="nested" [class.expand]="showMenu[1] === 'home1'">
                 <ul class="submenu">
                     <li>
-                        <a class="hiden-decoration" routerLink="./create-debt-reminder" [routerLinkActive]="['router-link-active']">
+                        <a class="hiden-decoration" routerLink="./customer-account-management" [routerLinkActive]="['router-link-active']">
                             <i class="fa fa-monument"></i>&nbsp;
-                            <span>Tạo nhắc nợ </span>
+                            <span>Quản lý tài khoản khách hàng </span>
                         </a>
                     </li>
                     <li>
-                        <a class="hiden-decoration" routerLink="./debt-reminder" [routerLinkActive]="['router-link-active']" >
+                        <a class="hiden-decoration" routerLink="./employee-account-management" [routerLinkActive]="['router-link-active']" >
                             <i class="fa fa-monument"></i>&nbsp;
-                            <span>Xem nhắc nợ</span>
+                            <span>Quản lý tài khoản nhân viên</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="hiden-decoration" routerLink="./transaction-management" [routerLinkActive]="['router-link-active']" >
+                            <i class="fa fa-monument"></i>&nbsp;
+                            <span>Quản lý giao dịch</span>
                         </a>
                     </li>
                 </ul>
             </li>
-        </div> -->
+        </div>
         <!-- <div class="nested-menu">
             <a class="list-group-item" (click)="addExpandClass('home2', 2)">
                 <i class="fa fa-plus"></i>&nbsp;

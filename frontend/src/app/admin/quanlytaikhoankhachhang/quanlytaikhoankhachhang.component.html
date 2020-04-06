@@ -1,0 +1,42 @@
+<div>
+  <button class="btn rounded-btn" style="margin: 10px;" (click)="taoMoiTaiKhoan()">
+    <i class="material-icons">
+      note_add
+    </i> Tạo tài khoản
+  </button>
+</div>
+<div class="search-taikhoan">
+  <input class="form-control input-underline input-lg" placeholder="Tìm kiếm : số tài khoản, sđt" [(ngModel)]="keySearch">
+  <button type="button" (click)="timkiemTaiKhoan()">Tìm kiếm</button>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tên tài khoản</th>
+      <th scope="col">Số tài khoản</th>
+      <th scope="col">Email</th>
+      <th scope="col">Điện thoại</th>
+      <th scope="col">Số dư</th>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of listTaiKhoan; let stt= index">
+      <th scope="row">{{stt + 1}}</th>
+      <td>{{item.tenTaiKhoan}}</td>
+      <td>{{item.soTaiKhoan}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.sdt}}</td>
+      <td>{{item.soDu | currency: "VND"}}</td>
+      <td>
+        <i class="material-icons" title="Xóa" style="font-size: 35px; cursor: pointer;" (click)="xoaTaiKhoan(item.maTk)">
+          delete_forever
+        </i>
+        <i class="material-icons" title="Chỉnh sửa" style="font-size: 35px; cursor: pointer;" (click)="suaThongTinTaiKhoan(item)" >
+          create
+        </i>
+      </td>
+    </tr>
+  </tbody>
+</table>

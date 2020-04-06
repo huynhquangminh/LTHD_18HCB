@@ -1,0 +1,80 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Thông tin tài khoản nhân viên </h4>
+  <button type="button" class="close" aria-label="Close" (click)="modal.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form style="width: 400px;margin: 0 auto;margin-top: 10px;" novalidate #formTKNV="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-content">
+      <div class="form-group">
+        <div>
+          <input type="text" name="tendangnhap" class="form-control input-underline input-lg"
+            [(ngModel)]="themTaiKhoanModel.tendangnhap" placeholder="Tên đăng nhập" required>
+        </div>
+        <div class="validate-form" style="float: left;"
+          *ngIf="formTKNV.controls.tendangnhap?.errors?.required && formTKNV.controls.tendangnhap?.touched">
+          <span>Tên đăng nhập không được trống!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          <input type="text" name="tennhanvien" class="form-control input-underline input-lg"
+            [(ngModel)]="themTaiKhoanModel.tennhanvien" placeholder="Họ tên nhân viên " required>
+        </div>
+        <div class="validate-form" style="float: left;"
+          *ngIf="formTKNV.controls.tennhanvien?.errors?.required && formTKNV.controls.tennhanvien?.touched">
+          <span>Tên nhân viên không được trống!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          <input  type="text" name="email" class="form-control input-underline input-lg"
+            [(ngModel)]="themTaiKhoanModel.email" placeholder="Email" required  email>
+        </div>
+        <div class="validate-form" style="float: left;"
+          *ngIf="formTKNV.controls.email?.errors?.required && formTKNV.controls.email?.touched">
+          <span>Email không được trống!</span>
+        </div>
+        <div class="validate-form" style="float: left;"
+          *ngIf="formTKNV.controls.email?.errors?.email && formTKNV.controls.email?.touched">
+          <span>Email không hợp lệ!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          <input type="number" name="cmnd" class="form-control input-underline input-lg"
+          [(ngModel)]="themTaiKhoanModel.cmnd" placeholder="Cmnd" required maxlength="11">
+        </div>
+        <div class="validate-form" style="float: left;"
+          *ngIf="formTKNV.controls.cmnd?.errors?.required && formTKNV.controls.cmnd?.touched">
+          <span>Số cmnd không được trống!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          <input type="number" name="sodienthoai" class="form-control input-underline input-lg"
+          [(ngModel)]="themTaiKhoanModel.sodienthoai" placeholder="Số điện thoại" required>
+        </div>
+        <div class="validate-form" style="float: left;"
+          *ngIf="formTKNV.controls.sodienthoai?.errors?.required && formTKNV.controls.sodienthoai?.touched">
+          <span>Số điện thoại không được trống!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          <textarea rows="3" name="diachi" class="form-control input-underline input-lg"
+          [(ngModel)]="themTaiKhoanModel.diachi" placeholder="Địa chỉ" required ></textarea>
+        </div>
+        <div class="validate-form" style="float: left;"
+          *ngIf="formTKNV.controls.diachi?.errors?.required && formTKNV.controls.diachi?.touched">
+          <span>Địa chỉ không được trống!</span>
+        </div>
+      </div>
+    </div>
+    <button class="btn rounded-btn btn-the-moi"
+      [disabled]="(!formTKNV.valid) ">
+      Thêm mới
+    </button>
+  </form>
+</div>

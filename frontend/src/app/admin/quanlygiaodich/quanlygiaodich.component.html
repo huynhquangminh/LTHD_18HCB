@@ -1,0 +1,35 @@
+<div class="search-taikhoan">
+  <input class="form-control input-underline input-lg" placeholder="Tìm kiếm : số tài khoản" [(ngModel)]="keySearch">
+  <button type="button" (click)="timKiemGiaoDich()">Tìm kiếm</button>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Ngày giao dịch</th>
+      <th scope="col">Số tài khoản gửi</th>
+      <th scope="col">Số tài khoản nhận</th>
+      <th scope="col">Số tiền gửi</th>
+      <th scope="col">Nội dung</th>
+      <th scope="col">loại trả phí </th>
+      <th scope="col">#</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of danhSachGiaoDich; let stt= index">
+      <th scope="row">{{stt + 1}}</th>
+      <td>{{item.ngayGd| date:'dd/MM/yyyy' }}</td>
+      <td>{{item.stkGui}}</td>
+      <td>{{item.stkNhan}}</td>
+      <td>{{item.soTienGui | currency: "VND"}}</td>
+      <td>{{item.noiDung}}</td>
+      <td>{{item.loaiTraPhi ? 'Người nhận' : 'Người gửi'}}</td>
+      
+      <td>
+        <i class="material-icons" title="Xóa" style="font-size: 35px; cursor: pointer;" (click)="xoaGiaoDich(item.id)">
+          delete_forever
+        </i>
+      </td>
+    </tr>
+  </tbody>
+</table>

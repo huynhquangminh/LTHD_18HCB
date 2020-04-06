@@ -12,6 +12,9 @@ import { FormsModule } from '@angular/forms';
 import { LichsutaikhoanComponent } from './lichsutaikhoan/lichsutaikhoan.component';
 import { GiaodichnoiboComponent } from './giaodichnoibo/giaodichnoibo.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { QuanlytaikhoankhachhangComponent } from './quanlytaikhoankhachhang/quanlytaikhoankhachhang.component';
+import { QuanlytaikhoannhanvienComponent } from './quanlytaikhoannhanvien/quanlytaikhoannhanvien.component';
+import { QuanlygiaodichComponent } from './quanlygiaodich/quanlygiaodich.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { MatRadioModule } from '@angular/material/radio';
     GiaodichchuyentienComponent,
     LichsutaikhoanComponent,
     GiaodichnoiboComponent,
+    QuanlytaikhoankhachhangComponent,
+    QuanlytaikhoannhanvienComponent,
+    QuanlygiaodichComponent
   ],
   imports: [
     CommonModule,

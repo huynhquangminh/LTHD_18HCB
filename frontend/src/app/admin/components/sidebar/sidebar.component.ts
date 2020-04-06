@@ -1,3 +1,4 @@
+import { WebKeyStorage } from 'src/app/shared/globlas/web-key-storage';
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { WebStorageSerivce } from 'src/app/shared/services/webstorage.service';
@@ -13,6 +14,7 @@ export class SidebarComponent implements OnInit {
     collapsed: boolean;
     showMenu: any;
     pushRightClass: string;
+    public userInfo: any;
 
     @Output() collapsedEvent = new EventEmitter<boolean>();
 
@@ -37,6 +39,7 @@ export class SidebarComponent implements OnInit {
         this.collapsed = false;
         this.showMenu = ['', '', ''];
         this.pushRightClass = 'push-right';
+        this.userInfo = this.webStorageSerivce.getLocalStorage(WebKeyStorage.user_info);
     }
 
 
