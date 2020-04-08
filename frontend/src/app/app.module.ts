@@ -1,5 +1,5 @@
 import { DialogUpdateTaikhoanComponent } from './admin/components/dialog-update-taikhoan/dialog-update-taikhoan.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +23,7 @@ import {MatRippleModule} from '@angular/material/core';
 import { DialogThanhtoannoComponent } from './home/components/dialog-thanhtoanno/dialog-thanhtoanno.component';
 import { DialogThemtaikhoanComponent } from './admin/components/dialog-themtaikhoan/dialog-themtaikhoan.component';
 import { DialogTaikhoanNhanvienComponent } from './admin/components/dialog-taikhoan-nhanvien/dialog-taikhoan-nhanvien.component';
+import { AuthInterceptorService } from './shared/services/auth-interceptor.service';
 @NgModule({
     imports: [
         // CommonModule,
@@ -53,7 +54,12 @@ import { DialogTaikhoanNhanvienComponent } from './admin/components/dialog-taikh
     providers: [
         AuthGuard,
         NgbModalConfig,
-        WebStorageSerivce
+        WebStorageSerivce,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptorService,
+            multi: true
+        }
     ],
     bootstrap: [AppComponent],
     entryComponents: [

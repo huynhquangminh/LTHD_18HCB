@@ -34,6 +34,8 @@ export class LoginComponent implements OnInit {
                 const result = res;
                 delete result.user.matKhau;
                 delete result.user.soDu;
+                this.webStorageSerivce.setSessionStorage(WebKeyStorage.token_info, {token: result.token, refreshToken: 'xxxx' });
+                delete result.token;
                 result['isLogin'] = this.authService.isLogin;
                 this.webStorageSerivce.setLocalStorage(WebKeyStorage.user_info, result);
                 if (res.user.idLoaiTaiKhoan === 1) {

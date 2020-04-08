@@ -67,8 +67,7 @@ export class HandleErrorService {
         this.dialogServiceService.showDialogError(`message error code: ${statusCode}`);
         break;
       case HttpStatusCode.Unauthorized:
-        // this.dialogServiceService.showDialogError(`message error code: ${statusCode}`);
-        this.router.navigateByUrl('/login');
+        // this.router.navigateByUrl('/login');
         break;
       default:
         // Unexpected error

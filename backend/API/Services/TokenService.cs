@@ -21,7 +21,7 @@ namespace API.Services
                 issuer: Startup.StaticConfig["Jwt:Issuer"],
                 audience: Startup.StaticConfig["Jwt:Issuer"],
                 claims,
-                expires: DateTime.Now.AddMinutes(60),
+                expires: DateTime.Now.AddMinutes(2),
                 signingCredentials: credentials);
 
             var encodeToken = new JwtSecurityTokenHandler().WriteToken(token);

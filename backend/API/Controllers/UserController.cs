@@ -186,7 +186,7 @@ namespace API.Controllers
             // Generate OTP
             var otp = SendMailService.GenerateOTP();
 
-            var subject = "Xác nhận quên mật khẩu";
+            var subject = "[18HCB Banking] Mã xác nhận";
             StringBuilder body = new StringBuilder();
             body.AppendFormat("Mã xác nhận của bạn là: {0}", otp);
 

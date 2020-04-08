@@ -28,8 +28,8 @@ export class ApiService extends HandleErrorService {
   }
 
   protected setTokenForHeader() {
-    const userInfo = this.webStorageSerivce.getLocalStorage(WebKeyStorage.user_info);
-    const token = userInfo ? userInfo.token : '';
+    const tokenInfo = this.webStorageSerivce.getSessionStorage(WebKeyStorage.token_info);
+    const token = tokenInfo ? tokenInfo.token : '';
     this.headers = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
