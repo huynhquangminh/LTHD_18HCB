@@ -18,13 +18,12 @@ export class CanActiveGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
     // const userInfo = this.webStorageSerivce.getLocalStorage(WebKeyStorage.user_info);
-    // if (this.authService.isLogin) {
-    //   return true;
-    // } else {
-    //   this.webStorageSerivce.clearLocalStorage();
-    //   this.router.navigate(['/login']);
-    // }
-    // return false;
-    return true;
+    if (this.authService.isLogin) {
+      return true;
+    } else {
+      this.webStorageSerivce.clearLocalStorage();
+      this.router.navigate(['/login']);
+    }
+    return false;
   }
 }
