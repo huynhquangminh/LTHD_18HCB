@@ -435,7 +435,6 @@ namespace API.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        [Authorize]
         [HttpPut]
         [Produces("application/json")]
         [Route("RefreshToken")]
