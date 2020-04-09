@@ -433,25 +433,24 @@ namespace API.Controllers
         /// <summary>
         /// Refresh token
         /// </summary>
-        /// <param name="token"></param>
-        /// <param name="refreshToken"></param>
+        /// <param name="request"></param>
         /// <returns></returns>
         [Authorize]
         [HttpPut]
         [Produces("application/json")]
         [Route("RefreshToken")]
-        public async Task<IActionResult> RefreshToken(string token, string refreshToken)
+        public async Task<IActionResult> RefreshToken(RefreshTokenRequest request)
         {
-            if (token != null)
+            if (request.Token != null)
             {
-                var princial = GetPrincipalFromExpiredToken(token);
+                var princial = GetPrincipalFromExpiredToken(request.Token);
                 var tenTaiKhoan = princial.Claims.ToList()[0].Value;
                 var email = princial.Claims.ToList()[1].Value;
                 var maTaiKhoan = princial.Claims.ToList()[2].Value;
                 var userRefreshToken = _userService.GetRefreshTokenByMaTk(maTaiKhoan).Result;
 
                 // Check current request token of user
-                if (userRefreshToken == null || userRefreshToken != refreshToken)
+                if (userRefreshToken == null || userRefreshToken != request.RefreshToken)
                 {
                     return BadRequest();
                 }
@@ -467,7 +466,6 @@ namespace API.Controllers
 
                 return new ObjectResult(new
                 {
-                    result,
                     token = newJwtToken,
                     refreshToken = newRefreshToken
                 });
