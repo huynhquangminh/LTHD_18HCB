@@ -10,8 +10,8 @@ namespace DataAccess.Constant
         public const string USER_GETALL = "GetAllUser";
         public const string USER_GETBY_USERNAME = "sp_User_GetBy_UserName";
         public const string USER_GETBY_USERNAME_PASSWORD = "sp_User_GetBy_UserName_Password";
+        public const string USER_GET_REFRESHTOKEN_BYMATK = "GetRefreshTokenByMatk";
         public const string USER_INSERT = "sp_User_Insert";
-        public const string USER_EDIT_REFRESHTOKEN = "sp_User_Edit_RefreshToken";
         public const string USER_DOIMATKHAU = "DoiMatKhau";
         public const string USER_GETPASSWORDBY_MATK = "GetPasswordByMaTk";
         public const string USER_QUENMATKHAU = "QuenMatKhauUser";
@@ -29,6 +29,7 @@ namespace DataAccess.Constant
         public const string USER_XOA_TAIKHOAN = "XoaTaiKhoan";
         public const string USER_UPDATE_THONGTINTAIKHOANKHACHHANG = "UpdateThongTinTaiKhoanKhachHang";
         public const string USER_UPDATE_THONGTINTAIKHOANNHANVIEN = "UpdateThongTinTaiKhoanNhanVien";
+        public const string USER_UPDATE_REFRESHTOKEN = "UpdateRefreshToken";
 
         // TaiKhoanTietKiem
         public const string TAIKHOANTIETKIEM_GET_BY_MATAIKHOAN = "GetDsTaiKhoanTietKiem";

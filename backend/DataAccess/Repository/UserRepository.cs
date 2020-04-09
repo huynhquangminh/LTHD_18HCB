@@ -19,9 +19,14 @@ namespace DataAccess.Repository
 
         }
 
-        public Task<int> EditUserRefreshToken(string userName, string refreshToken)
+        public async Task<int> UpdateRefreshToken(string maTaiKhoan, string refreshToken)
         {
-            throw new NotImplementedException();
+            var param = new DynamicParameters();
+            param.Add("@matk", maTaiKhoan);
+            param.Add("@refreshToken", refreshToken);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.USER_UPDATE_REFRESHTOKEN, param);
+            return result;
         }
 
         public async Task<List<UserDO>> GetAllUser()
@@ -281,6 +286,15 @@ namespace DataAccess.Repository
             param.Add("@diachi", taiKhoanNhanVien.DiaChi);
 
             var result = await ExecuteCommandAsync(StoredProcedure.USER_THEM_THONGTINTAIKHOANNHANVIEN, param);
+            return result;
+        }
+
+        public async Task<string> GetRefreshTokenByMaTk(string maTaiKhoan)
+        {
+            var param = new DynamicParameters();
+            param.Add("@matk", maTaiKhoan);
+
+            var result = await QueryCommandSingleAsync<string>(StoredProcedure.USER_GET_REFRESHTOKEN_BYMATK, param);
             return result;
         }
     }

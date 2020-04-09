@@ -13,7 +13,8 @@ namespace DataAccess.Interface
         Task<UserDO> GetUserByUserName(string userName);
         Task<UserDO> GetThongTinTaiKhoanKhachHang(string maTaiKhoan);
         Task<UserDO> GetUserByUserNamePassword(string userName, string password);
-        Task<int> EditUserRefreshToken(string userName, string refreshToken);
+        Task<int> UpdateRefreshToken(string maTaiKhoan, string refreshToken);
+        Task<string> GetRefreshTokenByMaTk(string maTaiKhoan);
         Task<UserDO> GetUserByTenDangNhap(string tenDangNhap);
         Task<UserDO> GetThongTinTaiKhoan(string maTaiKhoan);
         Task<UserDO> GetThongTinTaiKhoanAdmin(string maTaiKhoan);

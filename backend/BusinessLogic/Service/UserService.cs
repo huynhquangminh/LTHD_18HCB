@@ -13,7 +13,7 @@ namespace BusinessLogic.Service
 {
     public class UserService : IUserService
     {
-        public async Task<int> EditUserRefreshToken(string userName, string refreshToken)
+        public async Task<int> UpdateRefreshToken(string maTaiKhoan, string refreshToken)
         {
             var result = 0;
 
@@ -22,12 +22,12 @@ namespace BusinessLogic.Service
                 try
                 {
                     dal.UnitOfWork.Begin();
-                    result = await dal.UnitOfWork.UserRepository.EditUserRefreshToken(userName, refreshToken);
+                    result = await dal.UnitOfWork.UserRepository.UpdateRefreshToken(maTaiKhoan, refreshToken);
                     dal.UnitOfWork.Commit();
                 } catch (Exception ex)
                 {
                     dal.UnitOfWork.Rollback();
-                    throw new AggregateException();
+                    throw new AggregateException(ex);
                 }
                 return result;
             }
@@ -123,7 +123,7 @@ namespace BusinessLogic.Service
                 catch (Exception ex)
                 {
                     dal.UnitOfWork.Rollback();
-                    throw new AggregateException();
+                    throw new AggregateException(ex);
                 }
                 return result;
             }
@@ -153,7 +153,7 @@ namespace BusinessLogic.Service
                 catch (Exception ex)
                 {
                     dal.UnitOfWork.Rollback();
-                    throw new AggregateException();
+                    throw new AggregateException(ex);
                 }
                 return result;
             }
@@ -183,7 +183,7 @@ namespace BusinessLogic.Service
                 catch (Exception ex)
                 {
                     dal.UnitOfWork.Rollback();
-                    throw new AggregateException();
+                    throw new AggregateException(ex);
                 }
                 return result;
             }
@@ -241,7 +241,7 @@ namespace BusinessLogic.Service
                 catch (Exception ex)
                 {
                     dal.UnitOfWork.Rollback();
-                    throw new AggregateException();
+                    throw new AggregateException(ex);
                 }
                 return result;
             }
@@ -391,6 +391,15 @@ namespace BusinessLogic.Service
                     dal.UnitOfWork.Rollback();
                     throw new AggregateException(ex);
                 }
+                return result;
+            }
+        }
+
+        public async Task<string> GetRefreshTokenByMaTk(string maTaiKhoan)
+        {
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.UserRepository.GetRefreshTokenByMaTk(maTaiKhoan);
                 return result;
             }
         }

@@ -14,5 +14,6 @@ namespace BusinessObject
         public string MatKhau { get; set; }
         public decimal SoDu { get; set; }
         public int IdLoaiTaiKhoan { get; set; }
+        public string RefreshToken { get; set; }
     }
 }
