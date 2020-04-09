@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { WebKeyStorage } from './../globlas/web-key-storage';
 import { Injectable } from '@angular/core';
@@ -7,10 +8,11 @@ import { WebStorageSerivce } from './webstorage.service';
 import { throwError } from 'rxjs';
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
-
+  URL = 'https://localhost:44364/api/';
   constructor(
     public http: HttpClient,
-    public webStorageSerivce: WebStorageSerivce
+    public webStorageSerivce: WebStorageSerivce,
+    public router: Router
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): any {
@@ -30,18 +32,21 @@ export class AuthInterceptorService implements HttpInterceptor {
           refreshToken: tokenInfo.refreshToken
         };
         console.log('401');
-        // return this.http.put('localhost:8080/auth/refresh', params).mergeMap((data: any) => {
-        //     if (data.status === 200) {
-        //       this.webStorageSerivce.setSessionStorage(WebKeyStorage.token_info, { token: data.token, refreshToke: data.refreshToke });
-        //       req = req.clone({
-        //         setHeaders: {
-        //           'Content-Type': 'application/json',
-        //           'Authorization': 'Bearer ' + data.token
-        //         }
-        //       });
-        //       return next.handle(req);
-        //     }
-        // });
+        return this.http.put(this.URL + 'User/RefreshToken', JSON.stringify(params) )
+          .mergeMap((data: any) => {
+            if (data) {
+              this.webStorageSerivce.setSessionStorage(WebKeyStorage.token_info, { token: data.token, refreshToke: data.refreshToke });
+              req = req.clone({
+                setHeaders: {
+                  'Content-Type': 'application/json',
+                  'Authorization': 'Bearer ' + data.token
+                }
+              });
+              return next.handle(req);
+            } else {
+              this.router.navigateByUrl('/login');
+            }
+          });
       }
       return throwError(error);
     }));
