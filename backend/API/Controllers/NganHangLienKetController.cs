@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Models.Request;
 using API.Services;
 using BusinessLogic.Service.Interface;
 using BusinessObject;
@@ -56,20 +58,26 @@ namespace API.Controllers
         /// <param name="soTaiKhoan"></param>
         /// <param name="timer"></param>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
         [Produces("application/json")]
         [Route("GetThongTinTaiKhoan")]
-        public async Task<IActionResult> GetThongTinTaiKhoan(string soTaiKhoan, string timer)
+        public async Task<IActionResult> GetThongTinTaiKhoan(GetThongTinTaiKhoanLienKetNganHang request)
         {
             var secretKey = "nhom9";
-            var text = $"{soTaiKhoan}{timer}{secretKey}";
+            var text = $"{request.soTaiKhoan}{request.timer}{secretKey}";
             var textHash = BCryptService.HashPassword(text);
-            var result = CheckHash(text, textHash);
+            var result = CheckHash(text, request.hashStr);
 
             if (result)
             {
-                var user = _userService.GetThongTinTaiKhoanBySoTaiKhoan(soTaiKhoan);
-                return Ok(new { user.Result, status = true });
+                var user = _userService.GetThongTinTaiKhoanBySoTaiKhoan(request.soTaiKhoan);
+                dynamic accountInfo = new ExpandoObject();
+                accountInfo.maTk = user.Result.MaTk;
+                accountInfo.soTaiKhoan = user.Result.SoTaiKhoan;
+                accountInfo.tenTaiKhoan = user.Result.TenTaiKhoan;
+                accountInfo.email = user.Result.Email;
+                accountInfo.status = true;
+                return Ok(accountInfo);
             }
 
             return Ok(new {mesError = "request false", status = false });
