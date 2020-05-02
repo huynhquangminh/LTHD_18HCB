@@ -62,8 +62,9 @@ namespace API.Controllers
         public async Task<IActionResult> GetThongTinTaiKhoan(string soTaiKhoan, string timer)
         {
             var secretKey = "nhom9";
-            var hashString = $"{soTaiKhoan}{timer}{secretKey}";
-            var result = CheckHash(soTaiKhoan, timer, secretKey);
+            var text = $"{soTaiKhoan}{timer}{secretKey}";
+            var textHash = BCryptService.HashPassword(text);
+            var result = CheckHash(text, textHash);
 
             if (result)
             {
@@ -74,18 +75,9 @@ namespace API.Controllers
             return Ok(new {mesError = "request false", status = false });
         }
 
-        private bool CheckHash(string soTaiKhoan, string time, string secretKey)
+        private bool CheckHash(string textValue, string hashValue)
         {
-            var result = false;
-            var checkString = $"{soTaiKhoan}{time}{secretKey}";
-
-            var checkHash = BCryptService.HashPassword(checkString);
-
-            if (BCryptService.CheckPassword(checkString, checkHash))
-            {
-                result = true;
-            }
-            return result;
+            return BCryptService.CheckPassword(textValue, hashValue);
         }
     }
 }
