@@ -1,0 +1,21 @@
+<div>
+  <button class="btn rounded-btn" style="margin: 10px;" (click)="taoLienKet()">
+    <i class="material-icons">
+      note_add
+    </i> Tạo liên kết
+  </button>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tên ngân hàng </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of listNganHangLienKet; let stt= index">
+      <th scope="row">{{stt + 1}}</th>
+      <td>{{item.tenNganHang}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,3 +1,4 @@
+import { LienketnganhangComponent } from './lienketnganhang/lienketnganhang.component';
 import { AdminComponent } from './admin.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -21,6 +22,7 @@ const routes: Routes = [
             { path: 'customer-account-management', component: QuanlytaikhoankhachhangComponent },
             { path: 'employee-account-management', component: QuanlytaikhoannhanvienComponent },
             { path: 'transaction-management', component: QuanlygiaodichComponent },
+            { path: 'bank-link', component: LienketnganhangComponent },
         ]
     }
 ];

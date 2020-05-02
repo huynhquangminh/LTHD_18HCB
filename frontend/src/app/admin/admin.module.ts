@@ -15,6 +15,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { QuanlytaikhoankhachhangComponent } from './quanlytaikhoankhachhang/quanlytaikhoankhachhang.component';
 import { QuanlytaikhoannhanvienComponent } from './quanlytaikhoannhanvien/quanlytaikhoannhanvien.component';
 import { QuanlygiaodichComponent } from './quanlygiaodich/quanlygiaodich.component';
+import { LienketnganhangComponent } from './lienketnganhang/lienketnganhang.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { QuanlygiaodichComponent } from './quanlygiaodich/quanlygiaodich.compone
     GiaodichnoiboComponent,
     QuanlytaikhoankhachhangComponent,
     QuanlytaikhoannhanvienComponent,
-    QuanlygiaodichComponent
+    QuanlygiaodichComponent,
+    LienketnganhangComponent
   ],
   imports: [
     CommonModule,
