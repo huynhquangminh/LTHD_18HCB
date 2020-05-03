@@ -21,5 +21,9 @@
     <ProjectReference Include="..\BusinessObject\BusinessObject.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\fileKey\" />
+  </ItemGroup>
+
 
 </Project>
