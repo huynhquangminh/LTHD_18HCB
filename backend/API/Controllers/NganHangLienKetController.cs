@@ -92,6 +92,96 @@ namespace API.Controllers
             return Ok(new {mesError = "request false", status = false });
         }
 
+        /// <summary>
+        /// Thêm ngân hàng liên kết
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Produces("application/json")]
+        [Route("ThemNganHangLienKet")]
+        public async Task<ActionResult<int>> Them(ThemNganHangLienKetRequest request)
+        {
+            NganHangLienKetBO nganHangLienKet = new NganHangLienKetBO();
+            nganHangLienKet.TenNganHang = request.TenNganHang;
+            nganHangLienKet.PublicKey = request.PublicKey;
+            nganHangLienKet.SecretKey = request.SecretKey;
+
+            var result = await _nganHangLienKetService.Them(nganHangLienKet);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Lấy danh sách ngân hàng liên kết theo id hay tên ngân hàng
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="tenNganHang"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("GetNganHangLienKetByIdOrTenNganHang")]
+        public async Task<ActionResult<NganHangLienKetBO>> GetNganHangLienKetByIdOrTenNganHang(int id, string tenNganHang)
+        {
+            var result = await _nganHangLienKetService.GetNganHangLienKetByIdOrTenNganHang(id, tenNganHang);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Lấy data rsa
+        /// </summary>
+        /// <param name="secretKey"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("GetSignDataRSA")]
+        public async Task<ActionResult<string>> GetSignDataRSA(string secretKey)
+        {
+            var result = SignDataRsa(secretKey);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Thêm thông tin giao dịch khác ngân hàng
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Produces("application/json")]
+        [Route("ThemThongTinGiaoDichKhacNganHang")]
+        public async Task<IActionResult> ThemThongTinGiaoDichKhacNganHang(ThemThongTinGiaoDichKhacNganHangRequest request)
+        {
+            var nganHang = GetNganHangLienKetByIdOrTenNganHang(-1, request.TenNganHangGui);
+            var secretKey = nganHang.Result.Value.SecretKey;
+            var publicKey = nganHang.Result.Value.PublicKey;
+
+            var thongTinGiaoDichLienNganHangBO = new ThongTinGiaoDichLienNganHangBO();
+            thongTinGiaoDichLienNganHangBO.NgayTao = request.NgayTao;
+            thongTinGiaoDichLienNganHangBO.NoiDung = request.NoiDung;
+            thongTinGiaoDichLienNganHangBO.SoTien = request.SoTien;
+            thongTinGiaoDichLienNganHangBO.SoTKGui = request.SoTKGui;
+            thongTinGiaoDichLienNganHangBO.SoTKNhan = request.SoTKNhan;
+            thongTinGiaoDichLienNganHangBO.TenNganHangGui = request.TenNganHangGui;
+            thongTinGiaoDichLienNganHangBO.TenNganHangNhan = request.TenNganHangNhan;
+
+            if (secretKey == "" || secretKey == null || publicKey == "" || publicKey == null)
+            {
+                return Ok(new { mesError = "request false", status = false });
+            }
+            else
+            {
+                var verifySignRsa = VerifySignRsa(secretKey, publicKey, request.Signature);
+                if(verifySignRsa)
+                {
+                    var result = _nganHangLienKetService.ThemThongTinGiaoDichKhacNganhang(thongTinGiaoDichLienNganHangBO);
+                    return Ok(new { mesError = "request success", status = true });
+                }
+                else
+                {
+                    return Ok(new { mesError = "request false", status = false });
+                }
+            }
+        }
+
         private bool CheckHash(string textValue, string hashValue)
         {
             return BCryptService.CheckPassword(textValue, hashValue);

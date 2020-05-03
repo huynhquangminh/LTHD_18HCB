@@ -25,6 +25,7 @@ namespace DataAccess.Interface
         string GetPasswordByMaTk(string maTaiKhoan);
         Task<int> QuenMatKhau(string tenDangNhap, string email, string matKhauMoi);
         Task<int> UpdateSoDuSauKhiChuyenKhoanNoiBo(string taiKhoanGui, string taiKhoanNhan, int soTienGui);
+        Task<int> UpdateSoDuGiaoDichKhacNganHang(string soTaiKhoan, int soTien, bool loaiGiaoDich);
         Task<int> ThemTaiKhoanDangNhap(TaiKhoanDangNhapDO taiKhoanDangNhap);
         Task<int> ThemThongTinTaiKhoanKhachHang(TaiKhoanKhachHangDO taiKhoanKhachHang);
         Task<int> ThemTaiKhoanNhanVien(TaiKhoanNhanVienDO taiKhoanNhanVien);

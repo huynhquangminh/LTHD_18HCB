@@ -493,6 +493,20 @@ namespace API.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Cập nhật số dư của giao dịch khác ngân hàng
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [HttpPut]
+        [Produces("application/json")]
+        [Route("UpdateSoDuGiaoDichKhacNganHang")]
+        public async Task<ActionResult<int>> UpdateSoDuGiaoDichKhacNganHang(UpdateSoDuKhacNganHangRequest request)
+        {
+            var result = _userService.UpdateSoDuGiaoDichKhacNganHang(request.SoTaiKhoan, request.SoTien, request.LoaiGiaoDich);
+            return await result;
+        }
+
         //[HttpPost]
         //[Produces("application/json")]
         //[Route("RefreshToken")]

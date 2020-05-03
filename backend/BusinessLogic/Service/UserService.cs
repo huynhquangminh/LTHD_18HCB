@@ -403,5 +403,26 @@ namespace BusinessLogic.Service
                 return result;
             }
         }
+
+        public async Task<int> UpdateSoDuGiaoDichKhacNganHang(string soTaiKhoan, int soTien, bool loaiGiaoDich)
+        {
+            var result = 0;
+
+            using (DalSession dal = new DalSession())
+            {
+                try
+                {
+                    dal.UnitOfWork.Begin();
+                    result = await dal.UnitOfWork.UserRepository.UpdateSoDuGiaoDichKhacNganHang(soTaiKhoan, soTien, loaiGiaoDich);
+                    dal.UnitOfWork.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dal.UnitOfWork.Rollback();
+                    throw new AggregateException(ex);
+                }
+                return result;
+            }
+        }
     }
 }

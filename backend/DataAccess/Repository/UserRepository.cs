@@ -297,5 +297,16 @@ namespace DataAccess.Repository
             var result = await QueryCommandSingleAsync<string>(StoredProcedure.USER_GET_REFRESHTOKEN_BYMATK, param);
             return result;
         }
+
+        public async Task<int> UpdateSoDuGiaoDichKhacNganHang(string soTaiKhoan, int soTien, bool loaiGiaoDich)
+        {
+            var param = new DynamicParameters();
+            param.Add("@sotaikhoan", soTaiKhoan);
+            param.Add("@sotien", soTien);
+            param.Add("@loaigiaodich", loaiGiaoDich);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.USER_UPDATE_SODUGIAODICHKHACNGANHANG, param);
+            return result;
+        }
     }
 }

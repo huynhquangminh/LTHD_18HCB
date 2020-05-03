@@ -25,6 +25,7 @@ namespace BusinessLogic.Service.Interface
         string GetPasswordByMaTk(string maTaiKhoan);
         Task<int> QuenMatKhau(string tenDangNhap, string email, string matKhauMoi);
         Task<int> UpdateSoDuSauKhiChuyenKhoanNoiBo(string taiKhoanGui, string taiKhoanNhan, int soTienGui);
+        Task<int> UpdateSoDuGiaoDichKhacNganHang(string soTaiKhoan, int soTien, bool loaiGiaoDich);
         Task<int> ThemTaiKhoanDangNhap(TaiKhoanDangNhapBO taiKhoanDangNhap);
         Task<int> ThemThongTinTaiKhoanKhachHang(TaiKhoanKhachHangBO taiKhoanKhachHang);
         Task<int> ThemTaiKhoanNhanVien(TaiKhoanNhanVienBO taiKhoanNhanVien);

@@ -22,6 +22,7 @@ namespace DataAccess.Constant
         public const string USER_GET_THONGTINTAIKHOAN_SOTAIKHOAN = "GetThongTinTaiKhoanBySTK";
         public const string USER_GETDANHSACHTAIKHOANADMIN = "GetDanhSachTaiKhoanAdmin";
         public const string USER_UPDATE_SODUSAUKHICHUYENKHOANNOIBO = "UpdateSoDuSauKhiChuyenKhoanNoiBo";
+        public const string USER_UPDATE_SODUGIAODICHKHACNGANHANG = "UpdateSoDuGiaoDichKhacNganHang";
         public const string USER_TIMKIEM_THONGTINTAIKHOAN = "TimKiemThongTinTaiKhoan";
         public const string USER_THEM_TAIKHOANDANGNHAP = "ThemTaiKhoanDangNhap";
         public const string USER_THEM_THONGTINTAIKHOANKHACHHANG = "ThemThongTinTaiKhoanKhachHang";
@@ -47,6 +48,9 @@ namespace DataAccess.Constant
 
         // NganHangLienKet
         public const string NGANHANGLIENKET_GETALL = "GetDSNganHangLienKet";
+        public const string NGANHANGLIENKET_THEM = "ThemNganHangLienKet";
+        public const string NGANHANGLIENKET_GETBYID_TENNGANHANG = "GetNganHangLienKetByIdOrTenNganHang";
+        public const string NGANHANGLIENKET_THEMTHONGTINGIAODICHKHACNGANHANG = "ThemThongTinGiaoDichKhacNganHang";
 
         // ThongTinChuyenTienNoiBo
         public const string THONGTINCHUYENTIENNOIBO_CHUYENKHOANNOIBO = "ChuyenKhoanNoiBo";

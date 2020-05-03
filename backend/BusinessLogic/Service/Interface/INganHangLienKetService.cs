@@ -9,5 +9,8 @@ namespace BusinessLogic.Service.Interface
     public interface INganHangLienKetService
     {
         Task<List<NganHangLienKetBO>> GetDanhSach();
+        Task<int> Them(NganHangLienKetBO nganHangLienKet);
+        Task<NganHangLienKetBO> GetNganHangLienKetByIdOrTenNganHang(int id, string tenNganHang);
+        Task<int> ThemThongTinGiaoDichKhacNganhang(ThongTinGiaoDichLienNganHangBO thongTinGiaoDichLienNganHang);
     }
 }
