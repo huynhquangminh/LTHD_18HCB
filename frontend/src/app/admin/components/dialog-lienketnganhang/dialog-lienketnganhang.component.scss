@@ -1,0 +1,15 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.btn-the-moi {
+  margin-left: 300px; 
+  background-color: #61b2e2;
+}

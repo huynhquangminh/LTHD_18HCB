@@ -24,6 +24,7 @@ import { DialogThanhtoannoComponent } from './home/components/dialog-thanhtoanno
 import { DialogThemtaikhoanComponent } from './admin/components/dialog-themtaikhoan/dialog-themtaikhoan.component';
 import { DialogTaikhoanNhanvienComponent } from './admin/components/dialog-taikhoan-nhanvien/dialog-taikhoan-nhanvien.component';
 import { AuthInterceptorService } from './shared/services/auth-interceptor.service';
+import { DialogLienketnganhangComponent } from './admin/components/dialog-lienketnganhang/dialog-lienketnganhang.component';
 @NgModule({
     imports: [
         // CommonModule,
@@ -49,7 +50,8 @@ import { AuthInterceptorService } from './shared/services/auth-interceptor.servi
         DialogThanhtoannoComponent,
         DialogThemtaikhoanComponent,
         DialogUpdateTaikhoanComponent,
-        DialogTaikhoanNhanvienComponent
+        DialogTaikhoanNhanvienComponent,
+        DialogLienketnganhangComponent
     ],
     providers: [
         AuthGuard,
@@ -71,7 +73,8 @@ import { AuthInterceptorService } from './shared/services/auth-interceptor.servi
         DialogThanhtoannoComponent,
         DialogThemtaikhoanComponent,
         DialogUpdateTaikhoanComponent,
-        DialogTaikhoanNhanvienComponent
+        DialogTaikhoanNhanvienComponent,
+        DialogLienketnganhangComponent
     ]
 })
 export class AppModule { }

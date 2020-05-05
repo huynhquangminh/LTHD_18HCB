@@ -1,0 +1,47 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Liên kết ngân hàng</h4>
+  <button type="button" class="close" aria-label="Close" (click)="modal.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form style="width: 400px;margin: 0 auto;margin-top: 10px;" novalidate #form="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-content">
+      <div class="form-group">
+        <div>
+          <input type="text" name="tennganhang" class="form-control input-underline input-lg"
+            [(ngModel)]="nganHangLienKetModel.tenNganHang" placeholder="Tên ngân hàng liên kết" required>
+        </div>
+        <div class="validate-form" style="float: left;"
+          *ngIf="form.controls.tennganhang?.errors?.required && form.controls.tennganhang?.touched">
+          <span>Tên ngân hàng không được trống!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          <input type="text" name="secretkey" class="form-control input-underline input-lg"
+            [(ngModel)]="nganHangLienKetModel.secretKey" placeholder="secret key" required>
+        </div>
+        <div class="validate-form" style="float: left;"
+          *ngIf="form.controls.secretkey?.errors?.required && form.controls.secretkey?.touched">
+          <span>Secret key không được trống!</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <div>
+          <textarea rows="4" name="publickey" class="form-control input-underline input-lg"
+            [(ngModel)]="nganHangLienKetModel.publicKey" placeholder="public key" required></textarea>
+          <!-- <input  type="text" name="publickey" class="form-control input-underline input-lg"
+            [(ngModel)]="nganHangLienKetModel.publicKey" placeholder="public key" required> -->
+        </div>
+        <div class="validate-form" style="float: left;"
+          *ngIf="form.controls.publickey?.errors?.required && form.controls.publickey?.touched">
+          <span>Public key không được trống!</span>
+        </div>
+      </div>
+    </div>
+    <button class="btn rounded-btn btn-the-moi" [disabled]="(!form.valid) ">
+      Liên kết
+    </button>
+  </form>
+</div>

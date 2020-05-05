@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TaikhoanthanhtoanService } from 'src/app/shared/services/taikhoanthanhtoan.service';
+import { DialogService } from 'src/app/shared/services/dialog-service.service';
+import { DialogLienketnganhangComponent } from 'src/app/admin/components/dialog-lienketnganhang/dialog-lienketnganhang.component';
 
 @Component({
   selector: 'app-lienketnganhang',
@@ -9,7 +11,8 @@ import { TaikhoanthanhtoanService } from 'src/app/shared/services/taikhoanthanht
 export class LienketnganhangComponent implements OnInit {
   public listNganHangLienKet: any = [];
   constructor(
-    private taiKhoanService: TaikhoanthanhtoanService
+    private taiKhoanService: TaikhoanthanhtoanService,
+    private dialogService: DialogService,
   ) { }
 
   ngOnInit() {
@@ -26,5 +29,11 @@ export class LienketnganhangComponent implements OnInit {
     });
   }
 
-  taoLienKet() { }
+  taoLienKet() {
+    this.dialogService.showDialog(DialogLienketnganhangComponent).then(res => {
+      if (res) {
+        this.getDanhSachNganHangLienKet();
+      }
+    });
+   }
 }

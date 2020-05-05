@@ -37,4 +37,8 @@ export class TaikhoanthanhtoanService extends ApiService {
   updateSoDuTaiKhoan(params: any) {
     return this.httpPut('User/UpdateSoDuSauKhiChuyenKhoanNoiBo', params);
   }
+
+  themNganHangLienKet(params: any) {
+    return this.httpPost('NganHangLienKet/ThemNganHangLienKet', params);
+  }
 }
