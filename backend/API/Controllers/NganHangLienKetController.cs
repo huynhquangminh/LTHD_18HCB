@@ -140,6 +140,15 @@ namespace API.Controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("GetHashString")]
+        public async Task<ActionResult<string>> GetHashString(string hashString)
+        {
+            var result = BCrypt.Net.BCrypt.HashPassword(hashString);
+            return Ok(result);
+        }
+
         /// <summary>
         /// Thêm thông tin giao dịch khác ngân hàng
         /// </summary>
