@@ -38,7 +38,7 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
         this.isActive = false;
         this.collapsed = false;
-        this.showMenu = ['', '', ''];
+        this.showMenu = ['home', 'home1', 'home2'];
         this.pushRightClass = 'push-right';
     }
 

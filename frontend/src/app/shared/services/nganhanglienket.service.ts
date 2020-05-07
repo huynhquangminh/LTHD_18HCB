@@ -13,4 +13,12 @@ export class NganhanglienketService extends ApiService {
     return this.httpGet('NganHangLienKet/GetHashString?hashString=' + textStr);
   }
 
+  getSignData(keyStr = 'nhom9') {
+    return this.httpGet('NganHangLienKet/GetSignDataRSA?secretKey=' + keyStr);
+  }
+
+  giaoDichKhacNganHang(params: any) {
+    return this.httpPost('NganHangLienKet/GiaoDichKhacNganHang', params);
+  }
+
 }

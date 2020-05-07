@@ -156,12 +156,13 @@ namespace API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Produces("application/json")]
-        [Route("ThemThongTinGiaoDichKhacNganHang")]
-        public async Task<IActionResult> ThemThongTinGiaoDichKhacNganHang(ThemThongTinGiaoDichKhacNganHangRequest request)
+        [Route("GiaoDichKhacNganHang")]
+        public async Task<IActionResult> GiaoDichKhacNganHang(ThemThongTinGiaoDichKhacNganHangRequest request)
         {
-            var nganHang = GetNganHangLienKetByIdOrTenNganHang(-1, request.TenNganHangGui);
-            var secretKey = nganHang.Result.Value.SecretKey;
-            var publicKey = nganHang.Result.Value.PublicKey;
+            //var nganHang = GetNganHangLienKetByIdOrTenNganHang(-1, request.TenNganHangGui);
+            var nganHang = _nganHangLienKetService.GetNganHangLienKetByIdOrTenNganHang(-1, request.TenNganHangGui);
+            var secretKey = nganHang.Result.SecretKey;
+            var publicKey = nganHang.Result.PublicKey;
 
             var thongTinGiaoDichLienNganHangBO = new ThongTinGiaoDichLienNganHangBO();
             thongTinGiaoDichLienNganHangBO.NgayTao = request.NgayTao;
@@ -179,9 +180,11 @@ namespace API.Controllers
             else
             {
                 var verifySignRsa = VerifySignRsa(secretKey, publicKey, request.Signature);
-                if(verifySignRsa)
+                
+                if (verifySignRsa)
                 {
                     var result = _nganHangLienKetService.ThemThongTinGiaoDichKhacNganhang(thongTinGiaoDichLienNganHangBO);
+                    var updateSoDu = _userService.UpdateSoDuGiaoDichKhacNganHang(request.SoTKNhan, request.SoTien, true);
                     return Ok(new { mesError = "request success", status = true });
                 }
                 else

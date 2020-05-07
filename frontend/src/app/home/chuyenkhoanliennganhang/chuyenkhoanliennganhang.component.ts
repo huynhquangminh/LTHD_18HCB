@@ -62,6 +62,28 @@ export class ChuyenkhoanliennganhangComponent implements OnInit {
 
   chuyenkhoan() {
     if (this.checkOTP()) {
+      // goi api chuyen khoan cua ngan hang tuong ung
+      this.nganHangLKService.getSignData().subscribe(res => {
+        if (res) {
+          const param = {
+            soTKGui: this.userInfo.user.soTaiKhoan,
+            tenNganHangGui: 'TP BANK',
+            soTKNhan: this.chuyenkhoanModel.sotaikhoan.toString(),
+            tenNganHangNhan: this.chuyenkhoanModel.tennganhang,
+            soTien: this.chuyenkhoanModel.sotiengui,
+            noiDung: this.chuyenkhoanModel.noidungchuyentien,
+            ngayTao: moment(new Date()).format('YYYY-MM-DD'),
+            signature: res
+          };
+          this.nganHangLKService.giaoDichKhacNganHang(param).subscribe(result => {
+            if (result.status) {
+              alert('chuyen tien thanh cong');
+              this.codeOTP = null;
+              this.codeOTPComfirm = null;
+            }
+          });
+        }
+      });
     }
    }
 
@@ -77,7 +99,7 @@ export class ChuyenkhoanliennganhangComponent implements OnInit {
 
   getThongTinTaiKhoan() {
     // gọi api lấy thông tin tài khoản từ ngân hàng khác
-    if (this.chuyenkhoanModel.sotaikhoan.toString().length >= 9 && this.chuyenkhoanModel.tennganhang !== '') {
+    if (this.chuyenkhoanModel.sotaikhoan && this.chuyenkhoanModel.sotaikhoan.toString().length >= 9 && this.chuyenkhoanModel.tennganhang) {
       const timeNow = moment(new Date()).format('YYYYMMDDHHmmss');
       const textStr = this.chuyenkhoanModel.sotaikhoan.toString() + timeNow + 'nhom9';
       this.nganHangLKService.getHashString(textStr).subscribe(res => {
