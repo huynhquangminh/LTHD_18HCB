@@ -59,5 +59,13 @@ namespace DataAccess.Repository
             var result = await ExecuteCommandAsync(StoredProcedure.NGANHANGLIENKET_THEMTHONGTINGIAODICHKHACNGANHANG, param);
             return result;
         }
+
+        public async Task<List<ThongTinGiaoDichLienNganHangDO>> XemGiaoDichKhacNganHang(string soTaiKhoan)
+        {
+            var param = new DynamicParameters();
+            param.Add("@sotaikhoan", soTaiKhoan);
+            var result = await QueryCommandAsyncWithParam<ThongTinGiaoDichLienNganHangDO>(StoredProcedure.NGANHANGLIENKET_XEMGIAODICHKHACNGANHANG, param);
+            return result.ToList();
+        }
     }
 }

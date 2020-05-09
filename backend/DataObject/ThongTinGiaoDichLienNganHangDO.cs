@@ -6,6 +6,7 @@ namespace DataObject
 {
     public class ThongTinGiaoDichLienNganHangDO
     {
+		public int Id { get; set; }
 		public string SoTKGui { get; set; }
 		public string TenNganHangGui { get; set; }
 		public string SoTKNhan { get; set; }

@@ -194,6 +194,20 @@ namespace API.Controllers
             }
         }
 
+        /// <summary>
+        /// Xem thông tin giao dịch khác ngân hàng theo số tài khoản
+        /// </summary>
+        /// <param name="soTaiKhoan"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("XemGiaoDichKhacNganHang")]
+        public async Task<ActionResult<List<ThongTinGiaoDichLienNganHangBO>>> XemGiaoDichKhacNganHang(string soTaiKhoan)
+        {
+            var result = await _nganHangLienKetService.XemGiaoDichKhacNganHang(soTaiKhoan);
+            return Ok(result);
+        }
+
         private bool CheckHash(string textValue, string hashValue)
         {
             return BCryptService.CheckPassword(textValue, hashValue);

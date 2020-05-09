@@ -94,5 +94,20 @@ namespace BusinessLogic.Service
                 return result;
             }
         }
+
+        public async Task<List<ThongTinGiaoDichLienNganHangBO>> XemGiaoDichKhacNganHang(string soTaiKhoan)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ThongTinGiaoDichLienNganHangDO, ThongTinGiaoDichLienNganHangBO>();
+            });
+
+            var mapper = config.CreateMapper();
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.NganHangLienKetRepository.XemGiaoDichKhacNganHang(soTaiKhoan);
+                return mapper.Map<List<ThongTinGiaoDichLienNganHangBO>>(result);
+            }
+        }
     }
 }

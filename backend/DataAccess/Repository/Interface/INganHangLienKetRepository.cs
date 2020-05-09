@@ -12,5 +12,6 @@ namespace DataAccess.Repository.Interface
         Task<int> Them(NganHangLienKetDO nganHangLienKet);
         Task<NganHangLienKetDO> GetNganHangLienKetByIdOrTenNganHang(int id, string tenNganHang);
         Task<int> ThemThongTinGiaoDichKhacNganhang(ThongTinGiaoDichLienNganHangDO thongTinGiaoDichLienNganHang);
+        Task<List<ThongTinGiaoDichLienNganHangDO>> XemGiaoDichKhacNganHang(string soTaiKhoan);
     }
 }
