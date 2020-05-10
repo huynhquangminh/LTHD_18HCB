@@ -21,4 +21,8 @@ export class NganhanglienketService extends ApiService {
     return this.httpPost('NganHangLienKet/GiaoDichKhacNganHang', params);
   }
 
+  getLichSuGiaoDich(stk: string) {
+    return this.httpGet('NganHangLienKet/XemGiaoDichKhacNganHang?soTaiKhoan=' + stk);
+  }
+
 }

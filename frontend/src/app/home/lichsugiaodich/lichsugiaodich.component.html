@@ -49,3 +49,33 @@
     </tbody>
   </table>
 </div>
+
+<div style="height: 350px; overflow: auto; margin-top: 20px;">
+  <span>Lịch sử giao dịch khác ngân hàng </span>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Ngày giao dịch </th>
+        <th scope="col">Số tài khoản gửi</th>
+        <th scope="col">Tên ngân hàng gửi</th>
+        <th scope="col">Số tài khoản nhận</th>
+        <th scope="col">Tên ngân hàng nhận</th>
+        <th scope="col">Số tiền</th>
+        <th scope="col">Nội dung</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of listGiaoKhacNganHang">
+        <td>
+          {{item.ngayTao | date:'dd/MM/yyyy'}}
+        </td>
+        <td>{{item.soTKGui}}</td>
+        <td>{{item.tenNganHangGui}}</td>
+        <td>{{item.soTKNhan}}</td>
+        <td>{{item.tenNganHangNhan}}</td>
+        <td>{{item.soTien | currency: "VND" }} VND</td>
+        <td>{{item.noiDung }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
