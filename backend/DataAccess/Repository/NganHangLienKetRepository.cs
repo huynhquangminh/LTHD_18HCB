@@ -18,6 +18,12 @@ namespace DataAccess.Repository
         {
         }
 
+        public async Task<List<ThongTinGiaoDichLienNganHangDO>> GetAllGiaoDichKhacNganHang()
+        {
+            var result = await QueryCommandAsync<ThongTinGiaoDichLienNganHangDO>(StoredProcedure.NGANHANGLIENKET_GETALL_GIAODICHKHACNGANHANG);
+            return result.ToList();
+        }
+
         public async Task<List<NganHangLienKetDO>> GetDanhSach()
         {
             var result = await QueryCommandAsync<NganHangLienKetDO>(StoredProcedure.NGANHANGLIENKET_GETALL);
@@ -60,12 +66,30 @@ namespace DataAccess.Repository
             return result;
         }
 
+        public async Task<List<ThongTinGiaoDichLienNganHangDO>> TimKiemGiaoDichKhacNganHang(string soTaiKhoan, string tenNganHang)
+        {
+            var param = new DynamicParameters();
+            param.Add("@sotaikhoan", soTaiKhoan);
+            param.Add("@@tennganhang", tenNganHang);
+            var result = await QueryCommandAsyncWithParam<ThongTinGiaoDichLienNganHangDO>(StoredProcedure.NGANHANGLIENKET_TIMKIEM_GIAODICHKHACNGANHANG, param);
+            return result.ToList();
+        }
+
         public async Task<List<ThongTinGiaoDichLienNganHangDO>> XemGiaoDichKhacNganHang(string soTaiKhoan)
         {
             var param = new DynamicParameters();
             param.Add("@sotaikhoan", soTaiKhoan);
             var result = await QueryCommandAsyncWithParam<ThongTinGiaoDichLienNganHangDO>(StoredProcedure.NGANHANGLIENKET_XEMGIAODICHKHACNGANHANG, param);
             return result.ToList();
+        }
+
+        public async Task<int> XoaThongTinGiaoDichKhacNganHang(int id)
+        {
+            var param = new DynamicParameters();
+            param.Add("@id", id);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.NGANHANGLIENKET_XOA_GIAODICHKHACNGANHANG, param);
+            return result;
         }
     }
 }

@@ -13,5 +13,8 @@ namespace BusinessLogic.Service.Interface
         Task<NganHangLienKetBO> GetNganHangLienKetByIdOrTenNganHang(int id, string tenNganHang);
         Task<int> ThemThongTinGiaoDichKhacNganhang(ThongTinGiaoDichLienNganHangBO thongTinGiaoDichLienNganHang);
         Task<List<ThongTinGiaoDichLienNganHangBO>> XemGiaoDichKhacNganHang(string soTaiKhoan);
+        Task<List<ThongTinGiaoDichLienNganHangBO>> GetAllGiaoDichKhacNganHang();
+        Task<List<ThongTinGiaoDichLienNganHangBO>> TimKiemGiaoDichKhacNganHang(string soTaiKhoan, string tenNganHang);
+        Task<int> XoaThongTinGiaoDichKhacNganHang(int id);
     }
 }

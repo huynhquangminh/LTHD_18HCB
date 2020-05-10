@@ -12,6 +12,21 @@ namespace BusinessLogic.Service
 {
     public class NganHangLienKetService : INganHangLienKetService
     {
+        public async Task<List<ThongTinGiaoDichLienNganHangBO>> GetAllGiaoDichKhacNganHang()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ThongTinGiaoDichLienNganHangDO, ThongTinGiaoDichLienNganHangBO>();
+            });
+
+            var mapper = config.CreateMapper();
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.NganHangLienKetRepository.GetAllGiaoDichKhacNganHang();
+                return mapper.Map<List<ThongTinGiaoDichLienNganHangBO>>(result);
+            }
+        }
+
         public async Task<List<NganHangLienKetBO>> GetDanhSach()
         {
             var config = new MapperConfiguration(cfg =>
@@ -95,6 +110,21 @@ namespace BusinessLogic.Service
             }
         }
 
+        public async Task<List<ThongTinGiaoDichLienNganHangBO>> TimKiemGiaoDichKhacNganHang(string soTaiKhoan, string tenNganHang)
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ThongTinGiaoDichLienNganHangDO, ThongTinGiaoDichLienNganHangBO>();
+            });
+
+            var mapper = config.CreateMapper();
+            using (DalSession dal = new DalSession())
+            {
+                var result = await dal.UnitOfWork.NganHangLienKetRepository.TimKiemGiaoDichKhacNganHang(soTaiKhoan, tenNganHang);
+                return mapper.Map<List<ThongTinGiaoDichLienNganHangBO>>(result);
+            }
+        }
+
         public async Task<List<ThongTinGiaoDichLienNganHangBO>> XemGiaoDichKhacNganHang(string soTaiKhoan)
         {
             var config = new MapperConfiguration(cfg =>
@@ -107,6 +137,26 @@ namespace BusinessLogic.Service
             {
                 var result = await dal.UnitOfWork.NganHangLienKetRepository.XemGiaoDichKhacNganHang(soTaiKhoan);
                 return mapper.Map<List<ThongTinGiaoDichLienNganHangBO>>(result);
+            }
+        }
+
+        public async Task<int> XoaThongTinGiaoDichKhacNganHang(int id)
+        {
+            var result = 0;
+
+            using (DalSession dal = new DalSession())
+            {
+                try
+                {
+                    dal.UnitOfWork.Begin();
+                    result = await dal.UnitOfWork.NganHangLienKetRepository.XoaThongTinGiaoDichKhacNganHang(id);
+                    dal.UnitOfWork.Commit();
+                }
+                catch (Exception ex)
+                {
+                    dal.UnitOfWork.Rollback();
+                }
+                return result;
             }
         }
     }

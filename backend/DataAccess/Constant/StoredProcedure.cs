@@ -52,6 +52,9 @@ namespace DataAccess.Constant
         public const string NGANHANGLIENKET_GETBYID_TENNGANHANG = "GetNganHangLienKetByIdOrTenNganHang";
         public const string NGANHANGLIENKET_THEMTHONGTINGIAODICHKHACNGANHANG = "ThemThongTinGiaoDichKhacNganHang";
         public const string NGANHANGLIENKET_XEMGIAODICHKHACNGANHANG = "XemGiaoDichKhacNganHang";
+        public const string NGANHANGLIENKET_GETALL_GIAODICHKHACNGANHANG = "GetDSGiaoDichKhacNganHangAll";
+        public const string NGANHANGLIENKET_TIMKIEM_GIAODICHKHACNGANHANG = "TimKiemGiaoDichKhacNganHang";
+        public const string NGANHANGLIENKET_XOA_GIAODICHKHACNGANHANG = "DeleteThongTinGiaoDichKhacNganHang";
 
         // ThongTinChuyenTienNoiBo
         public const string THONGTINCHUYENTIENNOIBO_CHUYENKHOANNOIBO = "ChuyenKhoanNoiBo";

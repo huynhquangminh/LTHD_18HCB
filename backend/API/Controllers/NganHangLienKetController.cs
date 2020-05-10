@@ -208,6 +208,43 @@ namespace API.Controllers
             return Ok(result);
         }
 
+        /// <summary>
+        /// Lấy tất cả giao dịch khác ngân hàng
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("GetAllGiaoDichKhacNganHang")]
+        public async Task<ActionResult<List<ThongTinGiaoDichLienNganHangBO>>> GetAllGiaoDichKhacNganHang()
+        {
+            var result = await _nganHangLienKetService.GetAllGiaoDichKhacNganHang();
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Tìm kiếm thông tin giao dịch khác ngân hàng theo số tài khoản, tên ngân hàng
+        /// </summary>
+        /// <param name="soTaiKhoan"></param>
+        /// <param name="tenNganHang"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("TimKiemGiaoDichKhacNganHang")]
+        public async Task<ActionResult<List<ThongTinGiaoDichLienNganHangBO>>> TimKiemGiaoDichKhacNganHang(string soTaiKhoan, string tenNganHang)
+        {
+            var result = await _nganHangLienKetService.TimKiemGiaoDichKhacNganHang(soTaiKhoan, tenNganHang);
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        [Produces("application/json")]
+        [Route("XoaThongTinGiaoDichKhacNganHang")]
+        public async Task<ActionResult<int>> XoaThongTinGiaoDichKhacNganHang(int id)
+        {
+            var result = await _nganHangLienKetService.XoaThongTinGiaoDichKhacNganHang(id);
+            return Ok(result);
+        }
+
         private bool CheckHash(string textValue, string hashValue)
         {
             return BCryptService.CheckPassword(textValue, hashValue);
