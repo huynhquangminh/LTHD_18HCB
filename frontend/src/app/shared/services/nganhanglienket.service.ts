@@ -25,4 +25,16 @@ export class NganhanglienketService extends ApiService {
     return this.httpGet('NganHangLienKet/XemGiaoDichKhacNganHang?soTaiKhoan=' + stk);
   }
 
+  getLichSuGiaoDichAll() {
+    return this.httpGet('NganHangLienKet/GetAllGiaoDichKhacNganHang');
+  }
+
+  xoaGiaoDichKhacNganHang(id) {
+    return this.httpDelete('NganHangLienKet/XoaThongTinGiaoDichKhacNganHang?id=' + id);
+  }
+
+  timKiemGiaoDichKhacNganHang(stk: string = '', tenNganHang: string = ''){
+    return this.httpGet('NganHangLienKet/TimKiemGiaoDichKhacNganHang?soTaiKhoan=' + stk + '&tenNganHang=' + tenNganHang);
+  }
+
 }
