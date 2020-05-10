@@ -37,7 +37,7 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
         this.isActive = false;
         this.collapsed = false;
-        this.showMenu = ['', '', ''];
+        this.showMenu = ['home', 'home1', ''];
         this.pushRightClass = 'push-right';
         this.userInfo = this.webStorageSerivce.getLocalStorage(WebKeyStorage.user_info);
     }

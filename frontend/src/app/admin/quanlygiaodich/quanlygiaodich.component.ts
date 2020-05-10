@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuanlyService } from 'src/app/shared/services/quanly.service';
 import { DialogService } from 'src/app/shared/services/dialog-service.service';
+import { NganhanglienketService } from 'src/app/shared/services/nganhanglienket.service';
 
 @Component({
   selector: 'app-quanlygiaodich',
@@ -10,9 +11,11 @@ import { DialogService } from 'src/app/shared/services/dialog-service.service';
 export class QuanlygiaodichComponent implements OnInit {
   public keySearch = '';
   public danhSachGiaoDich: any;
+  public listGiaoKhacNganHang: any = [];
   constructor(
     private quanlyService: QuanlyService,
     private dialogService: DialogService,
+    private nganHangLienKetService: NganhanglienketService
   ) { }
 
   ngOnInit() {
@@ -51,4 +54,5 @@ export class QuanlygiaodichComponent implements OnInit {
       }
     });
   }
+
 }

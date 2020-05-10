@@ -6,6 +6,7 @@ namespace BusinessObject
 {
 	public class ThongTinGiaoDichLienNganHangBO
 	{
+		public int id { get; set; }
 		public string SoTKGui { get; set; }
 		public string TenNganHangGui { get; set; }
 		public string SoTKNhan { get; set; }
