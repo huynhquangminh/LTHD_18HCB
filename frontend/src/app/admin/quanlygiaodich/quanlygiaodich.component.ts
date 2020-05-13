@@ -38,7 +38,6 @@ export class QuanlygiaodichComponent implements OnInit {
   }
 
   timKiemGiaoDich() {
-    console.log(this.keySearch);
     if (this.keySearch === '') {
       this.getDanhSachGiaoDich();
     } else {

@@ -6,13 +6,15 @@ import { HttpInterceptor, HttpClient, HttpRequest, HttpHandler } from '@angular/
 import 'rxjs/add/operator/mergeMap';
 import { WebStorageSerivce } from './webstorage.service';
 import { throwError } from 'rxjs';
+import { DialogService } from './dialog-service.service';
 @Injectable()
 export class AuthInterceptorService implements HttpInterceptor {
   URL = 'https://localhost:44364/api/';
   constructor(
     public http: HttpClient,
     public webStorageSerivce: WebStorageSerivce,
-    public router: Router
+    public router: Router,
+    public dialogServiceService: DialogService,
   ) { }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): any {
@@ -27,6 +29,10 @@ export class AuthInterceptorService implements HttpInterceptor {
     }
     return next.handle(req).pipe(catchError((error: any) => {
       if (error.status === 401) {
+        if (req.url.includes('api/user/login')) {
+          this.dialogServiceService.showDialogError('Đăng nhập thất bại, vui lòng đăng nhập lại');
+          return throwError(error);
+        }
         const params = {
           token: tokenInfo.token,
           refreshToken: tokenInfo.refreshToken

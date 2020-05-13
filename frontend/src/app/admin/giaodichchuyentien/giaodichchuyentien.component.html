@@ -1,3 +1,59 @@
-<p>
-  giaodichchuyentien works!
-</p>
+<form style="width: 500px;margin: 0 auto;margin-top: 20px;" novalidate #formgiaodich="ngForm"
+  (ngSubmit)="onSubmitThongTin()">
+  <div class="form-content">
+    <div class="form-group">
+      <input readonly type="text" name="tennguoigui" class="form-control input-underline input-lg"
+        [(ngModel)]="giaoDichModel.tennguoigui" placeholder="Tên người gửi" required>
+    </div>
+
+    <div class="form-group">
+      <div>
+        <input type="number" name="sotaikhoangui" class="form-control input-underline input-lg"
+          [(ngModel)]="giaoDichModel.sotaikhoangui" placeholder="Số tài khoản người gửi" (blur)="thongtintaikhoangui()" required>
+      </div>
+      <div class="validate-form" style="float: left;"
+        *ngIf="formgiaodich.controls.sotaikhoangui?.errors?.required && formgiaodich.controls.sotaikhoangui?.touched">
+        <span>(*) Số tài khoản không được trống!</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input readonly type="text" name="tennguoinhan" class="form-control input-underline input-lg"
+        [(ngModel)]="giaoDichModel.tennguoinhan" placeholder="Tên người nhận" required>
+    </div>
+
+    <div class="form-group">
+      <div>
+        <input type="number" name="sotaikhoannhan" class="form-control input-underline input-lg"
+          [(ngModel)]="giaoDichModel.sotaikhoannhan" placeholder="Số tài khoản người nhận" (blur)="thongtintaikhoannhan()" required>
+      </div>
+      <div class="validate-form" style="float: left;"
+        *ngIf="formgiaodich.controls.sotaikhoannhan?.errors?.required && formgiaodich.controls.sotaikhoannhan?.touched">
+        <span>(*) Số tài khoản không được trống!</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <select name="tenNganHang" class="form-control input-underline input-lg" placeholder="d.ff" matNativeControl required
+        [(ngModel)]="giaoDichModel.tennganhangnhan">
+        <option *ngFor="let item of dsNganHang" [value]="item.tenNganHang">{{item.tenNganHang}}</option>
+      </select>
+    </div>
+    <!--  -->
+    <div class="form-group">
+      <input type="number" name="sotiengui" class="form-control input-underline input-lg"
+        [(ngModel)]="giaoDichModel.sotiengui" placeholder="Số tiền gửi" required maxlength="10">
+      <div class="validate-form" style="float: left;"
+        *ngIf="formgiaodich.controls.sotiengui?.errors?.required && formgiaodich.controls.sotiengui?.touched">
+        <span>(*) Số tiền không được trống!</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <textarea class="form-control input-underline input-lg" name="noidungchuyentien" rows="3"
+        [(ngModel)]="giaoDichModel.noidungchuyentien" placeholder="Nội dung chuyển tiền"></textarea>
+    </div>
+  </div>
+  <button style="margin-left: 390px; background-color: #61b2e2;" class="btn rounded-btn"
+    [disabled]="(!formgiaodich.valid) ">
+    Chuyển tiền
+  </button>
+</form>

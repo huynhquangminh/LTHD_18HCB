@@ -37,4 +37,8 @@ export class NganhanglienketService extends ApiService {
     return this.httpGet('NganHangLienKet/TimKiemGiaoDichKhacNganHang?soTaiKhoan=' + stk + '&tenNganHang=' + tenNganHang);
   }
 
+  giaoDichKhacNganHangAdmin(params: any = {}) {
+    return this.httpPost('NganHangLienKet/GiaoDichChuyenTienAdmin', params);
+  }
+
 }

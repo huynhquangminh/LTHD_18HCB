@@ -194,6 +194,26 @@ namespace API.Controllers
             }
         }
 
+        [HttpPost]
+        [Produces("application/json")]
+        [Route("GiaoDichChuyenTienAdmin")]
+        public async Task<IActionResult> GiaoDichChuyenTienAdmin(ThemThongTinGiaoDichKhacNganHangRequest request)
+        {
+            var thongTinGiaoDichLienNganHangBO = new ThongTinGiaoDichLienNganHangBO();
+            thongTinGiaoDichLienNganHangBO.NgayTao = request.NgayTao;
+            thongTinGiaoDichLienNganHangBO.NoiDung = request.NoiDung;
+            thongTinGiaoDichLienNganHangBO.SoTien = request.SoTien;
+            thongTinGiaoDichLienNganHangBO.SoTKGui = request.SoTKGui;
+            thongTinGiaoDichLienNganHangBO.SoTKNhan = request.SoTKNhan;
+            thongTinGiaoDichLienNganHangBO.TenNganHangGui = request.TenNganHangGui;
+            thongTinGiaoDichLienNganHangBO.TenNganHangNhan = request.TenNganHangNhan;
+
+            var result = _nganHangLienKetService.ThemThongTinGiaoDichKhacNganhang(thongTinGiaoDichLienNganHangBO);
+            var updateSoDu = _userService.UpdateSoDuGiaoDichKhacNganHang(request.SoTKGui, request.SoTien, false);
+            return Ok(result);
+            
+        }
+
         /// <summary>
         /// Xem thông tin giao dịch khác ngân hàng theo số tài khoản
         /// </summary>
