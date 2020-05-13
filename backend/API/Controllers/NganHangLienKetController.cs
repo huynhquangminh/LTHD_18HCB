@@ -10,6 +10,7 @@ using API.Models.Request;
 using API.Services;
 using BusinessLogic.Service.Interface;
 using BusinessObject;
+using DidiSoft.Pgp;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -265,6 +266,21 @@ namespace API.Controllers
             return Ok(result);
         }
 
+
+        /// <summary>
+        /// Lấy data PGP
+        /// </summary>
+        /// <param name="secretKey"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Produces("application/json")]
+        [Route("GetSignDataPGP")]
+        public async Task<ActionResult<string>> GetSignDataPGP()
+        {
+            var result = signDataPgp();
+            return Ok(result);
+        }
+
         private bool CheckHash(string textValue, string hashValue)
         {
             return BCryptService.CheckPassword(textValue, hashValue);
@@ -317,6 +333,25 @@ namespace API.Controllers
                 return false;
             }
             return result;
+        }
+
+        private string signDataPgp()
+        {
+            PGPLib pgp = new PGPLib();
+            try
+            {
+                string privateKeyPem = Directory.GetCurrentDirectory().ToString() + @"\Services\fileKey\privateKeyPGP.asc";
+                string secretKeyFile = Directory.GetCurrentDirectory().ToString() + @"\Services\fileKey\secretKeyFile.txt";
+                string signPGPFile = Directory.GetCurrentDirectory().ToString() + @"\Services\fileKey\signPGP.pgp";
+                pgp.SignFile(secretKeyFile, privateKeyPem, "nhom9", signPGPFile, true);
+                //var signText =  pgp.SignString("nhom9", privateKeyPem, "nhom9");
+                string signText = System.IO.File.ReadAllText(Directory.GetCurrentDirectory().ToString() + @"\Services\fileKey\signPGP.pgp");
+                return signText;
+            } catch(Exception e)
+            {
+                return "";
+            }
+
         }
 
     }
