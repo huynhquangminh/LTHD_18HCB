@@ -218,7 +218,7 @@ namespace DataAccess.Repository
             param.Add("@matkhau", taiKhoanDangNhap.MatKhau);
             param.Add("@idloaitaikhoan", taiKhoanDangNhap.IdLoaiTaiKhoan);
             param.Add("@mataikhoan", taiKhoanDangNhap.MaTaiKhoan);
-            param.Add("@refreshToken", null;
+            param.Add("@refreshToken", null);
             var result = await ExecuteCommandAsync(StoredProcedure.USER_THEM_TAIKHOANDANGNHAP, param);
             return result;
         }
