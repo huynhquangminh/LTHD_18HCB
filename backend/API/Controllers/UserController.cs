@@ -117,6 +117,43 @@ namespace API.Controllers
         }
 
         /// <summary>
+        /// Đăng nhập tài khoản ngân hàng liên kết
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpPost]
+        [Produces("application/json")]
+        [Route("LoginNganHangLienKet")]
+        public async Task<IActionResult> LoginNganHangLienKet(LoginUserRequest request)
+        {
+            IActionResult response = Unauthorized();
+
+            if (request.tenDangNhap == "nganhanglienket")
+            {
+                UserBO login = new UserBO();
+                login.TenTaiKhoan = request.tenDangNhap;
+                login.MatKhau = request.matKhau;
+
+                var user = AuthenticateUser(login);
+
+                if (user != null)
+                {
+                    var stringToken = GetJSONWebToken(user);
+
+                    var stringRefreshToken = TokenService.GenerateRefreshToken();
+
+                    response = Ok(new
+                    {
+                        token = stringToken
+                    });
+                }
+            }
+
+            return response;
+        }
+
+        /// <summary>
         /// Lấy thông tin tài khoản theo mã tài khoản
         /// </summary>
         /// <param name="maTaiKhoan"></param>
@@ -563,7 +600,7 @@ namespace API.Controllers
 
                 if (validPassword)
                 {
-                    if (user.IdLoaiTaiKhoan == 1)
+                    if (user.IdLoaiTaiKhoan == 1 || user.IdLoaiTaiKhoan == 4)
                     {
                         userKhachHang = _userService.GetThongTinTaiKhoanKhachHang(user.MaTk).Result;
                         return userKhachHang;
