@@ -6,6 +6,7 @@ import * as moment from 'moment';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { WebKeyStorage } from 'src/app/shared/globlas/web-key-storage';
 import { WebStorageSerivce } from 'src/app/shared/services/webstorage.service';
+import { LienketnganhangkhacService } from 'src/app/shared/services/lienketnganhangkhac.service';
 
 @Component({
   selector: 'app-chuyenkhoanliennganhang',
@@ -31,6 +32,7 @@ export class ChuyenkhoanliennganhangComponent implements OnInit {
     private nganHangLKService: NganhanglienketService,
     private authService: AuthService,
     private webStorageSerivce: WebStorageSerivce,
+    private lienKetNganHangKhacService: LienketnganhangkhacService
   ) { }
 
   ngOnInit() {
@@ -65,21 +67,22 @@ export class ChuyenkhoanliennganhangComponent implements OnInit {
       // goi api chuyen khoan cua ngan hang tuong ung
       this.nganHangLKService.getSignData().subscribe(res => {
         if (res) {
-          const param = {
-            soTKGui: this.userInfo.user.soTaiKhoan,
-            tenNganHangGui: 'TP BANK',
-            soTKNhan: this.chuyenkhoanModel.sotaikhoan.toString(),
-            tenNganHangNhan: this.chuyenkhoanModel.tennganhang,
-            soTien: this.chuyenkhoanModel.sotiengui,
-            noiDung: this.chuyenkhoanModel.noidungchuyentien,
+          const params = {
+            tenNganHangGui: '18HCB BANK',
+            soTaiKhoanGui: this.userInfo.user.soTaiKhoan,
+            soTaiKhoanNhan: this.chuyenkhoanModel.sotaikhoan.toString(),
+            tenNguoiNhan: this.chuyenkhoanModel.tennguoinhan,
+            tenNguoiGui: this.userInfo.user.tenTaiKhoan,
+            soTienChuyen: this.chuyenkhoanModel.sotiengui.toString(),
             ngayTao: moment(new Date()).format('YYYY-MM-DD'),
+            noiDung: this.chuyenkhoanModel.noidungchuyentien,
             signature: res
           };
-          this.nganHangLKService.giaoDichKhacNganHang(param).subscribe(result => {
+          this.lienKetNganHangKhacService.giaoDichTaiKhoanKhachNganHang(params).subscribe(result => {
             if (result.status) {
-              alert('chuyen tien thanh cong');
               this.codeOTP = null;
               this.codeOTPComfirm = null;
+              this.luuThongTinGiaoDich();
             }
           });
         }
@@ -101,19 +104,24 @@ export class ChuyenkhoanliennganhangComponent implements OnInit {
     // gọi api lấy thông tin tài khoản từ ngân hàng khác
     if (this.chuyenkhoanModel.sotaikhoan && this.chuyenkhoanModel.sotaikhoan.toString().length >= 9 && this.chuyenkhoanModel.tennganhang) {
       const timeNow = moment(new Date()).format('YYYYMMDDHHmmss');
-      const textStr = this.chuyenkhoanModel.sotaikhoan.toString() + timeNow + 'nhom9';
+      const textStr = this.chuyenkhoanModel.sotaikhoan.toString() + timeNow + 'nhom21';
       this.nganHangLKService.getHashString(textStr).subscribe(res => {
         if (res) {
           const params = {
-            soTaiKhoan: this.chuyenkhoanModel.sotaikhoan.toString(),
+            soTk: this.chuyenkhoanModel.sotaikhoan.toString(),
             timer: timeNow,
-            hashStr: res
+            hashCode: res
           };
-          this.nganHangLKService.getThongTinTaiKhoan(params).subscribe(result => {
+          this.lienKetNganHangKhacService.getThongTinTaiKhoan(params).subscribe(result => {
             if (result) {
-              this.chuyenkhoanModel.tennguoinhan = result.tenTaiKhoan;
+              this.chuyenkhoanModel.tennguoinhan = result.ten;
             }
           });
+          // this.nganHangLKService.getThongTinTaiKhoan(params).subscribe(result => {
+          //   if (result) {
+          //     this.chuyenkhoanModel.tennguoinhan = result.tenTaiKhoan;
+          //   }
+          // });
         }
       });
     }
@@ -133,6 +141,23 @@ export class ChuyenkhoanliennganhangComponent implements OnInit {
       return false;
     }
     return true;
+  }
+
+  luuThongTinGiaoDich() {
+    const params = {
+      soTKGui: this.userInfo.user.soTaiKhoan,
+      tenNganHangGui: '18HCB BANK',
+      soTKNhan: this.chuyenkhoanModel.sotaikhoan.toString(),
+      tenNganHangNhan: this.chuyenkhoanModel.tennganhang,
+      soTien: this.chuyenkhoanModel.sotiengui,
+      noiDung: this.chuyenkhoanModel.noidungchuyentien,
+      ngayTao: moment(new Date()).format('YYYY-MM-DD'),
+    };
+    this.nganHangLKService.luuGiaoDichKhacNganHang(params).subscribe(res => {
+      if (res) {
+        alert('chuyen tien thanh cong');
+      }
+    });
   }
 
 }

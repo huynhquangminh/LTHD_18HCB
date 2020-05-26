@@ -41,4 +41,8 @@ export class NganhanglienketService extends ApiService {
     return this.httpPost('NganHangLienKet/GiaoDichChuyenTienAdmin', params);
   }
 
+  luuGiaoDichKhacNganHang(params: any) {
+    return this.httpPost('NganHangLienKet/LuuGiaoDichKhacNganHang', params);
+  }
+
 }

@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
           <select name="tenNganHang" class="form-control input-underline input-lg" matNativeControl required
-            [(ngModel)]="chuyenkhoanModel.tennganhang">
+            [(ngModel)]="chuyenkhoanModel.tennganhang" (change)="getThongTinTaiKhoan()">
             <option *ngFor="let item of dsNganHang" [value]="item.tenNganHang">{{item.tenNganHang}}</option>
           </select>
         </div>

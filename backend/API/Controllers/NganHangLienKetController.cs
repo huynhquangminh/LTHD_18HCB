@@ -195,6 +195,33 @@ namespace API.Controllers
             }
         }
 
+        /// <summary>
+        /// Thêm thông tin giao dịch khác ngân hàng
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [Authorize]
+        [HttpPost]
+        [Produces("application/json")]
+        [Route("LuuGiaoDichKhacNganHang")]
+        public async Task<IActionResult> LuuGiaoDichKhacNganHang(ThemThongTinGiaoDichKhacNganHangRequest request)
+        {
+
+            var thongTinGiaoDichLienNganHangBO = new ThongTinGiaoDichLienNganHangBO();
+            thongTinGiaoDichLienNganHangBO.NgayTao = request.NgayTao;
+            thongTinGiaoDichLienNganHangBO.NoiDung = request.NoiDung;
+            thongTinGiaoDichLienNganHangBO.SoTien = request.SoTien;
+            thongTinGiaoDichLienNganHangBO.SoTKGui = request.SoTKGui;
+            thongTinGiaoDichLienNganHangBO.SoTKNhan = request.SoTKNhan;
+            thongTinGiaoDichLienNganHangBO.TenNganHangGui = request.TenNganHangGui;
+            thongTinGiaoDichLienNganHangBO.TenNganHangNhan = request.TenNganHangNhan;
+
+            var result = _nganHangLienKetService.ThemThongTinGiaoDichKhacNganhang(thongTinGiaoDichLienNganHangBO);
+            var updateSoDu = _userService.UpdateSoDuGiaoDichKhacNganHang(request.SoTKGui, request.SoTien, false);
+            return Ok(new { mesError = "request success", status = true });
+        }
+
+
         [HttpPost]
         [Produces("application/json")]
         [Route("GiaoDichChuyenTienAdmin")]
@@ -308,7 +335,7 @@ namespace API.Controllers
             }
         }
 
-        private bool VerifySignRsa (string secretKey, string publicKey, string signature) 
+        private bool VerifySignRsa(string secretKey, string publicKey, string signature) 
         {
             bool result = false;
             try
