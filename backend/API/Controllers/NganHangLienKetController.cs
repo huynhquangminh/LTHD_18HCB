@@ -67,6 +67,7 @@ namespace API.Controllers
         /// <param name="soTaiKhoan"></param>
         /// <param name="timer"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpPost]
         [Produces("application/json")]
         [Route("GetThongTinTaiKhoan")]
@@ -155,6 +156,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpPost]
         [Produces("application/json")]
         [Route("GiaoDichKhacNganHang")]
@@ -221,7 +223,7 @@ namespace API.Controllers
             return Ok(new { mesError = "request success", status = true });
         }
 
-
+        [Authorize]
         [HttpPost]
         [Produces("application/json")]
         [Route("GiaoDichChuyenTienAdmin")]
@@ -247,6 +249,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="soTaiKhoan"></param>
         /// <returns></returns>
+        [Authorize]
         [HttpGet]
         [Produces("application/json")]
         [Route("XemGiaoDichKhacNganHang")]
@@ -260,6 +263,7 @@ namespace API.Controllers
         /// Lấy tất cả giao dịch khác ngân hàng
         /// </summary>
         /// <returns></returns>
+        [Authorize]
         [HttpGet]
         [Produces("application/json")]
         [Route("GetAllGiaoDichKhacNganHang")]

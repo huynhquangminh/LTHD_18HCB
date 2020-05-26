@@ -129,25 +129,23 @@ namespace API.Controllers
         {
             IActionResult response = Unauthorized();
 
-            if (request.tenDangNhap == "nganhanglienket")
+            UserBO login = new UserBO();
+            login.TenTaiKhoan = request.tenDangNhap;
+            login.MatKhau = request.matKhau;
+
+            var user = AuthenticateUser(login);
+            if (user != null && user.IdLoaiTaiKhoan == 4)
             {
-                UserBO login = new UserBO();
-                login.TenTaiKhoan = request.tenDangNhap;
-                login.MatKhau = request.matKhau;
+                user.TenTaiKhoan = "nhom21";
+                user.Email = "nhom21@gmail.com";
+                var stringToken = GetJSONWebToken(user);
 
-                var user = AuthenticateUser(login);
+                var stringRefreshToken = TokenService.GenerateRefreshToken();
 
-                if (user != null)
+                response = Ok(new
                 {
-                    var stringToken = GetJSONWebToken(user);
-
-                    var stringRefreshToken = TokenService.GenerateRefreshToken();
-
-                    response = Ok(new
-                    {
-                        token = stringToken
-                    });
-                }
+                    token = stringToken
+                });
             }
 
             return response;
@@ -600,15 +598,22 @@ namespace API.Controllers
 
                 if (validPassword)
                 {
-                    if (user.IdLoaiTaiKhoan == 1 || user.IdLoaiTaiKhoan == 4)
+                    if (user.IdLoaiTaiKhoan == 1)
                     {
                         userKhachHang = _userService.GetThongTinTaiKhoanKhachHang(user.MaTk).Result;
                         return userKhachHang;
                     } 
                     else
                     {
-                        userAdmin = _userService.GetThongTinTaiKhoanAdmin(user.MaTk).Result;
-                        return userAdmin;
+                        if(user.IdLoaiTaiKhoan == 4 )
+                        {
+                            return user;
+                        } else
+                        {
+                            userAdmin = _userService.GetThongTinTaiKhoanAdmin(user.MaTk).Result;
+                            return userAdmin;
+                        }
+                        
                     }
                 }
             }
