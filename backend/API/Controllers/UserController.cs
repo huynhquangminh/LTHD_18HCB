@@ -152,6 +152,34 @@ namespace API.Controllers
         }
 
         /// <summary>
+        /// Đóng tài khoản thanh toán theo mã tài khoản
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        [Produces("application/json")]
+        [Route("DongTaiKhoanThanhToan")]
+        public async Task<IActionResult> DongTaiKhoanThanhToan(DongTaiKhoanThanhToanRequest request)
+        {
+            var hashPassword = _userService.GetPasswordByMaTk(request.MaTaiKhoan);
+            var response = false;
+            if (hashPassword != null)
+            {
+                bool checkPassword = BCryptService.CheckPassword(request.MatKhau, hashPassword);
+
+                if (checkPassword == true)
+                {
+                    var result = _userService.DongTaiKhoanThanhToan(request.MaTaiKhoan).Result;
+                    if (result > 0)
+                    {
+                        response = true;
+                    }
+                }
+            }
+
+            return Ok(new { response });
+        }
+
+        /// <summary>
         /// Lấy thông tin tài khoản theo mã tài khoản
         /// </summary>
         /// <param name="maTaiKhoan"></param>
