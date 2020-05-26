@@ -38,6 +38,14 @@ export class ChuyenkhoanliennganhangComponent implements OnInit {
   ngOnInit() {
     this.userInfo = this.webStorageSerivce.getLocalStorage(WebKeyStorage.user_info);
     this.getDSNganHangLienKet();
+    const nganhangLKInfo = this.webStorageSerivce.getSessionStorage(WebKeyStorage.token_nganhanglienket);
+    if (!nganhangLKInfo) {
+      this.lienKetNganHangKhacService.getTokenNhom9().subscribe(res => {
+        if (res && res.auth) {
+          this.webStorageSerivce.setSessionStorage(WebKeyStorage.token_nganhanglienket, {token_nhom9: res.access_token});
+        }
+      });
+    }
   }
 
   onSubmitThongTin() {

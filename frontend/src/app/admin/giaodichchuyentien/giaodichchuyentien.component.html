@@ -34,7 +34,7 @@
     </div>
     <div class="form-group">
       <select name="tenNganHang" class="form-control input-underline input-lg" placeholder="d.ff" matNativeControl required
-        [(ngModel)]="giaoDichModel.tennganhangnhan">
+        [(ngModel)]="giaoDichModel.tennganhangnhan" (change)="thongtintaikhoannhan()">
         <option *ngFor="let item of dsNganHang" [value]="item.tenNganHang">{{item.tenNganHang}}</option>
       </select>
     </div>

@@ -62,6 +62,7 @@ export class HeaderComponent implements OnInit {
 
     onLoggedout() {
         this.webStorageSerivce.clearLocalStorage();
+        this.webStorageSerivce.clearSessionStorage();
         this.authSerivce.isLogin = false;
         this.router.navigateByUrl('/login');
     }

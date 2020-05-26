@@ -6,6 +6,8 @@ import { HandleErrorService } from './handle-error.service';
 import { HttpStatusCode } from '../globlas/enums';
 import { DialogService } from './dialog-service.service';
 import { Router } from '@angular/router';
+import { WebStorageSerivce } from './webstorage.service';
+import { WebKeyStorage } from '../globlas/web-key-storage';
 
 @Injectable({
   providedIn: 'root'
@@ -18,15 +20,29 @@ export class ApiLienKetService extends HandleErrorService {
   public isLogin = false;
   constructor(
     dialogServiceService: DialogService,
+    private webStorageSerivce: WebStorageSerivce,
     router: Router,
     public httpClient: HttpClient) {
     super(dialogServiceService, router);
   }
-  public httpPost(methodName, args, isFormData?: boolean): Observable<any> {
+
+  protected setTokenForHeader() {
+    const tokenInfo = this.webStorageSerivce.getSessionStorage(WebKeyStorage.token_nganhanglienket);
+    const token = tokenInfo ? tokenInfo.token_nhom9 : '';
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'x-access-token': token
+    });
+    this.options = { headers: this.headers, observe: 'response' };
+  }
+  public httpPost(methodName, args, isToken = false, isFormData?: boolean): Observable<any> {
     let newOptions: any;
     let headers: HttpHeaders;
     let formData = '';
     let body;
+    if (isToken) {
+      this.setTokenForHeader();
+    }
     if (isFormData) {
       Object.keys(args).forEach((key, index) => {
         const arg = `${key}=${args[key]}`;
