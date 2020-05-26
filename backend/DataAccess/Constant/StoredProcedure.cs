@@ -31,6 +31,7 @@ namespace DataAccess.Constant
         public const string USER_UPDATE_THONGTINTAIKHOANKHACHHANG = "UpdateThongTinTaiKhoanKhachHang";
         public const string USER_UPDATE_THONGTINTAIKHOANNHANVIEN = "UpdateThongTinTaiKhoanNhanVien";
         public const string USER_UPDATE_REFRESHTOKEN = "UpdateRefreshToken";
+        public const string USER_DONG_TAIKHOANTHANHTOAN = "DongTaiKhoanThanhToan";
 
         // TaiKhoanTietKiem
         public const string TAIKHOANTIETKIEM_GET_BY_MATAIKHOAN = "GetDsTaiKhoanTietKiem";

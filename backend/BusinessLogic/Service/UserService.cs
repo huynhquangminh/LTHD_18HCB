@@ -424,5 +424,16 @@ namespace BusinessLogic.Service
                 return result;
             }
         }
+
+        public async Task<int> DongTaiKhoanThanhToan(string maTaiKhoan)
+        {
+            var result = 0;
+
+            using (DalSession dal = new DalSession())
+            {
+                result = await dal.UnitOfWork.UserRepository.DongTaiKhoanThanhToan(maTaiKhoan);
+                return result;
+            }
+        }
     }
 }

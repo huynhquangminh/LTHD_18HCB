@@ -32,5 +32,6 @@ namespace BusinessLogic.Service.Interface
         Task<int> UpdateThongTinTaiKhoanKhachHang(TaiKhoanKhachHangBO taiKhoanKhachHang);
         Task<int> UpdateThongTinTaiKhoanNhanVien(TaiKhoanNhanVienBO taiKhoanNhanVien);
         Task<int> XoaTaiKhoan(string maTaiKhoan);
+        Task<int> DongTaiKhoanThanhToan(string maTaiKhoan);
     }
 }

@@ -308,5 +308,14 @@ namespace DataAccess.Repository
             var result = await ExecuteCommandAsync(StoredProcedure.USER_UPDATE_SODUGIAODICHKHACNGANHANG, param);
             return result;
         }
+
+        public async Task<int> DongTaiKhoanThanhToan(string maTaiKhoan)
+        {
+            var param = new DynamicParameters();
+            param.Add("@matk", maTaiKhoan);
+
+            var result = await ExecuteCommandAsync(StoredProcedure.USER_DONG_TAIKHOANTHANHTOAN, param);
+            return result;
+        }
     }
 }
