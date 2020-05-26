@@ -42,7 +42,9 @@ export class HeaderComponent implements OnInit {
     ngOnInit() {
         this.pushRightClass = 'push-right';
         this.userInfo = this.webStorageSerivce.getLocalStorage(WebKeyStorage.user_info);
-        this.getDSThongBao(this.userInfo.user.maTk);
+        setInterval(() => {
+            this.getDSThongBao(this.userInfo.user.maTk);
+        }, 30000);
     }
 
     isToggled(): boolean {

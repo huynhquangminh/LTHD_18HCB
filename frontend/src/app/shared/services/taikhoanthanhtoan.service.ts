@@ -41,4 +41,8 @@ export class TaikhoanthanhtoanService extends ApiService {
   themNganHangLienKet(params: any) {
     return this.httpPost('NganHangLienKet/ThemNganHangLienKet', params);
   }
+
+  dongTaiKhoanThanhToan(params: any) {
+    return this.httpPost('User/DongTaiKhoanThanhToan', params);
+  }
 }

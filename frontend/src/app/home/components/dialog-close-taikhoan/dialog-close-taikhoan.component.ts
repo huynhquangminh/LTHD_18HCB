@@ -39,8 +39,15 @@ export class DialogCloseTaikhoanComponent implements OnInit {
         // goi api xoa tai khoan login
         // this.userInfo.user.maTk
         // matkhau
-
-        this.modal.close(true);
+        const params = {
+          maTaiKhoan: this.closeAccountModel.matKhau,
+          matKhau: this.userInfo.user.maTk
+        };
+        this.taikhoanService.dongTaiKhoanThanhToan(params).subscribe(res => {
+          if (res) {
+            this.modal.close(true);
+          }
+        });
       }
     } else {
       alert('Mã xác nhận hoặc mật khẩu không đúng');
