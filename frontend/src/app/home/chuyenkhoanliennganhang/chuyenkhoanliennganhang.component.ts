@@ -117,13 +117,10 @@ export class ChuyenkhoanliennganhangComponent implements OnInit {
               this.chuyenkhoanModel.tennguoinhan = result.ten;
             }
           });
-          // this.nganHangLKService.getThongTinTaiKhoan(params).subscribe(result => {
-          //   if (result) {
-          //     this.chuyenkhoanModel.tennguoinhan = result.tenTaiKhoan;
-          //   }
-          // });
         }
       });
+    } else {
+      this.chuyenkhoanModel.tennguoinhan = '';
     }
   }
 

@@ -94,6 +94,8 @@ export class ThemnhacnoComponent implements OnInit {
           this.themNhacNoModel.maTkNo = res.maTk;
         }
       });
+    } else {
+      this.themNhacNoModel.tennguoino = '';
     }
   }
 }

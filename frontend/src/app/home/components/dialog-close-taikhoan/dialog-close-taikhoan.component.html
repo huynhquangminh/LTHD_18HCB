@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">Xác nhận đóng tài khoản </h4>
+  <button type="button" class="close" aria-label="Close" (click)="modal.close()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <b style="font-size: 13px;">Khi bạn xác nhận đóng tài khoản là tài khoản của bạn sẽ bị hũy vĩnh viễn.</b><br>
+  <b style="font-size: 13px;">Vui lòng nhập mã xác nhận được gửi xuống mail đăng ký của bạn</b>
+  <form novalidate #form="ngForm" (ngSubmit)="onSubmit()">
+    <div class="form-content" style="height: 150px;">
+      <div class="form-group">
+        <input type="password" name="matKhau" class="form-control input-underline input-lg"
+          [(ngModel)]="closeAccountModel.matKhau" placeholder="Mật khẩu" required>
+        <div class="validate-form" style="float: left;"
+          *ngIf="form.controls.matKhau?.errors?.required && form.controls.matKhau?.touched">
+          <span>(*) Mật khẩu không được trống !</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input type="password" name="maXacNhan" class="form-control input-underline input-lg"
+          [(ngModel)]="closeAccountModel.maXacNhan" placeholder="Mã xác nhận " required>
+        <div class="validate-form" style="float: left;"
+          *ngIf="form.controls.maXacNhan?.errors?.required && form.controls.maXacNhan?.touched">
+          <span>(*) Mã xác nhận không được trống !</span>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex;">
+      <button type="button" style="margin-left: 10px; background-color: #ea6b88;" class="btn rounded-btn" (click)="getOTP()">
+        Lấy mã xác nhận 
+     </button>
+      <button style="margin-left: 150px; background-color: #61b2e2;" class="btn rounded-btn" [disabled]="(!form.valid)">
+         Đóng tài khoản 
+      </button>
+    </div>
+  </form>
+</div>

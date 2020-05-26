@@ -4,6 +4,7 @@ import { DialogService } from 'src/app/shared/services/dialog-service.service';
 import { DialogDoimatkhauComponent } from '../dialog-doimatkhau/dialog-doimatkhau.component';
 import { WebStorageSerivce } from 'src/app/shared/services/webstorage.service';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { DialogCloseTaikhoanComponent } from '../dialog-close-taikhoan/dialog-close-taikhoan.component';
 
 @Component({
     selector: 'app-sidebar',
@@ -77,6 +78,16 @@ export class SidebarComponent implements OnInit {
 
     showDialogChangePassword() {
         this.dialogServiceService.showDialog(DialogDoimatkhauComponent).then(res => {
+            if (res) {
+                this.webStorageSerivce.clearLocalStorage();
+                this.authSerivce.isLogin = false;
+                this.router.navigateByUrl('/login');
+            }
+        });
+    }
+
+    showDialogComfrimCloseAccount() {
+        this.dialogServiceService.showDialog(DialogCloseTaikhoanComponent).then(res => {
             if (res) {
                 this.webStorageSerivce.clearLocalStorage();
                 this.authSerivce.isLogin = false;

@@ -1,3 +1,4 @@
+import { DialogCloseTaikhoanComponent } from './home/components/dialog-close-taikhoan/dialog-close-taikhoan.component';
 import { DialogUpdateTaikhoanComponent } from './admin/components/dialog-update-taikhoan/dialog-update-taikhoan.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -51,7 +52,8 @@ import { DialogLienketnganhangComponent } from './admin/components/dialog-lienke
         DialogThemtaikhoanComponent,
         DialogUpdateTaikhoanComponent,
         DialogTaikhoanNhanvienComponent,
-        DialogLienketnganhangComponent
+        DialogLienketnganhangComponent,
+        DialogCloseTaikhoanComponent
     ],
     providers: [
         AuthGuard,
@@ -74,7 +76,8 @@ import { DialogLienketnganhangComponent } from './admin/components/dialog-lienke
         DialogThemtaikhoanComponent,
         DialogUpdateTaikhoanComponent,
         DialogTaikhoanNhanvienComponent,
-        DialogLienketnganhangComponent
+        DialogLienketnganhangComponent,
+        DialogCloseTaikhoanComponent
     ]
 })
 export class AppModule { }

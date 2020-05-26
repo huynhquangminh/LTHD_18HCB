@@ -24,7 +24,7 @@ export class DialogTaodanhbaComponent implements OnInit {
     idNganHangLienKet: 0
   };
   public dsNganHang: any = [
-    // { id: 0, name: '18HCB Bank' }
+    { id: 0, tenNganHang: '18HCB Bank' }
   ];
   public userInfo: any;
   constructor(
@@ -39,19 +39,19 @@ export class DialogTaodanhbaComponent implements OnInit {
 
   ngOnInit() {
     this.userInfo = this.webStorageSerivce.getLocalStorage(WebKeyStorage.user_info);
-    this.getDSNganHangLienKet();
+    // this.getDSNganHangLienKet();
     if (this.data) {
       this.formNewsPhoneBookModel = Object.assign({}, this.data);
     }
   }
 
-  getDSNganHangLienKet() {
-    this.danhBaService.getDsNganHangLienKet().subscribe(res => {
-      if (res) {
-        this.dsNganHang = res;
-      }
-    });
-  }
+  // getDSNganHangLienKet() {
+  //   this.danhBaService.getDsNganHangLienKet().subscribe(res => {
+  //     if (res) {
+  //       this.dsNganHang = res;
+  //     }
+  //   });
+  // }
 
   getThongTinTaiKhoan() {
     if (this.formNewsPhoneBookModel.soTaiKhoan) {

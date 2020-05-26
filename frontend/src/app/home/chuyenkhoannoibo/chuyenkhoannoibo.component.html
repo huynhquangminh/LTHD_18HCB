@@ -10,7 +10,7 @@
         <div class="form-group">
           <div style="width: 500px;" style="display: flex;">
             <input type="number" name="sotaikhoan" class="form-control input-underline input-lg"
-              [(ngModel)]="chuyenkhoanModel.sotaikhoan" placeholder="Số tài khoản người nhận" required>
+              [(ngModel)]="chuyenkhoanModel.sotaikhoan" placeholder="Số tài khoản người nhận" required  (blur)="thongtintaikhoan()">
             <button type="button" mat-button [matMenuTriggerFor]="menu">
               <span class="material-icons">
                 perm_contact_calendar

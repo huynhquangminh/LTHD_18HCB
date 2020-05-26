@@ -133,4 +133,18 @@ export class ChuyenkhoannoiboComponent implements OnInit {
       }
     });
   }
+
+  thongtintaikhoan() {
+    if (this.chuyenkhoanModel.sotaikhoan) {
+      this.taikhoanService.getThongTinTaiKhoanBySoTaiKhoan(this.chuyenkhoanModel.sotaikhoan).subscribe(res => {
+        if (res) {
+          this.chuyenkhoanModel.tennguoinhan = res.tenTaiKhoan;
+        } else {
+          this.chuyenkhoanModel.tennguoinhan = '';
+        }
+      });
+    } else {
+      this.chuyenkhoanModel.tennguoinhan = '';
+    }
+  }
 }
